@@ -1,0 +1,51 @@
+.artist__card {
+  display: inline-block;
+  max-width: 100px;
+  width: calc(100vw - 75.552vw);
+  border-radius: 20px;
+  padding-top: 38px;
+  padding-bottom: 6px;
+  background-color: #530628;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(25, 25, 25, 0),
+    rgba(25, 25, 25, 0.8)
+  );
+  margin-top: 30px;
+}
+.artist__details {
+  .artist__CircleImg {
+    img {
+      width: 69px;
+      height: 69px;
+      object-fit: cover;
+      position: absolute;
+      top: -30px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      border: solid 5px #530628;
+    }
+  }
+  .artist__name-location h6 {
+    font-family: Muli;
+    font-size: 10px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #e0e0e0;
+  }
+  p {
+    opacity: 0.7;
+    font-family: Muli;
+    font-size: 10px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #e0e0e0;
+  }
+}

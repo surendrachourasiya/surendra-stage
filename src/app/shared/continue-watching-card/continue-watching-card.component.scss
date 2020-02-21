@@ -1,0 +1,72 @@
+.continue__watching_card{
+   display: inline-block;
+   flex-shrink: 0;
+   border-radius: 12px;
+   background-color: #d8d8d8;
+   // background: linear-gradient(#7e5034, #7e5034);
+   // background-image: url('https://dummyimage.com/150x117/e67ec0/161838.png&text=Dumy+Image+for+Testing');
+   // background-image: url('/assets/images/5X4-150X120.jpg');
+   // background-size:cover;
+   // width: calc(100% / 2 - 22px);
+   // min-height: auto !important;
+   a{
+      .thumbnail__collectionList{
+         height: 0;
+         padding-top:80%;
+         display: block;
+         color: #fff;
+         background-color:transparent#000;
+         position: relative;
+         border-radius: 12px;
+         img{
+            height: 100%;
+            left: 0px;
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+         }
+
+      }
+      .continue__watching__bottom{
+         color: #ffffff;
+         // opacity: 0.5;
+         position: relative;
+         display:flex;
+         .continue__watching_playIcon{
+            position: relative;
+            left: 5px;
+            bottom: 5px;
+            svg{
+               width:25px;
+               height:25px;
+            }
+         }
+         .continue__watching_bottomRight {
+            text-align: right;
+            img.card__bg{
+               object-fit: cover;
+               width:100%
+            }
+            .progress{
+               height: 5px;
+               width: calc(100% - 48px);
+               position: absolute;
+               bottom: 6px;
+               right: 5px;
+            }
+         }
+      }
+      .duration{
+         bottom:21px;
+         right:4px;
+         background: #121212e6;
+         border-radius: 4px;
+         padding: 2px 7px;
+         font-size: 10px;
+         position: absolute;
+         color: #ffffff;
+      }
+   }
+}

@@ -1,0 +1,69 @@
+* {
+  color: #e0e0e0;
+}
+header {
+  padding: 0px 12px;
+  height: 56px;
+  h5 {
+    margin-left: 32px;
+    font-weight: 600;
+  }
+}
+
+// Card Css
+.collections {
+  padding: 0px 6px !important;
+  .card_wrap__collections {
+    margin-top: 12px;
+    .stage_collection_card {
+      margin: 0px 6px !important;
+      width: auto;
+      .card_thumbnail {
+        width: calc(50vw - 18px) !important;
+      }
+      .detail__collectionList {
+        min-height: 85px;
+        h6 {
+          font-size: 14px !important;
+          font-weight: normal !important;
+          // margin-top: 0px !important;
+        }
+        p {
+          font-size: 10px !important;
+        }
+        .relArt__collectionList {
+          // margin-top: -8px !important;
+          span {
+            width: 24px !important;
+            height: 24px !important;
+            border: none!important;
+            img {
+              vertical-align: top !important;
+            }
+          }
+          .remain__collectionList p {
+            font-size: 9px;
+          }
+        }
+        .artName__collectionList{
+          p{
+            // line-height: 1;
+          }
+          p:first-child{
+            font-size: 12px!important;
+          }
+        }
+        .seeCollection__collectionList {
+          display: none !important;
+        }
+      }
+    }
+  }
+  .cdk-virtual-scroll-viewport {
+    overflow: initial;
+    contain: style;
+    width: 100%;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+}

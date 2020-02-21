@@ -1,0 +1,166 @@
+<!-- collection detail container -->
+  <div class="container-fluid">
+      <div class="row" *ngIf="this.collectionDetails.isDataLoaded">
+        <!-- detail top card -->
+        <app-detail-top-card *ngIf="collectionDetails.detail.length != 0 && !!collectionDetails.s3Url"
+          [showDetailObj]="collectionDetails.detail" [lastSeenObj]="collectionDetails.collectionLastSeen" [showDetailS3Url]="collectionDetails.s3Url" [showSeasonObj]="[]" [language]="lang"
+          [pageType]="pageType" class="col-12 px-0"></app-detail-top-card>
+        <!-- /detail top card -->
+        
+        <!-- collection and trailer tab menu -->
+        <div class="col-12 px-0 mt-5 stage_section">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.details.inTheCollection"></h5>
+          </div>
+
+          <!-- Tab nav menu -->
+          <div class="tab_content__season">
+            <ul class="nav nav-pills align-items-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" (click)="switchTab('episodes')" id="artist-one-tab" data-toggle="pill" href="#artist-one" role="tab"
+                  aria-controls="artist-one" aria-selected="true">
+                  <h6 class="mb-0" [innerHtml]="lang.details.collection"></h6>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="switchTab('trailersMore')" id="artist-two-tab" data-toggle="pill" href="#artist-two" role="tab"
+                  aria-controls="artist-two" aria-selected="false">
+                  <h6 class="mb-0" [innerHtml]="lang.details.trailersMore"></h6>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- /Tab nav menu -->
+
+          <div class="tab-content" id="show_cd-tabContent">
+            <!-- collection episode list tab -->
+            <div class="tab-pane fade show active" id="artist-one" role="tabpanel" aria-labelledby="artist-one-tab">
+              <div class="wrapper_cd__episode" *ngIf="collectionDetails.episodeList.length == 0" [innerHtml]="lang.details.noMoreEpisode"></div>
+
+              <!-- episode card for collection -->
+              <div class="wrapper_cd__episode" *ngIf="collectionDetails.episodeList.length > 0">
+                <app-episode-card class="episode_card_{{item._id}}"(actionInfo)="actionViewToggle($event)" (clickInfo)="quickViewToggle($event)"
+                  [episodeDetailObj]="item" [episodeDetailS3Url]="collectionDetails.s3Url"
+                  *ngFor="let item of collectionDetails.episodeList"></app-episode-card>
+              </div>
+              <!--/ episode card for collection -->
+
+              <!-- show more button -->
+              <div class="position-relative seemore_btn text-center" *ngIf="collectionDetails.allRecords">
+                <button type="button" class="btn ripple rounded-pill mx-auto mt-1" (click)="getCollectionRemainingList()">
+                  <span [innerHtml]="lang.details.showMore"></span>
+                  <span style="width: 16px; height: 16px;display: flex; justify-content: center; align-items: center; margin-left: 4px;">
+                  <fa-icon [icon]="faChevronDown"></fa-icon>
+                  </span></button>
+              </div>
+              <!--/ show more button -->
+            </div>
+            <!-- /collection episode list tab -->
+
+            <!-- trailer list tab -->
+            <div class="tab-pane fade" id="artist-two" role="tabpanel" aria-labelledby="artist-two-tab">
+              <div *ngIf="collectionDetails.detail['mediaList'].length == 0" class="wrapper_cd__episode" [innerHtml]='lang.details.noMoreTrailer'></div>
+
+              <!-- trailer card -->
+              <div *ngIf="collectionDetails.detail['mediaList'].length > 0" class="wrapper_cd__episode">
+                <app-trailer-card [routerLink]="['/consumption']"
+                  [queryParams]="{type:'collectionPheripheral', slug: collectionDetails.detail['slug'], detailId: item['id']}"
+                  [trailerDetailObj]="item" [trailerDetailType]="'collection'" [trailerDetailS3Url]="collectionDetails.s3Url"
+                  *ngFor="let item of collectionDetails.detail['mediaList']"></app-trailer-card>
+              </div>
+              <!-- /trailer card -->
+            </div>
+            <!-- /trailer list tab -->
+          </div>
+        </div>
+        <!-- / collection and trailer tab menu -->
+
+        <!-- stage collection list virtual scroller -->
+        <div class="col-12 px-0 stage_section" *ngIf="stageCollectionList.data.length != 0">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.details.moreCollections"></h5>
+            <app-see-all-btn [link]="'collection-list'"></app-see-all-btn>
+          </div>
+          <cdk-virtual-scroll-viewport style="padding-top: 60.5%" #stageCollectionScroll itemSize="150"
+            (scrolledIndexChange)="getNextBatchOnScroll('stageCollection', 'getStageCollectionList', $event)"
+            class="scrolling_carousel" id="collectionListing_hScroll" orientation="horizontal">
+            <div role="list" class="scrolling_carousel">  
+              <app-stage-collection-card id="collectionListing_item" class="similarCollection_item_{{item._id}}" [stageCollectionObj]="item"
+                [stageCollectionS3Url]="stageCollectionList.s3Url" *cdkVirtualFor="let item of stageCollectionList.data">
+              </app-stage-collection-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+        <!-- /stage collection list virtual scroller -->
+
+        <!-- similar content card virtual scroller -->
+        <div class="col-12 px-0 stage_section" *ngIf="stageSimilarContentList.data.length != 0">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.details.moreSimilarContent"></h5>
+          </div>
+
+          <cdk-virtual-scroll-viewport style="padding-top: 50.5%" #stageSimilarContentScroll itemSize="150"
+            (scrolledIndexChange)="getNextBatchOnScroll('stageSimilarContent', 'getstageSimilarContentList', $event)"
+            class="scrolling_carousel" id="similarContentListing_hScroll" orientation="horizontal">
+            <div role="list" class="scrolling_carousel">
+              <app-full-similar-content-card id="similarContentListing_item" class="similarContent_item_{{item._id}}"
+                (selectedContent)="redirectSimilarContent($event)"
+                (quickViewEnabled)="quickViewSimilarContentToggle($event)" [contentType]="'collection'"
+                [artistContentObj]="{'data':item}" [artistContentIndex]="i"
+                [artistContentS3Url]="stageSimilarContentList.s3Url"
+                *ngFor="let item of stageSimilarContentList.data; let i = index"></app-full-similar-content-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+        <!-- / similar content card virtual scroller -->
+    
+        <!-- Artist story on scroll -->
+        <div class="col-12 px-0 stage_section position-relative artStryScr" style="display: none;">
+          <div class="section_header">
+            <h5 class="section_heading">Artist story on scroll</h5>
+          </div>
+          <div role="list" class="scrolling_carousel">
+            <app-season-dropdown></app-season-dropdown>
+          </div>
+          <div class="swipeIc">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="13px" height="13px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve" class=""><g transform="matrix(1 0 0 1 0 0)"><g>
+                <path d="M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+              </g></g> </svg>
+          </div>
+        </div>
+        <!-- Artist Story on scroll -->
+      </div>
+  </div>
+<!-- / collection detail container -->
+
+    <!-- action bottom shift menu -->
+    <app-action-overflow-menu *ngIf="actionBottomVisible" [screen_type]="'collection_detail'"
+      [detail]="collectionDetails.detail"
+      (actionDisable)="actionBottomVisible = false"></app-action-overflow-menu>
+    <!-- action bottom shift menu -->
+   
+    <!-- quick-view-card -->
+    <div class="quickView" *ngIf="isQuickviewVisible">
+      <div class="scrolling_carousel position-relative episodelist_quickview invisible" style="z-index: 9999">
+          <app-quick-view-card id="episode_{{item._id}}" (clickInfo)="quickViewToggle($event)" [quickViewIndex]="i+1"
+            [quickViewObj]="item"
+            [quickViewS3Url]="collectionDetails.s3Url" *ngFor="let item of collectionDetails.episodeList; let i=index;">
+          </app-quick-view-card>
+      </div>
+      <a href="JavaScript:Void(0);" (click)="quickViewToggle(false)" class="close"></a>
+    </div>
+    <!-- /quick-view-card -->
+
+    <!-- quick-view-card-similar-Content -->
+    <div class="quickView" *ngIf="isQuickviewVisibleSimilarContent">
+      <div class="scrolling_carousel position-relative episodelist_quickviewnew invisible" style="z-index: 9999">
+        <app-quick-view-card id="episode_{{item._id}}" (clickInfo)="quickViewSimilarContentToggle($event)"
+          [quickViewIndex]="i+1"
+          [quickViewObj]="item" [quickViewS3Url]="collectionDetails.s3Url"
+          *ngFor="let item of stageSimilarContentList.data; let i=index;">
+        </app-quick-view-card>
+      </div>
+      <a href="JavaScript:Void(0);" (click)="quickViewSimilarContentToggle(false)" class="close"></a>
+    </div>
+    <!-- /quick-view-card-similar-Content -->
+    

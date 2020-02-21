@@ -1,0 +1,319 @@
+body#hin{
+    font-family: 'Noto Sans';
+}
+ #hin{
+    // color:#000;
+    .stage_section {
+        .section_header {
+            .section_heading{
+                font-size: 18px;
+                span{
+                    font-size: 14px;
+                    font-weight: normal;
+                }
+            }
+
+        }
+
+    }
+    .artist{
+        li{
+            a.active{
+                small{
+                    font-size: 12px!important;
+                }
+            }
+            a{
+                small{
+                    font-size: 12px!important;
+                }
+            } 
+        } 
+    }
+    .artist_tab_content{
+        .tab-pane{
+            .artist_content_title{
+                font-size: 18px!important;
+                line-height: 1.5!important;
+            } 
+        } 
+    }
+    .artist_chip{
+        .detailArt__individual{
+            h6{
+                font-size: 14px!important;
+                margin-bottom: 0px!important;
+            }
+            p{
+                font-size: 12px!important;
+            }     
+        } 
+
+    }
+    .stage_collection_card{
+        .detail__collectionList{
+            > h6{
+                font-size: 18px!important;
+                line-height: 1.5!important;
+            }
+            .remain__collectionList{
+                p{
+                    font-size: 12px!important;
+                } 
+            } 
+        } 
+    }
+    .artist__details{
+        .artist__bio{
+            p{
+                line-height: 1.5!important;
+            }
+        } 
+    }
+    .card__collectionList{
+        .detail__collectionList{
+            h6{
+                font-size: 18px!important;
+            } 
+        } 
+    }
+    .exclusive__card{
+        .showTitle__exclusive{
+            h6{
+                font-size: 18px!important;
+            } 
+        } 
+    }
+    .card__collectionList{
+        .episodelist__collection{
+            .wrapper__loadlist{
+                .title__episodelist{
+                    h6{
+                        font-size: 16px!important;
+                    }
+                } 
+            } 
+        } 
+    } 
+    .artist-hm_tab{
+        li{
+            a{
+                small{
+                    font-size: 12px!important;
+                } 
+            } 
+        } 
+    }
+    .card__collectionList{
+        .detail__collectionList{
+            .seeCollection__collectionList{
+                button{
+                    font-size: 14px!important;
+                } 
+            } 
+        } 
+        .see_all_btn.ripple{
+            font-size: 14px;
+        } 
+    }
+    .exclusive__card{
+        .showTitle__exclusive{
+            p{
+                font-size: 14px!important;
+            }
+        }
+    }
+    .artist-hm_tab{
+        li{
+            a.active{
+                .artDt__artCont{
+                    p{
+                        font-size: 12px!important;
+                        font-weight: normal!important;
+                    }
+                }
+            }
+        }
+    }
+    .inner__artistContent{
+        .detail__artistContent{
+            h6{
+                font-size: 16px!important;
+            }
+            p{
+                font-size: 12px!important;
+            }
+        }
+    }
+    .individual{
+        .showTitle__individual{
+            h6{
+                font-size: 18px!important;
+            }
+        }
+    }
+    .video_player{
+        .video_meta {
+            .upper__meta {
+                h6.artist_content_title{
+                    font-size: 18px!important;
+                    line-height: 1.5!important;
+                }
+            }
+        }
+    }
+    .inner__episodes{
+        .content_cd__episodes{
+            .ttl_cd__episodes{
+                h6{
+                    font-size: 18px!important;
+                    line-height: 1.5!important;
+                    padding-bottom: 2px!important;
+                    max-height: 80px;
+                }
+                p{
+                    font-size: 12px!important;
+                } 
+
+            } 
+            .desc__episodes{
+                p{
+                    font-size: 16px!important;
+                    line-height: 1.5!important;
+                }
+            } 
+        } 
+    }
+    app-similar-content-card{
+        .inner__episodes{
+            .content_cd__episodes{
+                .ttl_cd__episodes{
+                    h6{
+                        font-size: 16px!important;
+                    }
+                }
+            }
+        }
+    }
+
+    .artist__quickView{
+        .artistInner__quickView{
+            .head__artQuickView{
+                .artDet_artQuickView{
+                    h6{
+                        font-size: 18px!important;
+                   }
+                   p{
+                       font-size: 14px!important;
+                   }            
+                }        
+            }     
+        } 
+    }
+    .landscape__artist{
+        .artDesc__artist{
+            .desc-header{
+                h6{
+                    font-size: 16px!important;
+                    line-height: 1.5!important;
+                } 
+            }
+            .artDescription{
+                p{
+                    font-size: 14px!important;
+                    line-height: 1.5!important;
+                }             
+            } 
+        } 
+    }
+    .collections .card_wrap__collections .stage_collection_card .detail__collectionList h6{
+        font-size:16px!important;
+        font-weight: 600!important;
+        margin-top: 8px!important;
+        margin-bottom: 2px!important;
+    }
+    .collections .card_wrap__collections .stage_collection_card .detail__collectionList p{
+        font-size: 12px!important;
+    }
+    .login{
+        .see_all_btn{
+            font-size: 14px!important;
+        }
+        .bottomPopup__language{
+            h6{
+                font-size: 16px!important;
+            }
+        }
+        .loginPopup{
+            .inner_loginPopup{
+                h6{
+                    font-size: 16px!important;
+                }
+                span.divider{
+                    font-size: 14px!important;
+                    font-weight: normal!important;
+                }
+                .SocialLogin__login{
+                    margin: 24px 0px 24px 0px!important;
+                }     
+            } 
+        }
+        .see_all_btn.Btn__loginBtn{
+            padding: 0px 16px!important;
+            margin: 24px auto 24px!important;
+            height: 36px!important;
+        }
+        .wrapper__logindetails{
+            .login__details{
+                h6{
+                    font-size: 16px!important;
+                }
+                .form__details{
+                    form.go-bottom{
+                        input{
+                            &:focus + label{
+                                font-size: 14px!important;
+                            }        
+                        }
+                    } 
+                } 
+            } 
+        } 
+    } 
+    .login{
+        .Wrapper_otp{
+            .inner__otp{
+                .form__otp{
+                    countdown{
+                        font-size: 12px;
+                    }            
+                }
+                .head__otp{
+                    p:first-child{
+                        font-size: 16px;
+                    }
+                    p:last-child{
+                        font-size: 14px;
+                    }
+                }
+                .resend_wrap{
+                    .resend__otp{
+                        p{
+                            font-size: 12px;
+                        }    
+                    }
+                } 
+            }     
+        } 
+    }
+    app-settings{
+        .stage_section{
+            h1{
+                font-size: 20px;
+                font-weight: 600;
+                opacity: 0.7;
+                margin: 16px 0px;
+            }
+        }
+    } 
+}

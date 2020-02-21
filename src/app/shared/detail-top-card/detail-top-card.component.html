@@ -1,0 +1,118 @@
+<!-- show video section -->
+<div class="col-12 px-0 video_container" *ngIf="videoSrc != ''" #detailVideoElement
+  (scroll)="elementInViewport('detailVideoElement')">
+  <video id="show_player"
+    class="video-js vjs-16-9" playsinline webkit-playsinline muted data-setup='{ 
+              "controls": true,
+              "autoplay": "muted",
+              "preload": "auto",
+              "bigPlayButton": false,
+              "errorDisplay" : false,
+              "controlBar": { 
+                "volumeMenuButton": false,
+                "muteToggle": true,
+                "volumeControl": false,
+                "progressControl":false,
+                "children":{
+                }
+                }
+            }' style="border-radius: 12px 12px 0px 0px">
+    <source [attr.src]="videoSrc" [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'">
+  </video>
+  <a (click)="redirectToConsumption()" class="position-absolute top w-100 h-75" style="top:0"></a>
+  <div class="w-75 video_footer d-flex align-items-center position-absolute px-2 mb-2">
+    <a title="Unmute" class="text-center mute_toggle d-none" (click)="muteToggle()">
+      <fa-icon [icon]="faVolumeMute" [hidden]="!mute"></fa-icon>
+      <fa-icon [icon]="faVolumeUp" [hidden]="mute"></fa-icon>
+    </a>
+  </div>
+  <span class="videoPlayIc" (click)="playPeripheralVideo()" [ngClass]="isOpenDirectly ? '' : 'd-none'">
+    <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 565.648 565.648" height="48px"
+      viewBox="0 0 565.648 565.648" width="48px" class="">
+      <g>
+        <path
+          d="m282.824 0c-155.947 0-282.824 126.877-282.824 282.824s126.877 282.824 282.824 282.824 282.824-126.877 282.824-282.824-126.877-282.824-282.824-282.824zm-70.706 424.233v-282.822l212.118 141.41z"
+          data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0" />
+      </g>
+    </svg>
+  </span>
+</div>
+
+<div class="col-12 px-0 video_container" *ngIf="videoSrc == ''">
+    <video id="show_player" #detailVideoElement
+      class="video-js vjs-16-9" crossorigin="true" playsinline webkit-playsinline muted data-setup='{ 
+              "controls": true,
+              "autoplay": false,
+              "preload": "auto",
+              "bigPlayButton": false,
+              "errorDisplay" : false,
+              "controlBar": { 
+                "volumeMenuButton": false,
+                "muteToggle": true,
+                "volumeControl": false,
+                "progressControl":false,
+                "children":{
+                }
+                }
+            }' style="border-radius: 12px 12px 0px 0px">
+      <source [attr.src]="videoSrc" [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'">
+    </video>
+  
+</div>
+
+<!-- Show title and description section -->
+<div class="col-12 video_meta">
+  <div class="w-100 d-flex align-items-start title_section">
+    <h5 class="text-capitalize align-self-start pr-1 video_title mb-0" [innerHtml]="showDetailObj.title"></h5>
+    <span class="gradient_btn">
+      <button type="button" (click)="redirectToFullConsumption()" class="btn rounded-pill text-uppercase play">
+        <!-- <fa-icon class="mr-2" [icon]="faPlayCircle"></fa-icon> -->
+        <!-- <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"
+            width="20px" height="20px">
+            <g>
+                <g>
+                <g>
+                    <path
+                    d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M256,490.667     C126.604,490.667,21.333,385.396,21.333,256S126.604,21.333,256,21.333S490.667,126.604,490.667,256S385.396,490.667,256,490.667     z"
+                    fill="#ffffff" />
+                    <path
+                    d="M357.771,247.031l-149.333-96c-3.271-2.135-7.5-2.25-10.875-0.396C194.125,152.51,192,156.094,192,160v192     c0,3.906,2.125,7.49,5.563,9.365c1.583,0.865,3.354,1.302,5.104,1.302c2,0,4.021-0.563,5.771-1.698l149.333-96     c3.042-1.958,4.896-5.344,4.896-8.969S360.813,248.99,357.771,247.031z M213.333,332.458V179.542L332.271,256L213.333,332.458z"
+                    fill="#ffffff" />
+                </g>
+                </g>
+            </g>
+        </svg> -->
+        <svg class="icon_custom icon-play mr-2">
+          <use xlink:href="#icon-play"></use>
+        </svg>
+          <span class="action_type" *ngIf="!lastSeenObj['episodeId']" [innerHtml]="lang.detailTopCard.play"></span> 
+          <span class="action_type" *ngIf="!!lastSeenObj['episodeId']" [innerHtml]="lang.detailTopCard.resume"></span> 
+      </button>
+    </span>
+  </div>
+  <div class="col px-0 detail_section">
+    <p class="detail_text">
+      <span class="text__detail" [innerHtml]="toggleDescription.text"></span>&nbsp;
+      <span *ngIf="toggleDescription.status != 'no'" (click)="toggleText()" href="javascript:void(0);"
+        class="text-capitalize d-inline-block" [innerHtml]="toggleDescription.seeBtnText"></span>
+    </p>
+  </div>
+</div>
+
+<!-- ARTIST CHIP SCROLL SECTION -->
+<div class="col-12 px-0 artist_carousal" *ngIf="showDetailObj.artistList.length != 0">
+  <h6 class="text-uppercase mt-3 heading" [innerHtml]="language.details.artisttitle+' '+'('+showDetailObj.artistList.length+')'"></h6>
+  <div role="list" class="scrolling_carousel" (scroll)="onScroll($event)">
+      <app-artist-chip id="artist_chip_{{item.id}}" [artistChipObj]="item" [screenType]="pageType" [collection_show_detail]="showDetailObj" (click)="showArtistCard(item);" [artistChipS3Url]="showDetailS3Url" *ngFor="let item of showDetailObj.artistList"></app-artist-chip>
+  </div>
+</div>
+<!-- /ARTIST CHIP SCROLL SECTION -->
+
+<!-- artist quick view  -->
+<div class="quickView" *ngIf="showArtistCardView">
+  <app-artist-quick-view  [artistId]="passSingleArtistId"></app-artist-quick-view>
+  <a  (click)="quickViewToggle()" class="close"></a>
+</div>
+<!-- / artist quick view  -->
+  

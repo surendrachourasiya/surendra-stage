@@ -1,0 +1,128 @@
+<div class="container-fluid rounded animated fadeIn">
+   <div class="row">
+      <!-- search field -->
+      <div class="col-12 py-3 stage_section sticky-top">
+         <div class="section_header pl-3" id="hide_this">
+            <h5 class="section_heading" [innerHtml]="lang.search.search"></h5>
+         </div>
+         <form id="searchForm" class="search_form position-relative">
+            <input type="text" class="w-100" autocomplete="off" autofocus (click)='fixedToggle()' (ngModelChange)="onSearch($event)" [(ngModel)]="searchText" name="searchText" id=""
+               placeholder="{{lang.search.searchBy}}">
+               <a class="searchIcon" *ngIf="searchText.length == 0">
+                  <svg class="icon_custom icon-search">
+                     <use xlink:href="#icon-search"></use>
+                  </svg>
+               </a>
+               <a class="backIcon" (click)="clearSearch()" *ngIf="searchText.length != 0">
+                  <svg class="icon_custom icon-back">
+                     <use xlink:href="#icon-back"></use>
+                  </svg>
+               </a>
+               <a class="cancelIcon" (click)="clearSearch()" *ngIf="searchText.length != 0">
+                  <svg class="icon_custom icon-close-circular">
+                     <use xlink:href="#icon-close-circular"></use>
+                  </svg>
+               </a>
+         </form>
+      </div>
+      <!-- /search field -->
+      
+      <!-- no result message -->
+      <div *ngIf="searchNoResult" class="col-12">
+         <p [innerHtml]="lang.search.noRecordFound"></p>
+         <p [innerHtml]="lang.search.tryOther"></p>
+      </div>
+      <!--/ no result message -->
+
+      <!-- artist listing virtual scroll-->
+      <div *ngIf="artistList.data.length != 0" class="col-12  px-0 stage_section featured_artist">
+         <div class="section_header pl-3">
+            <h5 class="section_heading" [innerHtml]="lang.search.papularArtists +' ('+ artistList.data.length+')'"></h5>
+         </div>
+         <cdk-virtual-scroll-viewport (scrolledIndexChange)="getNextBatchOnScroll('artistSearch')" style="padding-top: 22.5%" #artistScroll itemSize="90" class=""
+            id="artistOrig_hScroll"
+            orientation="horizontal">
+            <div role="list" class="scrolling_carousel">
+               <app-artist-small-card class="searchArtist_item_{{item._id}}" [artistSmallObj]="item" [artistSmallS3Url]="artistList.s3Url" id="artist_original_card"
+                  *cdkVirtualFor="let item of artistList.data" ></app-artist-small-card>
+            </div>
+         </cdk-virtual-scroll-viewport>
+      </div>
+      <!-- / artist listing virtual scroll-->
+
+      <!-- stage original list -->
+      <div *ngIf="showStageOriginalList.data.length != 0" class="col-12  px-0 stage_section featured_artist">
+         <div class="section_header pl-3">
+            <h5 class="section_heading" [innerHtml]="lang.search.popularShows +' ('+ showStageOriginalList.data.length+')'"></h5>
+         </div>
+         <cdk-virtual-scroll-viewport (scrolledIndexChange)="getNextBatchOnScroll('showSearch')" style="padding-top: 65.5%" #showStageOriginalScroll class="stageOrig_hScroll"
+            id="stageOrig_hScroll"
+            orientation="horizontal" itemSize="141">
+            <div role="list" class="scrolling_carousel smallStagecard">
+               <app-stage-original-card class="searchShow_item_{{item._id}}" class="scrolling_carousel_item" id="stage_original_card" [stageOriginalObj]="item"
+                  [stageOriginalS3Url]="showStageOriginalList.s3Url"
+                  *cdkVirtualFor="let item of showStageOriginalList.data"></app-stage-original-card>
+            </div>
+         </cdk-virtual-scroll-viewport>
+      </div>
+      <!-- /stage original list -->
+
+      <!-- collection list scroll -->
+      <div *ngIf="stageCollectionList.data.length != 0" class="col-12  px-0 stage_section featured_artist">
+         <div class="section_header pl-3">
+            <h5 class="section_heading" [innerHtml]="lang.search.popularCollections +' ('+ stageCollectionList.data.length+')'"></h5>
+         </div>
+         <cdk-virtual-scroll-viewport (scrolledIndexChange)="getNextBatchOnScroll('collectionSearch')" style="padding-top: 40.5%" #stageCollectionScroll itemSize="150"
+            class="stageCollCard_hScroll" id="collectionOrig_hScroll" orientation="horizontal">
+            <div role="list" class="scrolling_carousel">
+               <app-stage-collection-card class="searchCollection_item_{{item._id}}" [stageCollectionObj]="item" [stageCollectionS3Url]="stageCollectionList.s3Url" id="collection_original_card"
+                  *cdkVirtualFor="let item of stageCollectionList.data"></app-stage-collection-card>
+            </div>
+         </cdk-virtual-scroll-viewport>
+      </div>
+      <!-- /collection list scroll -->
+
+      <!-- episode card list -->
+      <div *ngIf="showDetails.episodeList.length != 0" class="col-12  px-0 stage_section featured_artist mb-0">
+         <div class="section_header pl-3">
+            <h5 class="section_heading" [innerHtml]="lang.search.popularOnStage +' ('+ showDetails.episodeCount+')'"></h5>
+         </div>
+         <div class="px-3">
+            <app-episode-card (actionInfo)="actionView($event)" (clickInfo)="quickViewToggle($event)" [searchKeyword]="searchText" [episodeDetailObj]="item"
+               [episodeDetailS3Url]="showDetails.s3Url" *ngFor="let item of showDetails.episodeList"></app-episode-card>
+         </div>
+      </div>
+      <!--/ episode card list -->
+
+      <!-- show more button episode-->
+      <div class="col-12">
+         <div class="position-relative seemore_btn text-center sticky-bottom mt-1 mb-3">
+            <button type="button" class="btn ripple rounded-pill mx-auto" (click)="searchShowMore()" *ngIf="showDetails.showMoreBtn" >
+               <span [innerHtml]="lang.search.showMore" class="mr-2">
+               </span>
+               <svg class="icon_custom icon-chevron-down">
+                  <use xlink:href="#icon-chevron-down"></use>
+               </svg>
+            </button>
+         </div>
+      </div>
+      <!-- show more button of episode -->
+
+   </div>
+</div>
+
+<!-- action bottom shift menu -->
+<app-action-overflow-menu *ngIf="actionBottomVisible" (actionDisable)="actionBottomVisible = false">
+</app-action-overflow-menu>
+<!-- action bottom shift menu -->
+
+<!-- quick-view-card -->
+<div class="quickView" *ngIf="isQuickviewVisible">
+   <div class="scrolling_carousel position-relative episodelist_quickview invisible" style="z-index: 9999">
+      <app-quick-view-card id="episode_{{item._id}}" [searchKeyword]="searchText" [quickViewIndex]="i+1" [quickViewObj]="item" [quickViewS3Url]="showDetails.s3Url"
+         *ngFor="let item of showDetails.episodeList; let i=index;"></app-quick-view-card>
+   </div>
+   <a href="JavaScript:Void(0);" (click)="quickViewToggle(false)" class="close"></a>
+</div>
+<!-- /quick-view-card -->
+

@@ -1,0 +1,45 @@
+<div class="artist__card position-relative" style="display: inline-block;flex-shrink: 0;white-space: pre-line" [routerLink]="['/artist-landscape', artistObj.slug]">
+    <!-- artist card design svg -->
+    <svg width="148px" height="227px" viewBox="0 0 148 227" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Group</title>
+        <desc>Created with Sketch.</desc>
+        <defs>
+            <linearGradient x1="47.2987687%" y1="0%" x2="47.2987687%" y2="100%" id="linearGradient-1">
+                <stop stop-color="#191919" stop-opacity="0" offset="0%" />
+                <stop stop-color="#191919" offset="100%" />
+            </linearGradient>
+        </defs>
+        <g id="Stage-Master-File" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+            <g id="Similar-artist-Copy-8">
+                <g id="Group" [attr.fill]="artistObj.gradientColor">
+                    <path d="M75,0 C92.5259887,0 107.280825,11.8647131 111.670522,28.0001522 L111.698586,28 L112.050031,28.9890762 C113.75039,33.7744219 118.278965,36.971261 123.357425,36.971261 L136,36.971261 C142.627417,36.971261 148,42.343844 148,48.971261 L148,215 C148,221.627417 142.627417,227 136,227 L12,227 C5.372583,227 8.11624501e-16,221.627417 0,215 L0,50 C9.64732338e-16,43.372583 5.372583,38 12,38 L26.1202568,38 C30.9131233,38 35.2463312,35.1480236 37.1418803,30.745926 L38.3242798,28 C42.7191749,11.8647131 57.4740113,0 75,0 Z" id="Combined-Shape-Copy-2"></path>
+                </g>
+                <g id="Group" fill="url(#linearGradient-1)">
+                    <path d="M75,0 C92.5259887,0 107.280825,11.8647131 111.670522,28.0001522 L111.698586,28 L112.050031,28.9890762 C113.75039,33.7744219 118.278965,36.971261 123.357425,36.971261 L136,36.971261 C142.627417,36.971261 148,42.343844 148,48.971261 L148,215 C148,221.627417 142.627417,227 136,227 L12,227 C5.372583,227 8.11624501e-16,221.627417 0,215 L0,50 C9.64732338e-16,43.372583 5.372583,38 12,38 L26.1202568,38 C30.9131233,38 35.2463312,35.1480236 37.1418803,30.745926 L38.3242798,28 C42.7191749,11.8647131 57.4740113,0 75,0 Z" id="Combined-Shape-Copy-2"></path>
+                </g>
+            </g>
+        </g>
+    </svg>
+    <!-- /artist card design svg -->
+
+    <!-- overlay of artist-image/name and desc -->
+    <div class="artist__details position-absolute text-center">
+        <div class="artist__CircleImg">
+            <img [attr.src]="artistS3Url.basePath+artistS3Url.artistPath+constantImg.artistMedium+artistObj.profilePic" loading="lazy" class="rounded-circle" alt="" width="60" height="60" style="object-fit: cover">
+        </div>
+        <div class="artist__name-location">
+            <h6 class="mb-0 mt-2 text-truncate" [innerHtml]="artistObj.firstName + ' '+ artistObj.lastName"></h6>
+            <p class="mb-0" [innerHtml]="artistObj.city"></p>
+        </div>
+        <div class="artist__bio" *ngIf="artistBio != 'searchCom'">
+            <p class="mb-0" [innerHtml]="artistObj.description"></p>
+        </div>
+    </div>
+    <!-- /overlay of artist-image/name and desc -->
+</div>
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+<div class="bottomPopupMask animated fadeIn faster" (click)="toggleActionPanel(false)"></div>
+
+<div class="bottomPopupWrap">
+   <div  class="bottomPopup animated slideInUp faster w-100" id="bottomPopup">
+      <div  class="listItems_bottomPopup position-relative" >
+         <ul  class="list-unstyled mb-0">
+            <li style="padding: 15px 16px;" (click)="enableShareOption()">
+               <a  href="javascript:void(0);">
+                  <!-- <fa-icon [icon]='faShareAlt' class="mr-2"></fa-icon> -->
+                  <svg class="icon_custom icon-share">
+                     <use xlink:href="#icon-share"></use>
+                  </svg>
+                  <span style="display: inline-block;margin-left: 24px;">{{lang.home.common.share}}</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="col-12 px-0 stage_section position-relative artStryScr animated slideInUp"
+   [ngClass]="isSliderOn ? '' : 'closed'">
+   <div class="section_header">
+      <h5 class="section_heading mb-0" [innerHtml]="lang['consumption']['upNext']"></h5>
+   </div> 
+   <div role="list" (scroll)= "onScrollCard()" class="scrolling_carousel d-flex" id="playlistDrawerFullConsumption_hScroll">
+      <ng-container *ngIf="type==='show' || type==='collection'">
+            <app-full-similar-content-card id="full_similar_content_{{item._id}}"  (selectedContent)="changeVideo($event)" (quickViewEnabled)="isQuickviewVisible = true;" [contentType]="type" [artistContentObj]="{'data':item}" [artistContentIndex]="i" [activeContentIndex]="activeElementIndex" [artistContentS3Url]="artistDrawerS3Url" *ngFor="let item of artistDrawerObj; let i = index"></app-full-similar-content-card> 
+      </ng-container>
+   </div>
+   <div class="" (click)="toggleslide()" (swipe)="toggleslide()" style="position: absolute;width: 100%;height: 0px;top: -31px;left: 0px;right: 0px;">
+      <div class="swipeIc" style="position: relative;width: 65px;
+       height: 40px;
+       border-radius: 50vw;
+       border-bottom-left-radius: 0px;
+       border-bottom-right-radius: 0px;
+       top: -8px;
+       left: 0px;
+       right: 0px;
+       margin: auto;
+       background-color: #242424; 
+       text-align: center;padding-top: 12px;">
+         <fa-icon [icon]="faAngleDown" *ngIf="isSliderOn; else arrowUp"></fa-icon>
+         <ng-template #arrowUp>
+            <fa-icon [icon]="faAngleUp"></fa-icon>
+         </ng-template>
+      </div>
+   </div>
+</div>
+

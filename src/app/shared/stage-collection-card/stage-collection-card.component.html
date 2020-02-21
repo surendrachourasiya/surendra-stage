@@ -1,0 +1,60 @@
+<article [routerLink]="['/collection-details', stageCollectionObj.slug]" class="stage_collection_card"
+  [ngStyle]="{'background-color': stageCollectionObj.thumbnail.horizontal.ratio1.gradient  }">
+  <div class="card_thumbnail" style="background-color: #236592">
+    <img [attr.src]="stageCollectionS3Url.basePath+stageCollectionS3Url.collectionPath+constantImg.horizontalMedium+stageCollectionObj.thumbnail.horizontal.ratio1.sourceLink" loading="lazy" alt="">
+    <!-- <img src="../../../assets/images/failed_to_load_sq_small-02-03.svg" class="img-fluid" /> -->
+  </div>
+  <div class="detail__collectionList position-relative p-2">
+    <h6 class="mb-0" [innerHtml]="stageCollectionObj.title"></h6>
+    <p class="mb-0">
+      <span *ngIf="stageCollectionObj.episodeCount === undefined || stageCollectionObj.episodeCount ===0">&nbsp;</span>
+      <span *ngIf="stageCollectionObj.episodeCount !== undefined && stageCollectionObj.episodeCount !==0"
+        [innerHtml]="stageCollectionObj.episodeCount === 1 ? stageCollectionObj.episodeCount+' '+lang.home.common.videoSingular :
+        stageCollectionObj.episodeCount+' '+lang.home.common.videoPlural">
+      </span>
+    </p>
+    
+    <div class="d-flex justify-content-between align-items-end">
+        <div class="d-flex mt-2 justify-content-center align-items-center">
+            <div class="relArt__collectionList d-flex" *ngIf="stageCollectionObj.artistList.length > 0">
+                <span *ngFor="let item of stageCollectionObj.artistList | slice:0:1; let i=index" [ngStyle]="{'border-color': stageCollectionObj.thumbnail.horizontal.ratio1.gradient }">
+                  <img loading="lazy" class="rounded-circle img-fluid" [attr.src]="stageCollectionS3Url.basePath+stageCollectionS3Url.artistPath+constantImg.artistSmall+item.profilePic" alt="item.name" />
+                </span>
+            </div>
+
+            <div class="d-flex" *ngIf="stageCollectionObj.artistList.length == 0" style="min-height: 30px;">
+              <span></span>
+            </div>
+
+            <div class="artName__collectionList d-flex flex-column" *ngIf="stageCollectionObj.artistList.length > 0">
+              <p class="mb-0" [innerHtml]="stageCollectionObj.artistList[0].name">
+                
+              </p>
+              <p class="mb-0" *ngIf="stageCollectionObj.artistList.length > 1">
+                  {{lang.home.common.amp}} {{stageCollectionObj.artistList.length - 1}} {{lang.home.common.more}}
+              </p>
+            </div>
+        </div>
+
+        <div class="seeCollection__collectionList d-none">
+          <a class="position-absolute" style="right: 6px; bottom: 5px;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24"
+              viewBox="0 0 24 24">
+              <defs>
+                <path id="a" d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z" />
+                <path id="c" d="M0 0h50v50H0z" />
+              </defs>
+              <g fill="none" fill-rule="evenodd">
+                <mask id="b" fill="#fff">
+                  <use xlink:href="#a" />
+                </mask>
+                <g mask="url(#b)">
+                  <use fill="#E0E0E0" transform="translate(-13 -13)" xlink:href="#c" />
+                </g>
+              </g>
+            </svg>
+          </a>
+        </div>
+    </div>
+  </div>
+</article>

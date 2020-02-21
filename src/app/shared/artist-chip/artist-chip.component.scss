@@ -1,0 +1,62 @@
+.artist_chip {
+  border-radius: 20px;
+  border: solid 1px #3f3f3f;
+  background-image: linear-gradient(to bottom, #252525, #101010);
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #e0e0e0;
+  text-decoration: none;
+  min-width: 110px;
+  max-width: 155px;
+  padding: 0px 16px 0px 4px;
+  height: 40px;
+  justify-content: center;
+  .artThumb__individual{
+    img{
+      border-radius: 24px;
+      height: 32px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      overflow: hidden;
+      width: 32px;
+      border: none;
+    }
+  }
+  .detailArt__individual {
+    color: #e0e0e0;
+    max-width: 108px;
+    margin-left: 4px;
+
+    h6 {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 1px;
+    }
+
+    p {
+      font-size: 10px;
+      opacity: 0.7;
+      line-height: normal;
+    }
+  }
+  &.ripple {
+    background-position: center;
+    transition: background 0.8s;
+
+    &:hover {
+      background: #252525 radial-gradient(circle, transparent 1%, #2a2a2a 1%) (center / 15000%);
+    }
+
+    &:active {
+      background-color: #101010;
+      background-size: 100%;
+      transition: background 0s;
+      text-decoration: none;
+      background: #2a2a2a;
+    }
+  }
+}

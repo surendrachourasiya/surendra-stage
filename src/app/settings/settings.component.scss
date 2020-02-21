@@ -1,0 +1,80 @@
+.settings_list{
+   li{
+    padding:15px 12px;
+    a{
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+    }
+   }
+}
+
+.settings_header{
+   border-radius: 12px;
+   background-image: linear-gradient(to bottom, #252525, #151515);
+   padding:16px 12px;
+   h6{
+      font-weight: bold;
+       color: #e0e0e0;
+   }
+   p{
+      color:#e0e0e07a;
+   }
+   span.gradient_btn{
+      // height: 36px;
+      padding: 2px;
+      button{
+         padding: 0px 16px;
+         &:active,
+         &:hover{
+            color: #ffffff;
+            background-color: #121212;
+         }
+      }
+   }
+}
+[type=radio]:checked + label:before, [type=radio]:not(:checked) + label:before{
+   top: 0px!important;
+}
+[type=radio]:checked + label:after, [type=radio]:not(:checked) + label:after{
+   top:5px;
+}
+
+.logoutModal{
+   .modal-content{
+      background-image: linear-gradient(to bottom, #101010, #1d1d1d);
+      border-radius: 8px;
+      .modal-body{
+         p{
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.33;
+            color: #e0e0e0de;
+            // color:transparentize($color: #e0e0e0, $amount: 0.87);
+            // color: opacify(#e0e0e0, 0.87);
+         }
+      }
+      .modal-footer{
+         button{
+            background-image: linear-gradient(to bottom, #252525, #101010);
+            border-radius: 19px;
+            border: solid 1px #3f3f3f;
+            min-width: 60px;
+            height: 36px;
+            padding: 0px 16px;
+         }
+      }
+   }
+   a.close {
+      position: fixed;
+      bottom: 26px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 48px;
+      height: 48px;
+      z-index: 9999;
+      background-image: url(/assets/images/icons/cancel.svg);
+      background-size: 48px 48px;
+    }
+}

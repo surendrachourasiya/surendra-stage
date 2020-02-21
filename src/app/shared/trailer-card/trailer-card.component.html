@@ -1,0 +1,20 @@
+<div class="inner__trailers d-flex mb-3">
+  <div class="individual">
+     <div class="individual__card">
+        <div class="videos__individual position-relative" (click)="onTrailerClick()">
+           <img *ngIf="trailerDetailType == 'show'" _ngcontent-inf-c53="" loading="lazy"
+              [attr.src]="trailerDetailS3Url.basePath+trailerDetailS3Url.showPath+constantImg.horizontalSmall+trailerDetailObj.thumbnail.horizontal.sourceLink"
+              [attr.alt]="trailerDetailObj.title" alt="" class="img-fluid">
+            <img *ngIf="trailerDetailType == 'collection'" _ngcontent-inf-c53="" loading="lazy"
+               [attr.src]="trailerDetailS3Url.basePath+trailerDetailS3Url.collectionPath+constantImg.horizontalSmall+trailerDetailObj.thumbnail.horizontal.sourceLink"
+               [attr.alt]="trailerDetailObj.title" alt="" class="img-fluid">
+           <span class="position-absolute time" [innerHtml]="trailerDetailObj.duration | timeFormatter">8:30</span>
+        </div>
+        <div class="showTitleWrap__individual d-flex justify-content-between align-items-center">
+           <div class="showTitle__individual">
+              <h6 [innerHtml]="trailerDetailObj.title"></h6>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>

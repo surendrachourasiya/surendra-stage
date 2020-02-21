@@ -1,0 +1,75 @@
+<div class="artist__quickView position-fixed animated fadeIn slower">
+    <div *ngIf="artistDetail.data != null" class="artistInner__quickView animated zoomIn faster">
+        <!-- head Part -->
+        <div class="head__artQuickView position-relative" (click)="onArtistLandQuick(artistDetail.data._id, artistDetail.data.firstName)" [routerLink]="['/artist-landscape', artistDetail.data.slug]">
+            <div class="proPic__artQuickView">
+                <img  loading="lazy" [attr.src]="artistDetail.s3Url.basePath+artistDetail.s3Url.artistPath+'/'+artistDetail.data.profilePic" alt=""
+                width="48px" height="48px" class="img-fluid rounded-pill">
+            </div>
+            <div class="artDet_artQuickView">
+                <h6 [innerHtml]="artistDetail.data.firstName+' '+artistDetail.data.lastName"></h6>
+                <p [innerHtml]="artistDetail.data.city"></p>
+            </div>
+            <a class="ml-auto">
+                <svg class="icon_custom icon-chevron-right">
+                    <use xlink:href="#icon-chevron-right"></use>
+                </svg>
+            </a>
+        </div>
+        <!-- /head Part -->
+
+        <!-- Mid Part -->
+        <div class="artMidPart position-relative">
+            <div class="artiPro_meta">
+                <div class="tagswrapper">
+                    <div class="artistTags" *ngFor="let item of artistDetail.data.subGenreList" [innerHtml]="item.name"></div>
+                </div>
+            </div>
+            <div class="landscape__artist">
+                <div class="artDesc__artist" id="artDesc_artist">
+                    <div class="">
+                        <div class="desc-header d-flex justify-content-between align-items-center" id="artistHide">
+                            <h6 class="mb-0" [innerHtml]="artistDetail.data.description"></h6>
+                        </div>
+    
+                        <div id="artDesc_collepse" class="artDescription collapse show" aria-labelledby="artistHide"
+                            data-parent="#artDesc_artist">
+                            <p [innerHtml]="artistDetail.data.bio"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Mid Part -->
+
+        <!-- footer Part -->
+        <div class="footer__artQuickView p-3">
+            <span class="gradient_btn">
+                <button type="button" class="btn rounded-pill text-uppercase play" (click)="artistQuickView()" [routerLink]="['/feed-consumption']" [queryParams]="{'slug': artistDetail.data['slug'],'type': 'artist'}">
+                    <!-- <fa-icon class="mr-2" [icon]="faPlayCircle"></fa-icon> -->
+                    <!-- <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
+                    x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"
+                    width="20px" height="20px">
+                    <g>
+                        <g>
+                        <g>
+                            <path
+                            d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M256,490.667    C126.604,490.667,21.333,385.396,21.333,256S126.604,21.333,256,21.333S490.667,126.604,490.667,256S385.396,490.667,256,490.667     z"
+                            fill="#ffffff" />
+                            <path
+                            d="M357.771,247.031l-149.333-96c-3.271-2.135-7.5-2.25-10.875-0.396C194.125,152.51,192,156.094,192,160v192     c0,3.906,2.125,7.49,5.563,9.365c1.583,0.865,3.354,1.302,5.104,1.302c2,0,4.021-0.563,5.771-1.698l149.333-96     c3.042-1.958,4.896-5.344,4.896-8.969S360.813,248.99,357.771,247.031z M213.333,332.458V179.542L332.271,256L213.333,332.458z"
+                            fill="#ffffff" />
+                        </g>
+                        </g>
+                    </g>
+                    </svg> -->
+                    <svg class="icon_custom icon-play mr-2">
+                        <use xlink:href="#icon-play"></use>
+                    </svg>
+                    <span class="action_type" [innerHtml]="artistDetail.data['firstName'] | playBtnTextFormatter"></span>
+                </button>
+            </span>
+        </div>
+        <!-- /footer Part -->
+    </div>
+</div>

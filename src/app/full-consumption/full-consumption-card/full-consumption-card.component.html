@@ -1,0 +1,94 @@
+<div class="col-12 mt-3 px-0 stage_section" style="border-radius: 12px 12px 0px 0px;" [ngClass]="{'pointer-events': openPlaylistDrawer}">
+        <div class="video_player" [hidden]="!showVideoContainer">
+           <div class="position-relative">
+              <div class="video_container">
+                  <video id="full_consumption_player" class="video-js vjs-16-9" crossorigin="true" playsinline webkit-playsinline data-setup='{ 
+                    "controls": true,
+                    "poster": "",
+                    "autoplay": "true",
+                    "preload": "auto",
+                    "bigPlayButton": false,
+                    "errorDisplay" : false,
+                    "controlBar": { 
+                      "progressControl":true,
+                      "remainingTimeDisplay": true,
+                      "durationDisplay": true,
+                      "currentTimeDisplay" : true,
+                      "timeDivider": true,
+                      "volumeControl": false,
+                      "muteToggle": true,
+                      "fullscreenToggle": true,
+                      "children":{
+                      }
+                      }}'>
+                    <source [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'">
+                    <!-- <track kind="captions" src="https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/eng/vtt"
+                       srclang="en" label="English" default /> -->
+                  </video>
+                  <a (click)="showControls()" class="position-absolute top w-100" style="top:0; height: 85%;"></a>
+
+                  <span class="videoPlayIc" (click)="playPeripheralVideo()" [ngClass]="isOpenDirectly ? 'd-none' : ''">
+                     <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 565.648 565.648" height="48px"
+                     viewBox="0 0 565.648 565.648" width="48px" class="">
+                     <g>
+                        <path
+                           d="m282.824 0c-155.947 0-282.824 126.877-282.824 282.824s126.877 282.824 282.824 282.824 282.824-126.877 282.824-282.824-126.877-282.824-282.824-282.824zm-70.706 424.233v-282.822l212.118 141.41z"
+                           data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0" />
+                     </g>
+                     </svg>
+                  </span> 
+
+              </div>
+              <div>
+                 <div class="overlaysContainer w-100" tabindex="-1" >
+                    <div class="controlsOverlay" [hidden]="!controlOverlayVisible" >
+                       <div class="buttons d-flex justify-content-center align-items-center" style="position: absolute;top: calc(50% - 16px);width: 100%;">
+                          <div class="prev">
+                             <a *ngIf="activeArtistIndex != 0" class="prevBtn d-inline-block d-flex justify-content-center align-items-center" (click)="previousVideoItem()">
+                                <fa-icon [icon]="faStepBackward"></fa-icon>
+                             </a>
+                          </div>
+                          <div class="controls">
+                             <a class="playIcon justify-content-center align-items-center"  (click)="playPauseVideoItem()" [hidden]="isPlay || isReplay">
+                                <fa-icon [icon]="faPlay"></fa-icon>
+                             </a>
+                             <a class="pauseIcon justify-content-center align-items-center" (click)="playPauseVideoItem()" [hidden]="!isPlay || isReplay">
+                                <fa-icon [icon]="faPause"></fa-icon>
+                             </a>
+                             <a class="replayIcon justify-content-center align-items-center" (click)="replayVideoItem()" [hidden]="!isReplay">
+                                <fa-icon [icon]="faRedo"></fa-icon>
+                             </a>
+                          </div>
+                          <div class="next" *ngIf="activeArtistIndex != null">
+                             <a *ngIf="!(activeArtistIndex == listDetails.episodeList.length-1)" class="nextBtn d-flex justify-content-center align-items-center" (click)="nextVideoItem()">
+                                <fa-icon [icon]="faStepForward"></fa-icon>
+                             </a>
+                          </div>
+                       </div>
+                       <div class="settings" *ngIf="isSettingEnable">
+                          <a class=" d-flex justify-content-center align-items-center" (click)="settingsToggle()"
+                             style="width: 28px;height: 28px;background-color: rgba(37, 37, 37, 0.7);border-radius: 50px;display:flex">
+                             <fa-icon [icon]="faCog"></fa-icon>
+                          </a>
+                       </div>
+                    </div>
+                    <div class="pausedOverlay w-100 h-100" [hidden]="!nextOverlayVisible">
+                          <a (click)="closeOverlay()" ><fa-icon [icon]='faTimesCircle' class="mr-3 mt-3" ></fa-icon></a>
+                          <a class="timerBtn" (click)='nextVideoItem()'>{{this.lang['consumption']['nextIn']}} <span> {{timeLeft}}</span> <fa-icon [icon]='faCaretRight' class="ml-2"></fa-icon></a>
+                    </div>
+     
+                 </div>
+              </div>
+           </div>
+        </div>     
+ </div>
+     
+<!-- collection/ episode story on scroll -->
+   <app-full-consumption-playlist-drawer *ngIf="activeArtistIndex != null" (openCloseDrawer)="openCloseDrawer($event)"
+   (moveSelectedContent)="changeSelectedVideo($event)" [activeElementIndex]="activeArtistIndex" [type]="commonDetail.screenType" [artistDrawerObj]="listDetails.episodeList" 
+   [artistDrawerS3Url]="listDetails.s3Url" [commonData]="commonData"></app-full-consumption-playlist-drawer>
+<!--/ collection/ episode story on scroll -->
+
+<!-- setting drawer -->
+   <app-consumption-settings *ngIf="activeArtistIndex!=null && issettingsDrawerVisible" [passCurrentQuality]="selectedVideoQuality" (settingQualityChange)="videoQualityChange($event, true)" (settingClose)="closeSettingDrawer()" ></app-consumption-settings>
+<!-- /setting drawer -->

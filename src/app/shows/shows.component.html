@@ -1,0 +1,19 @@
+
+<div class="shows container animated slideInRight" *ngIf="showStageOriginalList.data.length != 0">
+    <cdk-virtual-scroll-viewport id="showDetailSeeAll_hScroll"
+    (scrolledIndexChange)="getNextBatchOnScroll('showStageOriginal', 'getShowOrginalList', $event)"
+    #showStageOriginalScroll
+    itemSize="240">
+        <div class="row no-gutters" *cdkVirtualFor="let item of showStageOriginalList.data">
+            <div class="col-6 card_wrap__shows px-0" id="show_{{item[0]._id}}" *ngIf="item['0']">
+                <app-stage-original-card [stageOriginalObj]="item['0']" [stageOriginalS3Url]="showStageOriginalList.s3Url"
+                ></app-stage-original-card>
+            </div>
+
+            <div class="col-6 card_wrap__shows px-0" id="show_{{item[1]._id}}" *ngIf="item['1']">
+                <app-stage-original-card [stageOriginalObj]="item['1']" [stageOriginalS3Url]="showStageOriginalList.s3Url">
+                </app-stage-original-card>
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>

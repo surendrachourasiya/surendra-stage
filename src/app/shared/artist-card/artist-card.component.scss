@@ -1,0 +1,35 @@
+.artist__card{
+    max-width: 148px;
+}
+.artist__details{
+    top: 8px;
+    left: 2px;
+    right: 0px;
+    margin: auto;
+    color: #e0e0e0;
+    padding: 0px 10px;
+    .artist__name-location{
+        h6{
+            font-weight: 600;
+            margin-bottom: 4px!important;
+        }
+        p{
+            font-size: 12px;
+            opacity: 0.70;
+            line-height: normal;
+        }
+    } 
+    .artist__bio{
+        // max-height: 92px;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        p{
+            font-size: 14px;
+            margin-top: 7px;
+            line-height: 17.5px;
+            opacity: 0.70;
+        }
+    }
+}

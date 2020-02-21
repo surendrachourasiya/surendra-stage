@@ -1,0 +1,76 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/*.css",
+          "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/css?family=Muli:300,400,700,900",
+          "https://fonts.googleapis.com/**"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "home",
+      "urls": [
+        "https://api.stage.in/homePage"
+      ],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 20,
+        "maxAge": "10m",
+        "timeout": "15s",
+        "strategy":"performance"
+      }
+    },
+    {
+      "name": "featuredArtist",
+      "urls": [
+        "https://api.stage.in/artist/getFeaturedArtistList",
+        "https://api.stage.in/artist/updateStoryViews",
+        "https://api.stage.in/user/exitContentConsumption"
+      ],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 20,
+        "maxAge": "2u",
+        "timeout": "15s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "artists",
+      "urls": [
+        "https://api.stage.in/feeds/slugAndRelatedCatchup"
+      ],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 20,
+        "maxAge": "2u",
+        "timeout": "15s",
+        "strategy": "performance"
+      }
+    }
+  ]
+}

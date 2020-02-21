@@ -1,0 +1,33 @@
+.see_all_btn {
+    border-radius: 15px;
+    border: solid 1px #3f3f3f;
+    background-image: linear-gradient(to bottom, #252525, #101010);
+    font-size: 12px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #e0e0e0;
+    padding: 0px 12px 0px 12px;
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    &.ripple {
+      background-position: center;
+      transition: background 0.8s;
+
+      &:hover {
+        background: #252525 radial-gradient(circle, transparent 1%, #252525 1%) (center / 15000%);
+      }
+
+      &:active {
+        background-color: #101010;
+        background-size: 100%;
+        transition: background 0s;
+        text-decoration: none;
+      }
+    }
+  }

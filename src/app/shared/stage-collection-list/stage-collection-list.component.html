@@ -1,0 +1,88 @@
+<div class="card__collectionList" [ngStyle]="{'background-color': collectionDetailObj.thumbnail.horizontal.ratio2.gradient }">
+    <div class="accordion" id="card__collectionList">
+      <div class="Collection_wrapper">
+          <div class="thumbnail__collectionList" (click)="getColletionObj('thumbnail', '')" [routerLink]="['/collection-details', collectionDetailObj.slug]">
+            <img loading="lazy" class="img-fluid"
+                [attr.src]="collectionDetailS3Url.basePath+collectionDetailS3Url.collectionPath+constantImg.horizontalSmall+collectionDetailObj.thumbnail.horizontal.ratio2.sourceLink"
+                [attr.alt]="collectionDetailObj.title">
+                <!-- <img src="../../../assets/images/failed_to_load_horizontal-04.svg" loading="lazy" class="img-fluid" alt=""> -->
+                <!-- <img src="../../../assets/images/failed_to_load_sq_big-02.svg" class="img-fluid" /> -->
+          </div>
+          <div class="detail__collectionList p-2">
+            <h6 class="mb-0" [innerHtml]="collectionDetailObj.title"></h6>
+            <div class="d-flex justify-content-between align-items-end">
+                <div class="d-flex justify-content-center align-items-center mt-2">
+                    <div class="relArt__collectionList d-flex">
+                        <span *ngFor="let item of collectionDetailObj.artistList | slice:0:1; let i=index" [ngStyle]="{'border-color': collectionDetailObj.thumbnail.horizontal.ratio1.gradient }">
+                            <img loading="lazy" class="rounded-circle img-fluid" [attr.src]="collectionDetailS3Url.basePath+collectionDetailS3Url.artistPath+constantImg.artistSmall+item.profilePic" [attr.alt]="item.name" />
+                        </span>
+                    </div>
+                    <div class="artName__collectionList d-flex flex-column" *ngIf="collectionDetailObj.artistList.length > 0">
+                        <p class="mb-0" [innerHtml]="collectionDetailObj.artistList[0].name"></p>
+                        <p class="mb-0" *ngIf="collectionDetailObj.artistList.length > 1">
+                            {{lang.home.common.amp}} {{collectionDetailObj.artistList.length - 1}} {{lang.home.common.more}}
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="seeCollection__collectionList">
+                    <button type="button" (click)="toggleArrow()"
+                        data-toggle="collapse"
+                        [attr.data-target]="'#episodelist__collection_'+ collectionDetailObj._id"
+                        aria-expanded="true"
+                        aria-controls="episode__collection"
+                        class="text-uppercase d-flex align-items-center">
+                        <span [innerHtml]="lang.home.stageCollectionsSec.seeCollection"></span>
+                        <span [ngClass]="iscollList? 'icRotate' : ' '">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve" class=""><g transform="matrix(1 0 0 1 0 0)"><g>
+                                <path d="M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                            </g></g> </svg> -->
+                            <svg class="icon_custom icon-chevron-down sm_svgic small_12"> 
+                                <use xlink:href="#icon-chevron-down"></use>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="episodelist_wrapper">
+            <div id="episodelist__collection_{{collectionDetailObj._id}}"
+                class="episodelist__collection collapse pt-3"
+                aria-labelledby="headingOne" data-parent="#card__collectionList">
+                <!-- CollectionList -->
+
+                <div (click)="getColletionObj('collection_play', episode._id); fullConsumptionCollection(episode['collectionSlug'], episode['slug'], collectionDetailObj['episodeCount'])"
+                    *ngFor="let episode of collectionEpisodeList | slice:0:3"
+                    class="wrapper__loadlist d-flex justify-content-between align-items-center mb-2 px-3">
+                    <div class="detailinner d-flex flex-direction-row align-items-center">
+                        <div class="thumbnail__episodelist">
+                            <img loading="lazy"
+                                [attr.src]="collectionDetailS3Url.basePath+collectionDetailS3Url.episodePath+constantImg.squareSmall+episode.thumbnail.square.ratio1.sourceLink"
+                                [attr.alt]="episode.title" class="img-fluid" width="44px" height="44px" />
+                        </div>
+                        <div class="title__episodelist ml-3">
+                            
+                            <h6 class="mb-0 text-truncate" [innerHtml]="episode.title"></h6>
+                            <p class="artist__episodelist mb-0" *ngIf="episode.artistList.length > 0">
+                                <span *ngIf="episode.artistList[0].name != '' && episode.artistList[0].name != undefined"
+                                    [innerHtml]="episode.artistList[0].name"></span></p>
+                        </div>
+                    </div>
+                    <div class="epiplay__episodelist">
+                        <svg class="icon_custom icon-play">
+                            <use xlink:href="#icon-play"></use>
+                        </svg>
+                    </div>
+                </div>
+                <!-- /CollectionList -->
+                <div class="d-flex justify-content-end pr-3 pb-3">
+                    <a href="javascript:void(0);" (click)="getColletionObj('see_all', '')" class="see_all_btn ripple"
+                        [routerLink]="['/collection-details', collectionDetailObj.slug]" style="border:none;"><span
+                            [innerHtml]="lang.home.common.seeAll"></span> ({{collectionDetailObj.episodeCount}})</a>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

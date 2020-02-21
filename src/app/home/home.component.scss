@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  background-color: #151515;
+  padding-bottom: 55px;
+}
+@media only screen and (max-width:720px){
+  // .stageOrig_hScroll{
+  //   min-height: 470px!important;
+  // }
+  // .stageCollCard_hScroll{
+  //   min-height: 295px!important;
+  // }
+}
+
+.video-js .vjs-control-bar {
+  opacity: 1 !important;
+  background-color: transparent!important;
+}
+
+.video-js .vjs-mute-control {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 13px !important;
+  background-color: #252525;
+}

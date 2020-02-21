@@ -1,0 +1,21 @@
+    <div class="bottomPopupMask animated fadeIn faster" *ngIf="seasonEnable" (tap)="toggleSeasonPanel(false)">
+    </div>
+
+    <div class="bottomPopupWrap" *ngIf="seasonEnable">
+
+      <div class="bottomPopup animated slideInUp faster w-100" id="bottomPopup">
+          <div class="season_bottomPopup position-relative" >
+              <form>
+                  <div class="d-flex" *ngFor="let item of seasonListObj; let i = index;" >
+                      <input type="radio" [id]="'Season'+i" name="radio-group" [checked]="i == selectedSeasonIndex" (click)="passSeasonId(i)">
+                      <label class="ml-4" [for]="'Season'+i">
+                          <h6 [innerHtml]="item.title"></h6>
+                          <p [innerHtml]="item.description" class="text-truncate-two"></p>
+                      </label>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+  
+  

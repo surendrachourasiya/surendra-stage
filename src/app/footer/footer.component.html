@@ -1,0 +1,42 @@
+<footer class="fixed-bottom animated slideInUp">
+   <div class="nav-items d-flex align-items-center justify-content-around" *ngIf='deviceType === "mobile"'>
+      <!-- home icon -->
+      <a class="footer_link" routerLink="/" (click)="onFooterClick('home_btn_click', '')" routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact: true}">
+         <svg class="icon_custom icon-home inactive">
+            <use xlink:href="#icon-home"></use>
+         </svg>
+         <svg class="icon_custom icon-home-active active">
+            <use xlink:href="#icon-home-active"></use>
+         </svg>
+         <span [innerHtml]="footer.home"></span>
+      </a>
+      <!--/ home icon -->
+
+      <!-- search icon -->
+      <a class="footer_link" routerLink="/search" (click)="onFooterClick('search_btn_click', '/search')" routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact: true}">
+         <svg class="icon_custom icon-search inactive">
+            <use xlink:href="#icon-search"></use>
+         </svg>
+         <svg class="icon_custom icon-unchecked active">
+            <use xlink:href="#icon-unchecked"></use>
+         </svg>
+         <span [innerHtml]="footer.search"></span>
+      </a>
+      <!--/ search icon -->
+
+      <!-- more icon -->
+      <a class="footer_link" routerLink="/settings"  (click)="onFooterClick('more_btn_click', '/settings')" routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact: true}">
+         <svg class="icon_custom icon-ellipsis-horizontal inactive">
+            <use xlink:href="#icon-ellipsis-horizontal"></use>
+         </svg>
+         <svg class="icon_custom icon-ellipsis-active active">
+            <use xlink:href="#icon-ellipsis-active"></use>
+         </svg>
+         <span [innerHtml]="footer.more"></span>
+      </a>
+      <!-- / more icon -->
+   </div>
+</footer>

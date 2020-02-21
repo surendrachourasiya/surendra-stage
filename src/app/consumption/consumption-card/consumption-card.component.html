@@ -1,0 +1,241 @@
+<div class="col-12 mt-3 px-0 stage_section" style="border-radius: 12px 12px 0px 0px;" [ngClass]="{'pointer-events': openPlaylistDrawer}">
+   <div *ngIf="(commonDetail.screenType==='collectionPheripheral' || commonDetail.screenType==='showPheripheral') && activeArtistIndex != null && collectionPheripheralDetails.detail['artistList'].length > 0" class="section_header pl-3 py-2 my-0">
+      <div class="artThumb__individual">
+         <img [attr.src]="collectionPheripheralDetails.s3Url.basePath+collectionPheripheralDetails.s3Url.artistPath+constantImg.artistSmall+collectionPheripheralDetails.detail['artistList'][0]['profilePic']" loading="lazy" class="img-fluid rounded-pill" style="border-radius: 24px;height: 32px;object-fit: cover;overflow: hidden;width: 32px;border: none;">
+      </div>
+      <h5 class="section_heading mb-0 ml-2">
+         <span [innerHtml]="collectionPheripheralDetails.detail['artistList'][0].name"></span>
+         <span *ngIf="collectionPheripheralDetails.detail['artistList'].length > 1" [innerHtml]="' +'+(collectionPheripheralDetails.detail['artistList'].length-1)"></span>
+      </h5>
+      <a class="px-2 ml-auto" (click)="actionBottomShift(true)">
+         <fa-icon [icon]="faEllipsisV"></fa-icon>
+      </a>
+   </div>
+
+   <div class="video_player" [hidden]="!showVideoContainer">
+      <div class="position-relative">
+         <div class="video_container">
+            <video id="consumption_player" class="video-js vjs-16-9" playsinline webkit-playsinline data-setup='{ 
+               "controls": true,
+               "poster": "",
+               "autoplay": "true",
+               "preload": "auto",
+               "bigPlayButton": false,
+               "errorDisplay" : false,
+               "controlBar": { 
+                 "progressControl":true,
+                 "remainingTimeDisplay": true,
+                 "durationDisplay": true,
+                 "currentTimeDisplay" : true,
+                 "timeDivider": true,
+                 "volumeControl": false,
+                 "muteToggle": true,
+                 "fullscreenToggle": true,
+                 "children":{
+                 }
+                 }
+            }'>
+               <source [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'">
+            </video>
+            <a (click)="showControls()" class="position-absolute top w-100" style="top:0; height: 85%;"></a>
+         </div>
+         <div>
+            <div class="overlaysContainer w-100" tabindex="-1" >
+               <div class="controlsOverlay" [hidden]="!controlOverlayVisible" >
+                  <div class="buttons d-flex justify-content-center align-items-center">
+                     <div class="prev">
+                        <a *ngIf="activeArtistIndex != 0" class="prevBtn d-inline-block d-flex justify-content-center align-items-center" (click)="previousVideoItem()">
+                           <svg class="icon_custom icon-previous">
+                              <use xlink:href="#icon-previous"></use>
+                           </svg>
+                        </a>
+                     </div>
+                     <div class="controls">
+                        <a class="playIcon justify-content-center align-items-center"  (click)="playPauseVideoItem()" [hidden]="isPlay || isReplay"
+                           >
+                           <svg class="icon_custom icon-play">
+                              <use xlink:href="#icon-play"></use>
+                           </svg>
+                        </a>
+                        <a class="pauseIcon justify-content-center align-items-center" (click)="playPauseVideoItem()" [hidden]="!isPlay || isReplay" >
+                           <svg class="icon_custom icon-pause">
+                              <use xlink:href="#icon-pause"></use>
+                           </svg>
+                        </a>
+                        <a class="replayIcon justify-content-center align-items-center" (click)="replayVideoItem()" [hidden]="!isReplay">
+                           <svg class="icon_custom icon-replay">
+                              <use xlink:href="#icon-replay"></use>
+                           </svg>
+                        </a>
+                     </div>
+                     
+                     <div class="next" *ngIf="activeArtistIndex != null">
+                        <a *ngIf="!(activeArtistIndex == (commonDetail.screenType == 'artist' ? featuredList.data.length-1 : collectionPheripheralDetails.detail['mediaList'].length-1))" class="nextBtn d-flex justify-content-center align-items-center" (click)="nextVideoItem()">
+                           <svg class="icon_custom icon-next">
+                              <use xlink:href="#icon-next"></use>
+                           </svg>
+                        </a>
+                     </div>
+                  </div>
+                  <div class="settings" *ngIf="isSettingEnable">
+                     <a class=" d-flex justify-content-center align-items-center" (click)="settingsToggle()"
+                        style="width: 28px;height: 28px;background-color: rgba(37, 37, 37, 0.7);border-radius: 50px;display:flex">
+                        <svg class="icon_custom icon-settings">
+                           <use xlink:href="#icon-settings"></use>
+                        </svg>
+                     </a>
+                  </div>
+               </div>
+               <div class="pausedOverlay w-100 h-100" [hidden]="!nextOverlayVisible">
+                  <a (click)="closeOverlay()" ><fa-icon [icon]='faTimesCircle' class="mr-3 mt-3" ></fa-icon></a>
+                  <a class="timerBtn" (click)='nextVideoItem()'>{{this.lang['consumption']['nextIn']}} <span> {{timeLeft}}</span> <fa-icon [icon]='faCaretRight' class="ml-2"></fa-icon></a>
+               </div>
+
+            </div>
+         </div>
+      </div>
+
+      
+      <div class="video_meta artist_meta" *ngIf="commonDetail.screenType==='artist' && activeArtistIndex != null">
+         <div class="upper__meta d-flex title_section w-100 mb-3">
+            <h6 class="artist_content_title mb-3 ml-1" 
+               [innerHtml]="featuredList.data[activeArtistIndex]['story']['title']">
+            </h6>
+            <a class="px-2" (click)="actionBottomShift(true)">
+               <svg class="icon_custom icon-ellipsis-vertical">
+                  <use xlink:href="#icon-ellipsis-vertical"></use>
+               </svg>
+            </a>
+         </div>
+         <div class="footer__artist d-flex justify-content-between align-items-center">
+            <app-artist-chip (click)="quickViewToggle(true)" [screenType]="screen_type" [artistChipObj]="featuredList.data[activeArtistIndex]" [artistChipS3Url]="featuredList.s3Url"></app-artist-chip>
+            <div class="explore__artist d-flex justify-content-center align-items-center">
+               <span class="gradient_btn">
+                  <button type="button" class="btn rounded-pill text-uppercase" [routerLink]="['/feed-consumption']"
+                  [queryParams]="{'slug': featuredList.data[activeArtistIndex]['slug'],'type': 'artist'}" (click)="playArtist(featuredList.data[activeArtistIndex])">
+                     <svg class="icon_custom icon-play mr-2">
+                        <use xlink:href="#icon-play"></use>
+                     </svg>
+                     <span [innerHtml]="featuredList.data[activeArtistIndex]['firstName'] | playBtnTextFormatter"></span>
+                  </button>
+               </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="video_meta" *ngIf="(commonDetail.screenType==='collectionPheripheral' || commonDetail.screenType==='showPheripheral') && activeArtistIndex != null">
+            <div class="upper__meta d-flex title_section w-100">
+               <h6 class="artist_content_title mb-0">
+                  <span *ngIf="collectionPheripheralDetails.detail['mediaList'].length > 0" [innerHtml]="collectionPheripheralDetails.detail['mediaList'][activeArtistIndex]['title']"></span>
+               </h6>
+            </div>
+            <div class="view_count">
+               <small style=" opacity: 0.7;font-size: 12px;font-weight: normal;font-stretch: normal;font-style: normal;line-height: normal;letter-spacing: normal;color: #e0e0e0;" [innerHtml]="collectionPheripheralDetails.detail['mediaList'][activeArtistIndex]['viewCount'] | viewsNumberFormatter"></small>
+            </div>
+            <div class="footer__artist mt-3">
+               <!-- /////////////////  Show Trailers from Home  -->
+               <div (click)="onChipClick()" class="align-items-center consumption_chip d-flex" *ngIf="commonDetail.screenType=='showPheripheral' && commonDetail.before=='home'">
+                  <div class="artThumb__individual">
+                     <img [attr.src]="collectionPheripheralDetails.s3Url.basePath+collectionPheripheralDetails.s3Url.showPath+ constantImg.squareSmall + collectionPheripheralDetails.detail['thumbnail']['square']['ratio1']['sourceLink']"
+                        loading="lazy" class="img-fluid rounded-pill">
+                     </div>
+                  <div class="detailArt__individual">
+                     <h6 class="text-truncate" [innerHtml]="collectionPheripheralDetails.detail['title']"></h6>
+                     <p class="artLocation mb-0" [innerHtml]="collectionPheripheralDetails.seasonList[0]['title']"></p>
+                  </div>
+                  <fa-icon [icon]='faChevronRight' class="ml-2" ></fa-icon>
+               </div>
+               <!-- /////////////////  Show Trailers from Home  -->
+   
+               <!-- ///////////////////  Show Trailers from Details -->
+               <div class="explore__artist d-flex" *ngIf="commonDetail.screenType=='showPheripheral' && commonDetail.before!='home'" 
+               [routerLink]="['./../full-consumption']" [queryParams]="{type: 'show', slug: collectionPheripheralDetails.detail['slug'], seasonSlug: collectionPheripheralDetails.seasonList[0]['slug']}">
+                  <span class="gradient_btn">
+                     <button type="button" class="btn rounded-pill text-uppercase" [routerLink]="['./../show-details', commonDetail.slug]">
+                        <span [innerHtml]="lang['consumption']['playShow']"></span>
+                        <fa-icon [icon]='faChevronRight' class="ml-2"></fa-icon>
+                     </button>
+                  </span>
+               </div>
+               <!-- ///////////////////  Show Trailers from Details -->
+   
+               <!-- ///////////////// Collections Trailers from Home -->
+               <div class="align-items-center consumption_chip d-flex" *ngIf="commonDetail.screenType=='collectionPheripheral' && commonDetail.before=='home'"
+               [routerLink]="['./../full-consumption']" [queryParams]="{type: 'collection', detailSlug: collectionPheripheralDetails.episodeList[0]['slug'], count: collectionPheripheralDetails.detail['episodeCount']}">
+                  <div class="artThumb__individual">
+                     <img [attr.src]="collectionPheripheralDetails.s3Url.basePath+this.collectionPheripheralDetails.s3Url.collectionPath+ constantImg.squareSmall + this.collectionPheripheralDetails.detail['thumbnail']['square']['ratio1']['sourceLink']" loading="lazy" class="img-fluid rounded-pill">
+                  </div>
+                  <div class="detailArt__individual">
+                     <h6 class="text-truncate" [innerHtml]="collectionPheripheralDetails.detail['title']"></h6>
+                     <p class="artLocation mb-0" [innerHtml]="lang['consumption']['collection']"></p>
+                  </div>
+                  <fa-icon [icon]='faChevronRight' class="ml-2"></fa-icon>
+               </div>
+               <!-- ///////////////// Collections Trailers from Home -->
+   
+   
+               <!-- ///////////////// Collections Trailers from Details -->
+               <div class="explore__artist d-flex" *ngIf="commonDetail.screenType=='collectionPheripheral' && commonDetail.before!='home'"
+               [routerLink]="['./../full-consumption']" [queryParams]="{type: 'collection', slug: collectionPheripheralDetails.detail['slug'], detailSlug: collectionPheripheralDetails.episodeList[0]['slug'], count: collectionPheripheralDetails.detail['episodeCount']}">
+                  <span class="gradient_btn big">
+                     <button type="button" class="btn rounded-pill text-uppercase big_btn" [routerLink]="['./../collection-details', collectionPheripheralDetails.detail['_id']]">
+                        <span [innerHtml]="lang['consumption']['playCollection']"></span>
+                        <fa-icon [icon]='faChevronRight' class="ml-2"></fa-icon>
+                     </button>
+                  </span>
+               </div>
+               <!-- ///////////////// Collections Trailers from Details -->
+            </div>
+      </div>
+   </div>
+
+   <div class="noVideo_container stage_section col" *ngIf="!showVideoContainer">
+      <div class="moreArt__artStryScr position-relative w-100">
+         <div class="moreArtWrap d-flex flex-column justify-content-center align-items-center position-absolute w-100">
+            <div class="artInner__artStryScr mb-3" *ngIf='featuredList.moreArtist.length > 0'>
+               <img *ngFor="let item of featuredList.moreArtist" loading="lazy" width="30" height="30" class="rounded-circle img-fluid" [attr.src]="featuredList.s3Url.basePath+featuredList.s3Url.artistPath+constantImg.artistMedium+item.profilePic"
+                   />
+            </div>
+            <h5 style="color:#e0e0e0b3" [innerHtml]="lang['consumption']['heyYouCaugh']"></h5>
+            <p style="color:#e0e0e0b3" [innerHtml]="lang['consumption']['exploreMoreArtist']"></p>
+            <div class="morebtn__artStryScr">
+               <button type="button" class="btn ripple rounded-pill  border-0" [routerLink]="['/', 'artist-list']"  style="border-radius: 18px;background-image: linear-gradient(to bottom, red, #101010);color:#e0e0e0b3">{{this.lang['consumption']['explore']}}
+                  <fa-icon [icon]='faCaretRight'></fa-icon>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Artist story on scroll -->
+<app-consumption-playlist-drawer *ngIf="activeArtistIndex != null && commonDetail.screenType=='artist'"
+   (openCloseDrawer)="openCloseDrawer($event)"  (moveSelectedContent)="changeSelectedVideo($event)"
+   [activeElementIndex]="activeArtistIndex" [consumptionDetail]="featuredList.data[activeArtistIndex]"  [type]="commonDetail.screenType" [moreArtistDrawerObj]="featuredList.moreArtist"
+   [artistDrawerObj]="featuredList.data" [artistDrawerS3Url]="featuredList.s3Url"></app-consumption-playlist-drawer>
+<!--/ Artist Story on scroll -->
+
+<!-- Collection story on scroll -->
+<app-consumption-playlist-drawer
+   *ngIf="activeArtistIndex != null && (commonDetail.screenType=='collectionPheripheral' || commonDetail.screenType=='showPheripheral') && collectionPheripheralDetails.detail['mediaList'].length > 0"
+   (openCloseDrawer)="openCloseDrawer($event)" (moveSelectedContent)="changeSelectedVideo($event)" (click)="onDrawerClick()"
+   [activeElementIndex]="activeArtistIndex" [consumptionDetail]="featuredList.data[activeArtistIndex]" [type]="commonDetail.screenType" [moreArtistDrawerObj]="[]" [artistDrawerObj]="collectionPheripheralDetails.detail"
+   [artistDrawerS3Url]="collectionPheripheralDetails.s3Url"></app-consumption-playlist-drawer>
+<!--/ Collection Story on scroll -->
+
+<div class="quickView" *ngIf="showArtistCardView && commonDetail.screenType == 'artist'">
+   <app-artist-quick-view [artistId]="featuredList.data[activeArtistIndex]['_id']"></app-artist-quick-view>
+   <a (click)="quickViewToggle(false)" class="close"></a>
+</div>
+
+<!-- action bottom shift menu -->
+<app-action-overflow-menu *ngIf="actionBottomVisible && activeArtistIndex!=null" [screen_type]="screen_type" [artistDetail]="featuredList.data[activeArtistIndex]"
+[detail]="{'title': commonDetail.screenType == 'artist'?featuredList.data[activeArtistIndex]['story']['title']:collectionPheripheralDetails.detail['mediaList'][activeArtistIndex]['title'],
+'url': sharedUrl}"
+  (actionDisable)="actionBottomShift(false)">
+</app-action-overflow-menu>
+<!-- /action bottom shift menu -->
+
+<!-- setting drawer -->
+   <app-consumption-settings *ngIf="activeArtistIndex!=null && issettingsDrawerVisible" [passCurrentQuality]="selectedVideoQuality" (settingQualityChange)="videoQualityChange($event, true)" (settingClose)="closeSettingDrawer()" ></app-consumption-settings>
+<!-- /setting drawer -->

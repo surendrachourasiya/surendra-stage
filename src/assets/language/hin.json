@@ -1,0 +1,175 @@
+{
+    "langauge": "hin",
+    "home": {
+        "common":{
+            "artistSingular": "कलाकार",
+            "artistPlural": "स्टेज के कलाकार",
+            "videoSingular": "वीडियो",
+            "videoPlural": "वीडियो",
+            "videoSingularCapitalize": "वीडियो",
+            "andMoreLabel": "##count## और",
+            "seeAll": "समस्त देखें",
+            "play":"चलाएं",
+            "pause": "रोकें",
+            "viewSingular": "बार देखा गया",
+            "viewPlural": "बार देखा गया",
+            "amp": "और",
+            "more": "अन्य",
+            "share": "शेयर",
+            "discoverButton": "को देखें",
+            "px": "पि."
+        },
+        "feturedArtistSec": {
+            "title": "विशेष कलाकार"
+        },
+        "stageOriginalsSec": {
+            "title": "स्टेज ऑरिजिनल्स"
+        },
+        "stageCollectionsSec": {
+            "title": "विशेष कलेक्शन्स",
+            "stageTitle": "स्टेज कलेक्शन्स",
+            "seeCollection": "कलेक्शन देखें"
+        },
+        "artistsSec": {
+            "title": "कलाकार"
+        },
+        "exclusiveSec": {
+            "title": "विशेष शो",
+            "exploreShow": "शो देखें"
+        },
+        "continueWatching": {
+            "title": "जो देख रहे थे"
+        },
+        "contentByArtist": {
+            "title": "कलाकारों को जानें"
+        }
+    },
+    "listing": {
+        "showtitle": "शो",
+        "collectiontitle": "कलेक्शन",
+        "artisttitle": "कलाकार"
+    },
+    "details": {
+        "artisttitle": "कलाकार",
+        "moreSimilarShow": "ऐसे अन्य शो",
+        "episodes": "एपिसोड्स",
+        "trailersMore": "ट्रेलर इत्यादि",
+        "noMoreEpisode": "कोई प्रकरण नहीं मिला।",
+        "noMoreTrailer": "कोई ट्रेलर नहीं मिला।",
+        "inTheCollection": "इस कलेक्शन में",
+        "moreCollections": "ऐसे अन्य कलेक्शन",
+        "moreSimilarContent": "ऐसे अन्य वीडियो",
+        "collection": "कलेक्शन",
+        "showMore": "और देखें",
+        "seeMore": "और देखें",
+        "seeLess": "कम दिखाएं"
+    },
+    "search": {
+        "search": "खोजें",
+        "searchBy": "कलाकार, शो, कलेक्शन्स, या वीडियो खोजें",
+        "noRecordFound": "दुर्भाग्यवश, खोजे गए शब्द के लिए हमारे पास कोई वीडियो नहीं है",
+        "tryOther": "किसी अन्य कलाकार,शो, कलेक्शन,या वीडियो को खोजने का प्रयास करें",
+        "papularArtists": "कलाकार",
+        "popularShows": "शो",
+        "popularCollections": "कलेक्शन",
+        "popularOnStage": "वीडियो",
+        "showMore": "और देखें"
+    },
+    "artistLandscape": {
+        "playStory": "स्टोरी देखें",
+        "popularShows": "शो",
+        "popularCollections": "कलेक्शन्स",
+        "performances": " के वीडियो",
+        "s" : "",
+        "similarArtists": "ऐसे अन्य कलाकार ",
+        "showMore": "और देखें"
+    },
+    "login": {
+        "language": "Language",
+        "a": "A",
+        "english": "English",
+        "next": "आगे बढ़ें",
+        "mobileLogin": "मोबाइल नंबर से लॉगिन करें",
+        "change": "बदलें",
+        "loginStageWith": "लॉगिन करें",
+        "or": "या",
+        "and": "और",
+        "byContinuing": "आगे बढ़ने पर आप हमारे",
+        "termCondition": "नियम व शर्तें",
+        "privacyPolicy": "गोपनीयता नीति",
+        "agree": " को स्वीकारते हैं",
+        "name": "नाम",
+        "mobileNumber": "मोबाइल नंबर",
+        "getOTP": "ओ टी पी पायें",
+        "enterDetails": "अपना ब्योरा भरें",
+        "enterOTP": "अपना चार अंकों का ओ टी पी भरें",
+        "we": "हमने",
+        "sentOTP": "ओ टी पी ",
+        "didnotReceiveOTP": "ओ टी पी नहीं मिला?",
+        "resend": "दोबारा पाएं",
+        "submit": "जमा करें",
+        "sentOTPextended" : "पर भेजा है |"
+    },
+    "setting": {
+        "login": "लॉगिन",
+        "appControls": "ऐप नियंतरण",
+        "languageSettings": "भाषा",
+        "shareApp": "शेयर ऐप",
+        "legalSection": "विधिक",
+        "privacyPolicy": "गोपनीयता नीति",
+        "termConditions": "नियम व शर्तें",
+        "aboutUs": "हमारे बारे में",
+        "contactUs": "संपर्क करें",
+        "logout": "लॉगआउट",
+        "version": "संस्करण 1.0",
+        "selectLanguage": "भाषा चुनें",
+        "hindi": "हिंदी",
+        "english": "English",
+        "policyDetail": "Biswa Kalyan Rath is an Indian stand-up comedian, writer, and YouTuber. He came into prominence through a YouTube comedy series, Pretentious Movie Reviews with fellow comedian Kanan Gill.",
+        "areYouSure": "क्या आप स्टेज से लॉग आउट करना चाहते हैं?",
+        "yes": "हाँ",
+        "no": "ना"
+    },
+    "footer": {
+        "home": "होम",
+        "search": "खोजें",
+        "more": "मोर"
+    },
+    "header": {
+        "shows": "शो",
+        "collections": "कलेक्शन",
+        "artists": "कलाकार"
+    },
+    "detailTopCard": {
+        "play": "देखें",
+        "resume": "देखते रहे"
+    },
+    "quickViewCard": {  
+        "play": "देखें"
+    },
+    "individualCard": {  
+        "play": "देखें"
+    },
+    "consumption":{
+        "moreArtist": "अन्य कलाकार",
+        "heyYouCaugh": "आप सभी वीडियोज़ देख चुके है।",
+        "exploreMoreArtist": "स्टेज के अन्य कलाकारों को देखे ।",
+        "explore": "कलाकार देखें",
+        "nextIn": "अगला वीडियो",
+        "playCollection" : "कलेक्शन देखें",
+        "playShow": "शो देखें",
+        "upNext": "अगले वीडियो",
+        "collection": "कलेक्शन"
+    },
+    "settingDrawer":{
+        "videoQuality": "वीडियो क्वालिटी",
+        "auto": "अपने आप",
+        "chooseQuality": "अपने वीडियो की क्वालिटी चुनें",
+        "cancel": "रद्द करें",
+        "full HD": "फ़ुल एच.डी",
+        "fair": "सामान्य",
+        "good": "मध्यम",
+        "best": "उत्तम",
+        "low": "मंद"
+    }
+}

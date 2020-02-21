@@ -1,0 +1,17 @@
+<!-- Artist Virtual Scroll Listing -->
+<div class="artists container-fluid animated slideInRight" *ngIf="artistList.data.length != 0">
+    <cdk-virtual-scroll-viewport #artistScroll itemSize="229" id="artistListing_hScroll"
+        (scrolledIndexChange)="getNextBatchOnScroll('artist', 'getArtistList', $event)">
+        <div class="row no-gutters"  *cdkVirtualFor="let item of artistList.data;">
+            <div class="col-6 card_wrap__artists px-0" id="artists_{{item[0]._id}}" *ngIf="item['0']">
+                <app-artist-card [artistObj]="item['0']" [artistS3Url]="artistList.s3Url" [artistBio]=""></app-artist-card>
+            </div>
+            
+            <div class="col-6 card_wrap__artists px-0" id="artists_{{item[1]._id}}" *ngIf="item['1']">
+                <app-artist-card [artistObj]="item['1']" [artistS3Url]="artistList.s3Url" [artistBio]=""></app-artist-card>
+            </div>
+        </div>            
+    </cdk-virtual-scroll-viewport>
+</div>
+<!-- / Artist Virtual Scroll Listing -->
+

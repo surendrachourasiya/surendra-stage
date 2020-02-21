@@ -1,0 +1,64 @@
+<ul class="nav nav-pills align-items-centers artist scrolling_carousel" role="tablist">
+  <li class="nav-item animated fadeIn" class="feature_artist_{{item._id}}" [ngClass]="isTabClickable ? '' : 'pointer-events'"
+    *ngFor="let item of featuredArtistObj; let i = index">
+    <a class="nav-link animated fadeIn" [ngClass]="{'active': i === activeIndex }" (click)="updateActiveArtistDetail(i, true)">
+      <span class="" role="img" [attr.aria-label]="item.firstName+' '+item.lastName">
+        <img
+          [attr.src]="featuredArtistS3Url.basePath+featuredArtistS3Url.artistPath+ constantImg.artistMedium+item.profilePic" class="animated fadeIn"
+          loading="lazy" alt="{{item.firstName+' '+item.lastName}}" />
+      </span>
+      <small [innerHtml]="item.firstName"></small>
+    </a>
+  </li>
+</ul>
+<div class="tab-content artist_tab_content rounded-0" id="pills-tabContent">
+  <div class="tab-pane fade show active animated fadeIn">
+    <div class="d-block position-relative" #featuredVideoElement (scroll)="elementInViewport('featuredVideoElement')">
+      <video id="player_{{featuredArtistID}}" class="video-js vjs-16-9" playsinline webkit-playsinline data-setup='{ 
+            "controls": true,
+            "poster": "",
+            "autoplay": "",
+            "preload": "auto",
+            "bigPlayButton": false,
+            "errorDisplay" : false,
+            "controlBar": { 
+              "volumeMenuButton": false,
+              "muteToggle": true,
+              "volumeControl": false,
+              "progressControl":false,
+              "children":{
+              }
+              }
+          }' >
+      </video>
+      <a (click)='redirectToConsumption()' class="position-absolute top w-100 h-75" style="top:0"></a>
+    </div>
+
+    <h6 class="artist_content_title mb-3 ml-1 animated fadeIn" [innerHtml]="activeContent.story.title">
+    </h6>
+    <div class="footer__artist d-flex justify-content-between align-items-center px-1">
+      <app-artist-chip [artistChipObj]="activeContent" [screenType]="'feature_artist'"
+        (click)="showArtistCard(activeContent);" [artistChipS3Url]="featuredArtistS3Url"></app-artist-chip>
+      <div class="explore__artist d-flex justify-content-center align-items-center"
+        *ngIf="activeContent['firstName'] != undefined">
+        <span class=gradient_btn>
+
+          <button type="button" (click)="playFeatureArtist(activeContent)" class="btn rounded-pill text-uppercase"
+            [routerLink]="['/feed-consumption']" [queryParams]="{'slug': activeContent['slug'],'type': 'artist'}">
+            <svg class="icon_custom icon-play mr-2">
+              <use xlink:href="#icon-play"></use>
+            </svg>
+            <span [innerHtml]=" activeContent['firstName'] | playBtnTextFormatter"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- artist quick view -->
+<div class="quickView" *ngIf="showArtistCardView">
+  <app-artist-quick-view [artistId]="passSingleArtistId"></app-artist-quick-view>
+  <a (click)="quickViewToggle()" class="close animated fadeIn slower"></a>
+</div>
+<!-- /artist quick view -->

@@ -1,0 +1,18 @@
+<!-- collection list virtual scroll -->
+<div class="collections container animated slideInRight" *ngIf="stageCollectionList.data.length != 0">
+    <cdk-virtual-scroll-viewport #stageCollectionScroll itemSize="229" id="collectionDetailSeeAll_hScroll"
+    (scrolledIndexChange)="getNextBatchOnScroll('stageCollection', 'getStageCollectionList', $event)">
+        <div class="row no-gutters" *cdkVirtualFor="let item of stageCollectionList.data">
+            <div class="col-6 card_wrap__collections px-0" id="collections_{{item[0]._id}}" *ngIf="item['0']">
+                <app-stage-collection-card [stageCollectionObj]="item['0']"
+                    [stageCollectionS3Url]="stageCollectionList.s3Url"></app-stage-collection-card>
+            </div>
+
+            <div class="col-6 card_wrap__collections px-0" id="collections_{{item[1]._id}}" *ngIf="item['1']">
+                <app-stage-collection-card [stageCollectionObj]="item['1']"
+                    [stageCollectionS3Url]="stageCollectionList.s3Url" class=" "></app-stage-collection-card>
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>
+<!--/ collection list virtual scroll -->

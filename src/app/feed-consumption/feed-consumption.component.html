@@ -1,0 +1,183 @@
+<div class="multiple-items pt-5" style="padding-bottom: 75vw;" *ngIf="collectionPheripheralDetails.isDataLoaded">
+        <!-- vertical_scrolling_carousel -->
+            <div class="col-12 mt-3 px-0 stage_section episode_slug_{{item.slug}}" id="feed_consumption_card_{{i}}"
+                style="border-radius: 12px 12px 0px 0px;"
+                *ngFor="let item of collectionPheripheralDetails.detail; let i = index"
+                [ngClass]="this.currentItemId == item['_id'] ? '' : 'pointer-events'">
+                <div class="section_header pl-3 py-2 my-0" *ngIf="item.artistList.length > 0">
+                    <div class="artThumb__individual">
+                        
+                        <img [attr.src]="collectionPheripheralDetails.s3Url.basePath+collectionPheripheralDetails.s3Url.artistPath+constantImg.artistMedium+item.artistList[0].profilePic"
+                            loading="lazy" class="img-fluid rounded-pill"
+                            style="border-radius: 24px;height: 32px;object-fit: cover;overflow: hidden;width: 32px;border: none;">
+                    </div>
+                    <h5 class="section_heading mb-0 ml-2">{{item.artistList[0].name}} <span *ngIf="item.artistList.length > 1">
+                            + {{item.artistList.length - 1}}</span>
+                    </h5>
+                    <a class="px-2 ml-auto" (click)="actionBottomShift(true)">
+                        <fa-icon [icon]="faEllipsisV"></fa-icon>
+                    </a>
+                </div>
+        
+                <div class="video_player">
+                     <!-- Video Player -->
+                    <div class="position-relative">
+                        <div class="video_container">
+                            <video id="feed_consumption_player_{{item._id}}" class="video-js vjs-16-9" playsinline
+                                webkit-playsinline data-setup='{ 
+                                "controls": true,
+                                "bigPlayButton": false,
+                                "errorDisplay" : false,
+                                "controlBar": { 
+                                    "progressControl":true,
+                                    "remainingTimeDisplay": true,
+                                    "durationDisplay": true,
+                                    "currentTimeDisplay" : true,
+                                    "timeDivider": true,
+                                    "volumeControl": false,
+                                    "muteToggle": true,
+                                    "fullscreenToggle": true,
+                                    "children":{
+                                    }
+                                    }
+                                }'>
+        
+                                <source [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'" [attr.src]="isHLSPlayed ? collectionPheripheralDetails.s3Url.basePath +
+                                    collectionPheripheralDetails.s3Url.episodePath + constantImg.hls +
+                                    item.hlsSourceLink :
+                                    collectionPheripheralDetails.s3Url.basePath +
+                                    collectionPheripheralDetails.s3Url.episodePath + '/main-video/' +
+                                    videoBitRate+'/'+item.sourceLink">
+                            </video>
+                            <a (click)="showControls(item, true)" class="position-absolute top w-100" style="top:0; height: 85%;"></a>
+                        </div>
+                    </div>
+                    <!--/ Video Player -->
+        
+                    <!-- Video control icons -->
+                    <div>
+                        <div class="overlaysContainer w-100" tabindex="-1">
+                            <div class="controlsOverlay"
+                                *ngIf="(this.currentItemId == item['_id']) && item.controlOverlayVisible">
+        
+                                <div class="buttons d-flex justify-content-center align-items-center">
+                                    <div class="controls" style="margin: 0px 42px;">
+                                        <a class="playIcon justify-content-center align-items-center"
+                                            (click)="playPauseVideoItem(item._id, item)" [hidden]="item.isPlay">
+                                            <fa-icon [icon]="faPlay"></fa-icon>
+                                        </a>
+                                        <a class="pauseIcon justify-content-center align-items-center"
+                                            (click)="playPauseVideoItem(item._id, item)" [hidden]="!item.isPlay">
+                                            <fa-icon [icon]="faPause"></fa-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <!-- /Video control icons -->
+                    <!-- {{collectionPheripheralDetails.detail[activeArtistIndex] |json}} -->
+                    <!-- Video title/chip/ellipses icon  -->
+                    <div class="video_meta" *ngIf="commonDetail.screenType==='artist' || commonDetail.screenType==='episode'">
+                        <!-- video title -->
+                        <div class="upper__meta d-flex title_section w-100">
+                            <h6 class="artist_content_title mb-0" [innerHtml]="item.title"></h6>
+                        </div>
+                        <!-- /video title -->
+        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="view_count" style="font-size: 8px;">
+                                <small [innerHtml]="item.viewCount | viewsNumberFormatter"
+                                    style=" opacity: 0.7;font-family: Muli;font-size: 10px;font-weight: normal;font-stretch: normal;font-style: normal;line-height: normal;letter-spacing: normal;color: #e0e0e0;">
+                                </small>
+                            </div>
+                            <div class="actionIc__episode">
+                                <a href="javascript:void(0);" class="ic_cd__episode" (click)="toggleInfoWindow(true, item._id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+                                    x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve"
+                                    width="24px" height="24px">
+                                    <g>
+                                        <g>
+                                            <path
+                                            d="M165,0C74.019,0,0,74.02,0,165.001C0,255.982,74.019,330,165,330s165-74.018,165-164.999C330,74.02,255.981,0,165,0z    M165,300c-74.44,0-135-60.56-135-134.999C30,90.562,90.56,30,165,30s135,60.562,135,135.001C300,239.44,239.439,300,165,300z"
+                                            data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0" />
+                                            <path
+                                            d="M164.998,70c-11.026,0-19.996,8.976-19.996,20.009c0,11.023,8.97,19.991,19.996,19.991   c11.026,0,19.996-8.968,19.996-19.991C184.994,78.976,176.024,70,164.998,70z"
+                                            data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0" />
+                                            <path
+                                            d="M165,140c-8.284,0-15,6.716-15,15v90c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15v-90C180,146.716,173.284,140,165,140z   "
+                                            data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                </a>
+                            </div>
+                        </div>
+        
+                        <!-- element chipset -->
+                        <div class="footer__artist mt-3" *ngIf="item.parentDetail !== undefined">
+                            <div *ngIf="item.parentDetail.seasonTitle != ''">
+                                <div class="align-items-center consumption_chip d-flex"
+                                    (click)="redirectURL('/show-details', item.parentDetail.slug)">
+        
+                                    <div class="artThumb__individual">
+                                        <img [attr.src]="collectionPheripheralDetails.s3Url.basePath+collectionPheripheralDetails.s3Url.showPath+constantImg.squareSmall+item.parentDetail.sourceLink"
+                                            loading="lazy" class="img-fluid rounded-pill"
+                                            [attr.alt]="item.parentDetail.title">
+                                    </div>
+        
+                                    <div class="detailArt__individual">
+                                        <h6 class="text-truncate" [innerHtml]="item.parentDetail.title">
+                                        </h6>
+                                        <p class="artLocation mb-0"
+                                            [innerHtml]="item.parentDetail.seasonTitle"></p>
+                                    </div>
+                                    <fa-icon [icon]="faChevronRight" class="ml-2"></fa-icon>
+                                </div>
+                            </div>
+                            <div *ngIf="item.parentDetail.seasonTitle == ''">
+                                <div class="align-items-center consumption_chip d-flex"
+                                    (click)="redirectURL('/collection-details', item.collectionSlug)">
+                                    <div class="artThumb__individual">
+                                        <img                                     [attr.src]="collectionPheripheralDetails.s3Url.basePath+collectionPheripheralDetails.s3Url.collectionPath+constantImg.horizontalSmall+item.parentDetail.sourceLink"
+                                            alt="" loading="lazy" class="img-fluid rounded-pill"
+                                            [attr.alt]="item.parentDetail.title">
+                                    </div>
+                                    <div class="detailArt__individual">
+                                        <h6 class="text-truncate" [innerHtml]="item.parentDetail.title">
+                                        </h6>
+                                        <p class="artLocation mb-0" [innerHtml]="lang['consumption']['collection']"></p>
+                                    </div>
+                                    <fa-icon [icon]="faChevronRight" class="ml-2"></fa-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /element chipset -->
+                    </div>
+                    <!-- /Video title/chip/ellipses icon  -->
+        
+                </div>
+                <div class="backdrop animate fadeIn"></div>
+            </div>
+        </div>
+        
+        <!-- action bottom shift menu -->
+        <app-action-overflow-menu  *ngIf="actionBottomVisible && activeArtistIndex!=null" [screen_type]="screen_type" 
+            [artistDetail]="collectionPheripheralDetails.detail[activeArtistIndex]" 
+            [collectionObj]="collectionPheripheralDetails.detail" [detail]="{'title': collectionPheripheralDetails.detail[activeArtistIndex]['title'], 'url': sharedUrl}" 
+            (actionDisable)="actionBottomShift(false)">
+        </app-action-overflow-menu>
+        <!-- action bottom shift menu -->
+        
+        <!-- quick-view-card -->
+        <div class="quickView" *ngIf="isQuickviewVisible">
+            <div class="scrolling_carousel position-relative episodelist_quickview invisible" style="z-index: 9999">
+                <app-quick-view-card id="episode_{{item._id}}" (closeQuickView)="toggleInfoWindow(false, null)" [quickViewIndex]="i+1" [quickViewObj]="item"
+                    [quickViewS3Url]="collectionPheripheralDetails.s3Url"
+                    *ngFor="let item of collectionPheripheralDetails.detail; let i=index;"></app-quick-view-card>
+            </div>
+            <a href="JavaScript:Void(0);" (click)="toggleInfoWindow(false, null)" class="close"></a>
+        </div>
+        <!-- /quick-view-card -->
+        

@@ -1,0 +1,102 @@
+<div class="bottomPopupMask animated fadeIn faster" (tap)="closeAll()">
+</div>
+
+<div class="bottomPopupWrap animated fadeIn faster">
+   <div class="bottomPopup animated slideInUp faster w-100" [hidden]="!isParantVisible">
+      <div class="listItems_bottomPopup position-relative">
+         <ul class="list-unstyled mb-0">
+            <li class="d-none">
+               <a href="javascript:void(0);" (click)="openLangSelector()">
+                  <fa-icon [icon]="faClosedCaptioning"></fa-icon>
+                  <span class="title">Caption</span>
+                  <span>Hindi</span>
+               </a>
+            </li>
+            <li>
+               <a href="javascript:void(0);" (click)="openQualitySelector()">
+                 <!-- <fa-icon [icon]="faAudioDescription"></fa-icon> -->
+                  <svg class="icon_custom icon-hd">
+                     <use xlink:href="#icon-hd"></use>
+                  </svg>
+                 <span class="title" [innerHtml]="lang['settingDrawer']['videoQuality']"></span>
+                 <span *ngIf="selectedVideoQuality['value']==null" [innerHtml]="this.lang['settingDrawer']['auto']"></span>
+                 <span class="text-capitalize" *ngIf="selectedVideoQuality['value']!=null" [innerHtml]="this.lang['settingDrawer'][selectedVideoQuality['name']] + '-'+selectedVideoQuality['value']"></span>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <div class="bottomPopup animated slideInUp faster w-100" id="qualitySelector" [hidden]="!isQualitySelectorVisible">
+      <div class="listItems_bottomPopup position-relative">
+         <h6 style="padding:18px 0px 17px 16px; opacity: 0.7;" [innerHtml]="lang['settingDrawer']['chooseQuality']"></h6>
+         <form action="#" style="background-image: linear-gradient(to bottom, #252525, #151515);">
+            <div class="d-flex" style="padding:12px 18px">
+               <input type="radio" id="full" name="radio-group" [checked]="selectedVideoQuality.name == 'full HD'" (click)="changeQuality('full HD', 1080)">
+               <label class="ml-4" for="full">
+                  <h6 [innerHtml]="this.lang['settingDrawer']['full HD']+' (1080'+ this.lang['home']['common']['px']+')'"></h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:12px 18px">
+               <input type="radio" id="best" name="radio-group" [checked]="selectedVideoQuality.name == 'best'" (click)="changeQuality('best', 720)">
+               <label class="ml-4" for="best">
+                  <h6 [innerHtml]="this.lang['settingDrawer']['best']+' (720'+ this.lang['home']['common']['px']+')'"></h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:12px 18px">
+               <input type="radio" id="good" name="radio-group" [checked]="selectedVideoQuality.name == 'good'" (click)="changeQuality('good', 480)">
+               <label class="ml-4" for="good">
+                  <h6 [innerHtml]="this.lang['settingDrawer']['good']+' (480'+ this.lang['home']['common']['px']+')'"></h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:12px 18px">
+               <input type="radio" id="fair" name="radio-group" [checked]="selectedVideoQuality.name == 'fair'" (click)="changeQuality('fair', 360)">
+               <label class="ml-4" for="fair">
+                  <h6 [innerHtml]="this.lang['settingDrawer']['fair']+' (360'+ this.lang['home']['common']['px']+')'"></h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:12px 18px">
+               <input type="radio" id="low" name="radio-group" [checked]="selectedVideoQuality.name == 'low'" (click)="changeQuality('low', 240)">
+               <label class="ml-4" for="low">
+                  <h6 [innerHtml]="this.lang['settingDrawer']['low']+' (240'+ this.lang['home']['common']['px']+')'"></h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:12px 18px">
+               <input type="radio" id="Auto" name="radio-group" [checked]="selectedVideoQuality.name == 'auto'" (click)="changeQuality('auto', null)">
+               <label class="ml-4" for="Auto">
+                  <h6 [innerHtml]="this.lang['settingDrawer']['auto']"></h6>
+               </label>
+            </div>
+         </form>
+         <span class="d-inline-block" (click)="back()" style="padding-top:18px;padding-left : 16px;padding-bottom: 17px"><fa-icon [icon]="faTimes" style="margin-right: 36px;">
+         </fa-icon><span class="text-uppercase" [innerHtml]="lang['settingDrawer']['cancel']"></span> </span>
+      </div>
+   </div>
+   <div class="bottomPopup animated slideInUp faster w-100" id="captionSelector" [hidden]="!isCaptionSelectorVisible">
+      <div class="listItems_bottomPopup position-relative">
+         <h6 style="padding-top:18px;padding-left : 16px;padding-bottom: 17px">Caption</h6>
+         <form action="#" style="background-image: linear-gradient(to bottom, #252525, #151515);">
+            <div class="d-flex" style="padding:16px">
+               <input type="radio" id="hindi" name="radio-group" checked>
+               <label class="ml-4" for="hindi">
+                  <h6>Hindi </h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:16px">
+               <input type="radio" id="english" name="radio-group">
+               <label class="ml-4" for="english">
+                  <h6>English</h6>
+               </label>
+            </div>
+            <div class="d-flex" style="padding:16px">
+               <input type="radio" id="off" name="radio-group">
+               <label class="ml-4" for="off">
+                  <h6>Off</h6>
+               </label>
+            </div>
+         </form>
+         <span class="d-inline-block" (click)="back()" style="padding-top:18px;padding-left : 16px;padding-bottom: 17px">
+            <fa-icon [icon]="faTimes" style="margin-right: 36px;"></fa-icon><span [innerHtml]="lang['settingDrawer']['cancel']"></span>
+         </span>
+      </div>
+   </div>
+</div>

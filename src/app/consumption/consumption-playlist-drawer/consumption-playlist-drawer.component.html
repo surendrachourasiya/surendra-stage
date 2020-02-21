@@ -1,0 +1,59 @@
+<div class="col-12 px-0 stage_section position-relative artStryScr animated slideInUp"
+   [ngClass]="isSliderOn ? '' : 'closed'">
+   <div class="section_header">
+      <h5 class="section_heading mb-0" [innerHtml]="lang['consumption']['upNext']"></h5>
+   </div>
+   <div role="list" class="scrolling_carousel d-flex" (scroll)= "onScrollCard()" id="playlistDrawerConsumption_hScroll">
+      <ng-container *ngIf="type==='artist'">
+         <app-similar-content-card  id="similar_content_{{item._id}}" (selectedContent)="changeVideo($event)" (quickViewEnabled)="isQuickviewVisible = true;" [contentType]="type" [artistContentObj]="{'data':item, 'artistData':[]}" [artistContentIndex]="i" [activeContentIndex]="activeElementIndex" [artistContentS3Url]="artistDrawerS3Url" *ngFor="let item of artistDrawerObj; let i = index" class="d-flex similar_content_{{item._id}}"></app-similar-content-card>
+      </ng-container>
+
+      <ng-container *ngIf="type==='collectionPheripheral' || type==='showPheripheral'">
+         <app-similar-content-card id="similar_content_show_{{item.id}}" (selectedContent)="changeVideo($event)" (quickViewEnabled)="isQuickviewVisible = true;" [contentType]="type" [artistContentObj]="{'data':item, 'artistData':artistDrawerObj.artistList}" [artistContentIndex]="i" [activeContentIndex]="activeElementIndex" [artistContentS3Url]="artistDrawerS3Url" *ngFor="let item of artistDrawerObj.mediaList; let i = index"></app-similar-content-card>
+      </ng-container>
+      
+
+      <div class="moreArt__artStryScr position-relative" *ngIf="type==='artist'">
+         <div class="moreArtWrap d-flex flex-column justify-content-center align-items-center position-absolute">
+            <div class="artInner__artStryScr" *ngIf="moreArtistDrawerObj.length > 0">
+               <img *ngFor="let item of moreArtistDrawerObj" loading="lazy" class="rounded-circle img-fluid" [attr.src]="artistDrawerS3Url.basePath+artistDrawerS3Url.artistPath+constantImg.artistSmall+item.profilePic" />
+            </div>
+            <div class="morebtn__artStryScr">
+               <button type="button" class="btn ripple" [routerLink]="['/', 'artist-list']" (click)="onMoreArtist()">
+                  <span [innerHtml]="lang['consumption']['moreArtist']"></span>
+                  <span class="d-flex align-items-center" style="width: 12px; height: 12px; margin-left: 4px;">
+                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847; transform: rotate(-90deg);" xml:space="preserve" class=""><g transform="matrix(1 0 0 1 0 0)"><g>
+                        <path d="M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                    </g></g> </svg>
+                  </span>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="" (click)="toggleslide()" (swipe)="toggleslide()" style="position: absolute;width: 100%;height: 0px;top: -31px;left: 0px;right: 0px;">
+   <div class="swipeIc" style="position: relative;width: 65px;height: 40px;border-radius: 50vw;border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;top: -8px;left: 0px;right: 0px;margin: auto;background-color: #242424;text-align: center;padding-top: 12px;">
+      <!-- <fa-icon [icon]="faAngleDown" *ngIf="isSliderOn; else arrowUp"></fa-icon> -->
+      <svg class="icon_custom icon-chevron-down sm_svgic "  *ngIf="isSliderOn; else arrowUp">
+         <use xlink:href="#icon-chevron-down"></use>
+      </svg>
+      <ng-template #arrowUp>
+         <!-- <fa-icon [icon]="faAngleUp"></fa-icon> -->
+         <svg class="icon_custom icon-chevron-up sm_svgic">
+            <use xlink:href="#icon-chevron-up"></use>
+         </svg>
+      </ng-template>
+   </div>
+   </div>
+</div>
+
+
+<!-- quick-view-card -->
+<div class="quickView" *ngIf="isQuickviewVisible">
+   <div class="scrolling_carousel position-relative" style="z-index: 9999">
+       <app-quick-view-card [quickViewIndex]="i+1" [quickViewObj]="item" [quickViewS3Url]="artistDrawerS3Url" *ngFor="let item of artistDrawerObj; let i=index;"></app-quick-view-card>
+   </div>
+   <a href="JavaScript:Void(0);" (click)="quickViewToggle(false)" class="close"></a>
+</div>
+<!-- /quick-view-card -->

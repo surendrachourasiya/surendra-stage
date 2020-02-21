@@ -1,0 +1,130 @@
+<div class="container-fluid animated bounceInUp">
+  <div class="row" *ngIf="showDetails.isDataLoaded">
+    <!-- detail top card -->
+    <app-detail-top-card *ngIf="showDetails.showDescription.length != 0 && !!showDetails.s3Url"
+      [showSeasonObj]="showDetails.seasonList" [lastSeenObj]= "showDetails.lastSeenDetail" [showDetailObj]="showDetails.showDescription"
+      [showDetailS3Url]="showDetails.s3Url" [language]="lang" [pageType]="pageType" class="col-12 px-0">
+    </app-detail-top-card>  
+    <!-- /detail top card -->
+
+    <!-- SEASON  -->
+    <div class="col-12 px-0 season  stage_section mt-5">
+      <!-- Dropdown button -->
+      <div class="col-12 px-0" *ngIf="showDetails.seasonList.length > 0">
+        <div class="section_header">
+          <button type="button" class="btn rounded-pill ripple" *ngIf="showDetails.seasonList.length > 1"
+            (click)="seasonBottomVisible = true">
+            <span class="text-uppercase" [innerHtml]="showDetails.seasonList[showDetails.activeSeason].title"></span>
+            <!-- set the uppercase of  -->
+            <span>
+              <!-- <fa-icon [icon]="faCaretDown"></fa-icon> -->
+              <svg class="icon_custom icon-chevron-down">
+                <use xlink:href="#icon-chevron-down"></use>
+              </svg>
+            </span>
+          </button>
+          <button type="button" class="btn rounded-pill ripple d-flex justify-content-center align-items-center" (click)="onSeasonClick(showDetails.seasonList)" *ngIf="showDetails.seasonList.length == 1">
+            <span class="text-uppercase" [innerHtml]="showDetails.seasonList[showDetails.activeSeason].title"></span>
+            <span class="ml-1" style="width: 16px;height: 16px;text-align: center;display: flex;align-items: center;justify-content: center;">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="11px" height="11px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve"><g><g>
+                    <path d="M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0"/>
+                  </g></g> </svg> -->
+                  <svg class="icon_custom icon-chevron-down">
+                    <use xlink:href="#icon-chevron-down"></use>
+                  </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <!-- /Dropdown button -->
+
+      <!-- Tab nav menu -->
+      <div class="tab_content__season">
+        <ul class="nav nav-pills align-items-center" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" (click)="switchTab('sdp_episodebtn_click')" id="artist-one-tab" data-toggle="pill" href="#artist-one" role="tab"
+              aria-controls="artist-one" aria-selected="true">
+              <h6 class="mb-0" [innerHtml]="lang.details.episodes"></h6>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="switchTab('sdp_trailer_click')" id="artist-two-tab" data-toggle="pill" href="#artist-two" role="tab"
+              aria-controls="artist-two" aria-selected="false">
+              <h6 class="mb-0" [innerHtml]="lang.details.trailersMore"></h6>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- /Tab nav menu -->
+
+      <div class="tab-content" id="show_cd-tabContent">
+        <!-- episode tab -->
+        <div class="tab-pane fade show active" id="artist-one" role="tabpanel" aria-labelledby="artist-one-tab">
+          <div class="wrapper_cd__episode" *ngIf="showDetails.episodeList.length == 0" [innerHtml]="lang.details.noMoreEpisodec"></div>
+
+          <div class="wrapper_cd__episode" *ngIf="showDetails.episodeList.length > 0">
+            <app-episode-card (actionInfo)="actionViewToggle($event)" (clickInfo)="quickViewToggle($event)"
+              [episodeDetailObj]="item" [episodeDetailS3Url]="showDetails.s3Url"
+              *ngFor="let item of showDetails.episodeList"></app-episode-card>
+          </div>
+        </div>
+        <!-- episode tab -->
+
+        <!-- trailer tab -->
+        <div class="tab-pane fade" id="artist-two" role="tabpanel" aria-labelledby="artist-two-tab">
+          <div *ngIf="showDetails.showDescription['mediaList'].length == 0" class="wrapper_cd__episode" [innerHtml]="lang.details.noMoreTrailer"></div>
+
+          <div *ngIf="showDetails.showDescription['mediaList'].length > 0" class="wrapper_cd__episode">
+            <app-trailer-card [routerLink]="['/consumption']"
+              [queryParams]="{type:'showPheripheral', slug: userDetail['slug'], detailId: item['id']}"
+              [trailerDetailType]="'show'" [trailerDetailObj]="item" [trailerDetailS3Url]="showDetails.s3Url"
+              *ngFor="let item of showDetails.showDescription['mediaList']"></app-trailer-card>
+          </div>
+        </div>
+        <!-- /trailer tab -->
+      </div>
+    </div>
+    <!-- /SEASON-->
+
+    <!-- Similar Show list virtual scroll -->
+    <div class="col-12 px-0 stage_section">
+      <div class="section_header">
+        <h5 class="section_heading" [innerHtml]="lang.details.moreSimilarShow"></h5>
+      </div>
+      <cdk-virtual-scroll-viewport style="padding-top: 116.67%" class="scrollerHide"
+        (scrolledIndexChange)="getNextBatchOnScroll('showStageOriginal', 'getShowOrginalList')" #showStageOriginalScroll
+        id="showStageOriginal_hScroll" orientation="horizontal" itemSize="300">
+        <div role="list" class="scrolling_carousel">
+          <app-stage-original-card class="showStageOriginal_item showStageOriginal_item_{{item._id}}" id="scrolling_carousel_item"
+            [stageOriginalObj]="item" [screenType]="'show-details'" [stageOriginalS3Url]="showStageOriginalList.s3Url"
+            *cdkVirtualFor="let item of showStageOriginalList.data"></app-stage-original-card>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+    <!-- /Similar Show list virtual scroll -->
+  </div>
+</div>
+
+<!-- season bottom shift -->
+<app-season-dropdown *ngIf="showDetails.seasonList.length != 0" (selectSeasonList)="changeSeason($event)"
+  [seasonEnable]="seasonBottomVisible" (seasonDisable)="seasonBottomVisible = false"
+  [seasonListObj]="showDetails.seasonList"></app-season-dropdown>
+<!-- /season bottom shift -->
+
+<!-- action bottom shift menu -->
+<app-action-overflow-menu *ngIf="actionBottomVisible" 
+ [screen_type]="screen_type" 
+ [detail]="showDetails.showDescription" (actionDisable)="actionBottomVisible = false">
+</app-action-overflow-menu>
+<!-- action bottom shift menu -->
+
+<!-- quick-view-card -->
+<div class="quickView" *ngIf="isQuickviewVisible">
+  <div class="scrolling_carousel position-relative episodelist_quickview invisible" style="z-index: 9999;">
+    <app-quick-view-card id="episode_{{item._id}}" [quickViewIndex]="i+1" [quickViewObj]="item"
+      [quickViewS3Url]="showDetails.s3Url" *ngFor="let item of showDetails.episodeList; let i=index;">
+    </app-quick-view-card>
+  </div>
+  <a href="JavaScript:Void(0);" (click)="quickViewToggle({ show: false, id: 0 })" class="close"></a>
+</div>
+<!-- /quick-view-card -->

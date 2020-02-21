@@ -1,0 +1,186 @@
+.inner__episodes {
+  background-image: linear-gradient(to bottom, #252525, #101010);
+  border-radius: 8px;
+  margin-bottom: 20px!important;
+
+  .content_cd__episodes {
+    background-image: linear-gradient(to bottom, #101010, #1d1d1d);
+    border-radius: 8px;
+    padding: 8px 8px 12px 8px;
+    box-shadow: rgba(0, 0, 0, 0.72) 0px 3px 0px 0px;
+    .ThumbWrap__show {
+      width: 100%;
+      // height: 124px;
+      border-radius: 8px;
+      // overflow: hidden;
+      // min-width: 125px;
+
+      .thumb_cd__episodes {
+        // max-width: calc(34.445vw);
+        border-radius: 8px;
+        height: 0;
+        padding-top: 100%;
+        display: block;
+        color: #fff;
+        // border-radius: 12px;
+        img {
+          height: 100%;
+          left: 0px;
+          position: absolute;
+          top: 0px;
+          width: 100%;
+          border-radius: 8px;
+          box-shadow: rgba(0, 0, 0, 0.72) 0px 3px 0px 0px;
+          -o-object-fit: cover;
+          object-fit: cover;
+        }
+        .time_cd__episodes {
+          background-color: #121212;
+          border-radius: 4px;
+          opacity: 0.9;
+          font-size: 12px;
+          letter-spacing: 0.51px;
+          font-weight: 600;
+          color: #e0e0e0;
+          right: 5px;
+          bottom: 5px;
+          // width: 35px;
+          // height: 19px;
+          padding: 2px 4px;
+          text-align: center;
+        }
+      }
+
+      .progress {
+        background: #3f3f3f !important;
+        height: 4px !important;
+        width: 100%;
+        position: absolute;
+        bottom: -7px;
+        left: 0px;
+
+        .progress-bar {
+          background-color: #ec1313;
+          border-radius:8px; 
+        }
+      }
+    }
+
+    .ttl_cd__episodes {
+      h6 {
+        font-weight: 600;
+        line-height: 22px;
+        max-height: 66px;
+        overflow: hidden;
+      }
+
+      p {
+        font-size: 10px;
+        opacity: 0.7;
+      }
+
+      .actionIc__episode {
+        position: absolute;
+        right: 6px;
+        bottom: 0px;
+        a{
+          margin-left: 24px;
+          &:first-child{
+            margin-left: 0px;
+          }
+          &:last-child{
+            display: none;
+          }
+        }
+      }
+    }
+    .desc__episodes{
+      p{
+        font-size: 12px;
+        opacity: 0.7;
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .meta_cd__episodes {
+    padding: 12px 12px 12px 8px;
+    .artist_cd__episodes {
+      h6 {
+        font-size: 14px;
+        opacity: 0.7;
+      }
+    }
+
+    .action_cd__episodes {
+      .download_cd__episodes {
+        margin-right: 23px;
+      }
+    }
+  }
+}
+.artiEpisodeCard{
+  padding: 0px 12px;
+  .inner__episodes{
+    background-image: none;
+    .content_cd__episodes{
+      box-shadow: none;
+      .ThumbWrap__show{
+        .thumb_cd__episodes{
+          img{
+            box-shadow: none;
+          }
+        }
+        // .progress{
+        //   display: none;
+        // }
+      }
+      .ttl_cd__episodes{
+        .actionIc__episode {
+          a{
+            color:#e0e0e0;
+            &:last-child{
+              display: block!important;
+            }
+
+          }
+
+        }
+
+      }
+    }
+    .meta_cd__episodes{
+      display: none!important;
+    }
+  } 
+  .see_all_btn {
+    border-radius: 15px;
+    border: solid 1px #3f3f3f;
+    background-image: linear-gradient(to bottom, #252525, #101010);
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #e0e0e0;
+    padding: 6px 13px 7px 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    &.ripple {
+      background-position: center;
+      transition: background 0.8s;
+
+      &:hover {
+        background: #252525 radial-gradient(circle, transparent 1%, #252525 1%) (center / 15000%);
+      }
+
+      &:active {
+        background-color: #101010;
+        background-size: 100%;
+        transition: background 0s;
+        text-decoration: none;
+      }
+    }
+  }
+}

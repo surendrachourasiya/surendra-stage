@@ -1,0 +1,175 @@
+{
+    "langauge": "en",
+    "home": {
+        "common":{
+            "artistSingular": "artist",
+            "artistPlural": "Artists on Stage",
+            "videoSingular": "video",
+            "videoPlural": "videos",
+            "videoSingularCapitalize": "Video",
+            "andMoreLabel": "& ##count## more",
+            "seeAll": "VIEW ALL",
+            "play":"play",
+            "pause": "pause",
+            "viewSingular": "view",
+            "viewPlural": "views",
+            "amp": "&",
+            "more": "More",
+            "share": "Share",
+            "discoverButton": "PLAY",
+            "px": "px"
+        },
+        "feturedArtistSec": {
+            "title": "Featured Artists"
+        },
+        "stageOriginalsSec": {
+            "title": "Stage Originals"
+        },
+        "stageCollectionsSec": {
+            "title": "Featured Collections",
+            "stageTitle": "Stage Collections",
+            "seeCollection": "VIEW COLLECTION"
+        },
+        "artistsSec": {
+            "title": "Artists on Stage"
+        },
+        "exclusiveSec": {
+            "title": "Exclusive Shows",
+            "exploreShow": "explore show"
+        },
+        "continueWatching": {
+            "title": "Continue watching"
+        },
+        "contentByArtist": {
+            "title": "Explore Artists"
+        }
+    },
+    "listing": {
+        "showtitle": "Shows",
+        "collectiontitle": "Collections",
+        "artisttitle": "Artists"
+    },
+    "details": {
+        "artisttitle": "Artists",
+        "moreSimilarShow": "Similar Shows",
+        "episodes": "Episodes",
+        "trailersMore": "Trailers & More",
+        "noMoreEpisode": "No episodes found.",
+        "noMoreTrailer": "No trailers found.",
+        "inTheCollection": "In this Collection",
+        "moreCollections": "Similar Collections",
+        "moreSimilarContent": "Similar Content",
+        "collection": "Collection",
+        "showMore": "Show More",
+        "seeMore": "Show More",
+        "seeLess": "Show Less"
+    },
+    "search": {
+        "search": "Search",
+        "searchBy": "Search Artists, Shows, Collections, or Content",
+        "noRecordFound": "Oh no, we don't seem to have what you searched for.",
+        "tryOther": "Try searching for some other Show, Collection, Artist, or Content.",
+        "papularArtists": "Artists",
+        "popularShows": "Shows",
+        "popularCollections": "Collections",
+        "popularOnStage": "Contents",
+        "showMore": "Show More"
+    },
+    "artistLandscape": {
+        "playStory": "PLAY STORY",
+        "popularShows": "Shows",
+        "popularCollections": "Collections",
+        "performances": " Performances",
+        "s" : "'s",
+        "similarArtists": "Similar Artists",
+        "showMore": "show more"
+    },
+    "login": {
+        "language": "Language",
+        "a": "A",
+        "english": "English",
+        "next": "NEXT",
+        "mobileLogin": "LOGIN WITH MOBILE NUMBER",
+        "change": "Change",
+        "loginStageWith": "Login with",
+        "or": "OR",
+        "and": "and",
+        "byContinuing": "By continuing you agree to our",
+        "termCondition": "Terms and condition",
+        "privacyPolicy": "Privacy Policy",
+        "agree": "",
+        "name": "Name",
+        "mobileNumber": "Mobile number",
+        "getOTP": "GET OTP",
+        "enterDetails": "Enter your Details",
+        "enterOTP": "Enter your 4 digit OTP",
+        "oneTimePassword": "We have sent the OTP to ",
+        "we": "We",
+        "sentOTP": "have sent 4 digit one time password on",
+        "didnotReceiveOTP": "Didn't receive the OTP?",
+        "resend": "Resend",
+        "submit": "SUBMIT"
+    },
+    "setting": {
+        "login": "Login",
+        "appControls": "App Controls",
+        "languageSettings": "Language Settings",
+        "shareApp": "Share App",
+        "legalSection": "Legal",
+        "privacyPolicy": "Privacy Policy",
+        "termConditions": "Terms and Conditions",
+        "aboutUs": "About Us",
+        "contactUs": "Contact Us",
+        "logout": "Logout",
+        "version": "Version 1.0",
+        "selectLanguage": "Select Language",
+        "hindi": "Hindi",
+        "english": "English",
+        "policyDetail": "Biswa Kalyan Rath is an Indian stand-up comedian, writer, and YouTuber. He came into prominence through a YouTube comedy series, Pretentious Movie Reviews with fellow comedian Kanan Gill.",
+        "areYouSure": "Are you sure you want to logout from stage?",
+        "yes": "YES",
+        "no": "NO"
+    },
+    "footer": {
+        "home": "Home",
+        "search": "Search",
+        "more": "More"
+    },
+    "header": {
+        "shows": "Shows",
+        "collections": "Collections",
+        "artists": "Artists"
+    },
+    "detailTopCard": {
+        "play": "PLAY",
+        "resume": "RESUME"
+    },
+    "quickViewCard": {  
+        "play": "PLAY"
+    },
+    "individualCard": {  
+        "play": "PLAY"
+    },
+    "consumption":{
+        "moreArtist": "MORE ARTIST",
+        "heyYouCaugh": "Hey, you are all caught up!",
+        "exploreMoreArtist": "Explore more artist and enjoy your feed",
+        "explore": "Explore",
+        "nextIn": "Next in",
+        "playCollection" : "PLAY COLLECTION",
+        "playShow": "PLAY SHOW",
+        "upNext": "Up Next",
+        "collection": "Collection"
+    },
+    "settingDrawer":{
+        "videoQuality": "Video Quality",
+        "auto": "Auto",
+        "chooseQuality": "Choose Your Video Quality",
+        "cancel": "Cancel",
+        "full HD": "Full HD",
+        "fair": "Fair",
+        "good": "Good",
+        "best": "Best",
+        "low": "Low"
+    }
+}

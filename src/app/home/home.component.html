@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <div class="row div__orderding" *ngIf="homeSections.length > 0">
+      
+      <div *ngFor="let section of homeSections; let i=index;" [ngSwitch]="section.type" class="col-12 px-0 stage_section" >
+        <ng-template  class="featured_artist" [ngSwitchCase]="'featuredArtistList'">
+          <div class="section_header pl-3">
+            <h5 class="section_heading" [innerHtml]="lang.home.feturedArtistSec.title"></h5>
+          </div>
+          <app-featured-artist (activeFeatureArtist)="getActiveFeatureIndex($event)" [featuredArtistID]="i" [featuredArtistObj]="section.artistList"
+            [featuredArtistS3Url]="s3Url">
+          </app-featured-artist>
+        </ng-template>
+      
+        <!-- Stage Originals -->
+        <ng-template [ngSwitchCase]="'showList'" >
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.home.stageOriginalsSec.title"></h5>
+            <app-see-all-btn [link]="'show-list'"></app-see-all-btn>
+          </div>
+          <cdk-virtual-scroll-viewport style="padding-top: 116.67%" (scrolledIndexChange)="getNextBatchOnScroll('homeShowlist')"
+            #showStageOriginalScroll class="stageOrig_hScroll scrollerHide" id="stageOrig_hScroll"
+            orientation="horizontal" itemSize="300">
+            <div role="list" class="scrolling_carousel">
+              <app-stage-original-card class="scrolling_carousel_item d-flex home_showlist_item_{{item._id}}" id="stage_original_card"
+                [stageOriginalObj]="item" [stageOriginalS3Url]="s3Url"
+                *cdkVirtualFor="let item of section.showStageOriginalList"></app-stage-original-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </ng-template>
+
+        <!-- Stage Collections -->
+        <ng-template [ngSwitchCase]="'collectionList'">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.home.stageCollectionsSec.stageTitle"></h5>
+            <app-see-all-btn [link]="'collection-list'"></app-see-all-btn>
+          </div>
+
+          <cdk-virtual-scroll-viewport style="padding-top: 82.5%" #stageCollectionScroll itemSize="150" (scrolledIndexChange)="getNextBatchOnScroll('homeCollectionlist')"
+            class="scrollerHide stageCollCard_hScroll" orientation="horizontal" id="stageCollCard_hScroll">
+            <div role="list" class="scrolling_carousel">
+              <app-stage-collection-card  [stageCollectionObj]="item" [stageCollectionS3Url]="s3Url"
+                *cdkVirtualFor="let item of section.collectionDetails" id="collection_original_card" class="d-flex home_collectionlist_item_{{item._id}}">
+              </app-stage-collection-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </ng-template>
+
+        <!-- Artist Listing -->
+        <ng-template [ngSwitchCase]="'artistList'">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.home.common.artistPlural"></h5>
+            <app-see-all-btn [link]="'artist-list'"></app-see-all-btn>
+          </div>
+
+          <cdk-virtual-scroll-viewport style="padding-top: 40.5%" #artistScroll itemSize="150" (scrolledIndexChange)="getNextBatchOnScroll('homeArtistlist')"
+            class="scrollerHide artistOrig_hScroll"
+            orientation="horizontal" id="artistOrig_hScroll">
+            <div role="list" class="scrolling_carousel">
+              <app-artist-card [artistObj]="item" [artistS3Url]="s3Url"
+                *cdkVirtualFor="let item of section.artistList" [artistBio]="" id="artist_original_card" class="home_artistlist_item_{{item._id}}">
+                </app-artist-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </ng-template>
+
+        <!-- Stage Collection -->
+        <ng-template [ngSwitchCase]="'collectionShowcase'">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.home.stageCollectionsSec.title"></h5>
+          </div>
+          <div class="col wrapper__collection-list">
+            <app-stage-collection-list class="home_collctionshowcase_{{section.collectionDetail['_id']}}" [collectionEpisodeList]="section.episodeList"
+              [collectionDetailObj]="section.collectionDetail"
+              [collectionDetailS3Url]="s3Url"></app-stage-collection-list>
+          </div>
+        </ng-template>
+
+        <!-- Exclusive -->
+        <ng-template [ngSwitchCase]="'showShowcase'">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.home.exclusiveSec.title"></h5>
+          </div>
+          <div class="col wrapper__exclusive">
+            <app-exclusive-card class="home_showshowcase_{{section.showList['_id']}}" [exclusiveID]="i" [exclusiveDetailObj]="section.showList"
+              [exclusiveDetailS3Url]="s3Url">
+            </app-exclusive-card>
+          </div>
+        </ng-template>
+
+        <!-- Continue Watching -->
+        <ng-template [ngSwitchCase]="'continueWatching'">
+          <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="lang.home.continueWatching.title"></h5>
+          </div>
+
+          <cdk-virtual-scroll-viewport style="padding-top: 35%;" #continueWatchingScroll itemSize="158" (scrolledIndexChange)="getNextBatchOnScroll('homeContinueWatchinglist')"
+            class="scrollerHide continuewatching_hScroll" orientation="horizontal" id="continuewatching_hScroll">
+            <div role="list" class="scrolling_carousel">
+              <app-continue-watching-card class="home_continuewatching_{{item._id}}" class="scrolling_carousel_item" [continueWatchingObj]="item"
+                [continueWatchingS3Url]="s3Url"
+                *cdkVirtualFor="let item of section.resumedList" id="continuewatching_original_card">
+              </app-continue-watching-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </ng-template>
+
+        <!-- Content By Artist -->
+        <ng-template [ngSwitchCase]="'artistShowcase'">
+          <div class="section_header pl-3">
+            <h5 class="section_heading" [innerHtml]="lang.home.contentByArtist.title"></h5>
+          </div>
+          <div>
+            <app-artist-content (activeArtistContent)="getActiveArtistIndex($event)"
+              [contentByArtistObj]="section.contentByArtist"
+              [contentByArtistS3Url]="s3Url"></app-artist-content>
+          </div>
+        </ng-template>
+
+        <!-- Individual Show -->
+        <ng-template [ngSwitchCase]="'individualContent'">
+          <div>
+            <app-individual-card class="home_indivisual_{{section.episodeDetail['_id']}}" [indvidualEpisodeObj]="section.episodeDetail" [indvidualEpisodeS3Url]="s3Url">
+            </app-individual-card>
+          </div>
+        </ng-template>
+
+      </div>
+      
+    </div>
+    
+  </div>

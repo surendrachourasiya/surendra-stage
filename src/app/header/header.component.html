@@ -1,0 +1,82 @@
+<header class="text-center header_section d-flex align-items-center text-center"
+  *ngIf="router.url === '/home' || router.url === '' || router.url === '/' || router.url.indexOf('/artist-landscape') > -1"
+  style="height: 56px;background-image: linear-gradient(to bottom, #252525, #151515);">
+  <a class="mx-auto ll" (click)="redirectHome()"> <img src="../../assets/images/header_logo.png" width="96" height=""
+      class="image-responsive" alt=""></a>
+
+  <div class="something text-white" *ngIf="router.url.indexOf('/artist-landscape') > -1 ">
+    <a class="mx-3 d-none" href="JavaScript:Void(0);">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="24px" height="24px" viewBox="0 0 561 561" style="enable-background:new 0 0 561 561;"
+        xml:space="preserve">
+        <path d="M510,51H51C22.95,51,0,73.95,0,102v76.5h51V102h459v357H331.5v51H510c28.05,0,51-22.95,51-51V102
+			C561,73.95,538.05,51,510,51z M0,433.5V510h76.5C76.5,466.65,43.35,433.5,0,433.5z M0,331.5v51c71.4,0,127.5,56.1,127.5,127.5h51
+			C178.5,410.55,99.45,331.5,0,331.5z M0,229.5v51c127.5,0,229.5,102,229.5,229.5h51C280.5,354.45,155.55,229.5,0,229.5z"
+          fill="#ffffff" />
+      </svg>
+    </a>
+
+    <a href="JavaScript:Void(0);" (click)="showSharePopup();">
+      <svg class="icon_custom icon-ellipsis-vertical text-white mr-2">
+        <use xlink:href="#icon-ellipsis-vertical"></use>
+      </svg>
+    </a>
+  </div>
+</header>
+
+<header class="Header__listing d-flex align-items-center px-3"
+  [ngClass]="{'fixed-top': router.url.indexOf('/feed-consumption') > -1}"
+  *ngIf="router.url.indexOf('/feed-consumption') > -1 || router.url === '/show-list' || router.url ===
+  '/collection-list' ||
+  router.url === '/artist-list' || router.url.indexOf('/consumption') > -1 || router.url.indexOf('/full-consumption') > -1 || router.url.indexOf('/auth') > -1">
+
+  <a (click)="redirectPrevious()" class="backArrow">
+    <svg class="icon_custom icon-back">
+      <use xlink:href="#icon-back"></use>
+    </svg>
+  </a>
+
+  <div class="title_listing" *ngIf="router.url == '/show-list'">
+    <h5 class="mb-0 text-white">
+      <span [innerHtml]="header.shows"></span>
+    </h5>
+  </div>
+
+  <div class="title_listing" *ngIf="router.url == '/collection-list'">
+    <h5 class="mb-0 text-white">
+      <span [innerHtml]="header.collections"></span>
+    </h5>
+  </div>
+
+  <div class="title_listing" *ngIf="router.url == '/artist-list'">
+    <h5 class="mb-0 text-white">
+      <span [innerHtml]="header.artists"></span>
+    </h5>
+  </div>
+</header>
+
+<header class="Header__listing d-flex align-items-center px-3"
+  *ngIf="router.url.indexOf('/show-details') > -1 || router.url.indexOf('/collection-details') > -1"
+  style=" background-image: linear-gradient(to bottom, #252525, #151515);justify-content: space-between">
+
+  <a (click)="redirectPrevious()" class="backArrow">
+    <svg class="icon_custom icon-back">
+      <use xlink:href="#icon-back"></use>
+    </svg>
+  </a>
+
+  <div class="something"
+    *ngIf="router.url.indexOf('/show-details') > -1 || router.url.indexOf('/collection-details') > -1 ">
+    <a class="mx-3" href="JavaScript:Void(0);" class="text-white d-none">
+      <svg class="icon_custom icon-video">
+        <use xlink:href="#icon-video"></use>
+      </svg>
+    </a>
+
+    <a href="JavaScript:Void(0);" class="text-white" (click)="showSharePopup();">
+      <svg class="icon_custom icon-ellipsis-vertical">
+        <use xlink:href="#icon-ellipsis-vertical"></use>
+      </svg>
+    </a>
+  </div>
+</header>

@@ -1,0 +1,113 @@
+.individual {
+    background-image: linear-gradient(#252525, #101010);
+    border-radius: 12px;
+    width: 100%;
+  
+    // padding-bottom:15px;
+    .individual__card {
+      background-image: linear-gradient(#252525, #101010);
+      border-radius: 12px;
+      // padding-bottom:15px;
+    }
+  
+    .videos__individual {
+      overflow: hidden;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      position: relative;
+      width: 100%;
+      color: #fff;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      height: 0;
+      padding-top: 66.67%;
+      display: block;
+      color: #fff;
+  
+      img {
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        box-shadow: rgba(0, 0, 0, 0.72) 0px 2px 0px 0px;
+        object-fit: cover;
+      }
+      .time{
+        background-color: #121212;
+        border-radius: 4px;
+        opacity: 0.9;
+        font-size: 12px;
+        letter-spacing: 0.51px;
+        font-weight: 600;
+        color: #e0e0e0;
+        right: 5px;
+        bottom: 5px;
+        width: 35px;
+        height: 19px;
+        text-align: center;
+      }
+    }
+  
+    .showThumb__individual {
+      width: 60px;
+      height: auto;
+      border-radius: 8px;
+      overflow: hidden;
+  
+      img {
+        width: 100%;
+      }
+    }
+  .showTitleWrap__individual{
+    margin: 12px 12px;
+    .showTitle__individual {
+      color: #e0e0e0;
+  
+      h6 {
+        margin-bottom: 3px;
+        font-weight: 600;
+        line-height: 28px;
+      }
+  
+      p {
+        font-size: 12px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+  
+    .explore__individual {
+      color: #e0e0e0;
+  
+      // span {
+      //   align-items: center;
+      //   background-image: linear-gradient(rgb(225, 13, 55), rgb(13, 157, 201));
+      //   border-radius: 80px;
+      //   display: inline-flex;
+      //   justify-content: center;
+  
+      //   button {
+      //     width: 25vw;
+      //     height: 36px;
+      //     border: double 2px transparent;
+      //     border-radius: 80px !important;
+      //     background: #121212;
+      //     background-origin: border-box;
+      //     background-clip: content-box, border-box;
+      //     padding: 0px;
+      //     color: #fff;
+      //     align-items: center;
+      //     font-weight: bold;
+      //     font-size: 16px;
+      //     justify-content: space-evenly;
+      //     display: flex;
+      //   }
+      // }
+    }
+  
+  }

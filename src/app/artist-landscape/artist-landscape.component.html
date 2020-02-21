@@ -1,0 +1,200 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="landscape__artist pb-2 position-relative col px-0 no-gutters" *ngIf="artistDetail.s3Url != null">
+            <div class="individual__card">
+                <!-- artist thumbnail -->
+                <div class="thumbnail__individual position-relative"  style="max-width:100%;max-height:100%;"  [style.width]="imageWidth+ '%'">
+                    <img loading="lazy" [attr.src]="artistDetail.s3Url.basePath+artistDetail.s3Url.artistPath+'/'+artistDetail.data.profilePic" alt=""
+                        class="img-fluid" [style.height]="imageHeight+'%'" style="max-width:100%;max-height:100%;">
+                    <a *ngIf="artistDetail.data.story.hlsSourceLink != ''" (click)= "onWatchStory(artistDetail.data)" href="javascript:void(0);" [routerLink]="['/consumption']" [queryParams]="{type:'artist', slug:artistDetail.data.slug}" class="transparent_btn">
+                        <!-- <fa-icon [icon]="faPlayCircle"></fa-icon> -->
+                        <svg class="icon_custom icon-play">
+                            <use xlink:href="#icon-play"></use>
+                        </svg>
+                        <h6 [innerHtml]="lang.artistLandscape.playStory" class="ml-2"></h6>
+                    </a>
+                </div>
+                <!-- /artist thumbnail -->
+
+                <div class="col-12 artiPro_meta">
+                    <div class="w-100 d-flex align-items-start title_section">
+                        <div>
+                            <h5 class="text-capitalize align-self-start pr-1 artiPro_title mb-0" [innerHtml]="artistDetail.data.firstName +' '+artistDetail.data.lastName"></h5>
+                            <p class="mb-0 loc_artPro" [innerHtml]="artistDetail.data.city"></p>
+                        </div>
+
+                        <!-- play button -->
+                        <span class="gradient_btn" *ngIf="showDetails.data.length > 0">
+                            <button type="button" (click)= "onPlayArtist(artistDetail.data['_id'])" class="btn rounded-pill text-uppercase play" [routerLink]="['/feed-consumption']" [queryParams]="{'type': 'artist', 'slug': artistDetail.data['slug']}">
+                                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
+                                    x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"
+                                    width="20px" height="20px">
+                                    <g>
+                                        <g>
+                                        <g>
+                                            <path
+                                            d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M256,490.667     C126.604,490.667,21.333,385.396,21.333,256S126.604,21.333,256,21.333S490.667,126.604,490.667,256S385.396,490.667,256,490.667     z"
+                                            fill="#ffffff" />
+                                            <path
+                                            d="M357.771,247.031l-149.333-96c-3.271-2.135-7.5-2.25-10.875-0.396C194.125,152.51,192,156.094,192,160v192     c0,3.906,2.125,7.49,5.563,9.365c1.583,0.865,3.354,1.302,5.104,1.302c2,0,4.021-0.563,5.771-1.698l149.333-96     c3.042-1.958,4.896-5.344,4.896-8.969S360.813,248.99,357.771,247.031z M213.333,332.458V179.542L332.271,256L213.333,332.458z"
+                                            fill="#ffffff" />
+                                        </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span [innerHtml]="artistDetail.data['firstName'] | playBtnTextFormatter"></span>
+                            </button>
+                        </span>
+                        <!--/play button -->
+                    </div>
+
+                    <!-- sub-genre list -->
+                    <div class="tagswrapper scrolling_carousel" id="subGenreList_hScroll">
+                        <div class="artistTags" *ngFor="let item of artistDetail.data.subGenreList" [innerHtml]="item.name"></div>
+                    </div>
+                    <!-- /sub-genre list -->
+                </div>
+            </div>
+            
+            <!-- show/hide description -->
+            <div class="artDesc__artist" id="artDesc_artist">
+                <div>
+                    <div class="desc-header d-flex justify-content-between align-items-center" (click)= "onExpandDesc(artistDetail.data['_id'])" id="artistHide">
+                        <h6 class="mb-0" [innerHtml]="artistDetail.data.description">
+                        </h6>
+                        <div class="pr-0 py-0 shadow-none" *ngIf="artistDetail.data.bio" data-toggle="collapse" data-target="#artDesc_collepse"
+                            aria-expanded="true" aria-controls="artDesc_collepse" style="line-height: normal">
+                            <!-- <fa-icon [icon]="faChevronCircleDown"></fa-icon> -->
+                            <svg class="icon_custom icon-chevron-down-circular sm_svgic">
+                                <use xlink:href="#icon-chevron-down-circular"></use>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div id="artDesc_collepse" class="artDescription collapse hide" aria-labelledby="artistHide"
+                        data-parent="#artDesc_artist">
+                        <p [innerHtml]="artistDetail.data.bio"></p> 
+                    </div>
+                </div>
+            </div>
+            <!-- / show/hide description -->
+        </div>
+
+        <!-- Scroll fixed head -->
+            <div class="FixedProHead position-fixed" id="stickcy_header" style="display: none;" *ngIf="artistDetail.s3Url != null">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex">
+                    <div class="proHeadBackArrow">
+                        <a (click)="redirectPrevious(artistDetail.data['_id'])">
+                            <!-- <fa-icon [icon]="faArrowLeft"></fa-icon> -->
+                            <svg class="icon_custom icon-back">
+                                <use xlink:href="#icon-back"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="proPic__Fixed">
+                        <img loading="lazy" [attr.src]="artistDetail.s3Url.basePath+artistDetail.s3Url.artistPath+'/'+artistDetail.data['profilePic']" alt="" class="rounded-pill" width="36px" height="36px"/>
+                    </div>
+                    <div class="artProDt__Fixed">
+                        <h6 class="mb-0" [innerHtml]="artistDetail.data['firstName'] +' '+ artistDetail.data['lastName']"></h6>
+                        <p class="mb-0" [innerHtml]="artistDetail.data['city']"></p>
+                    </div>
+                </div>
+
+                <a href="JavaScript:Void(0);" (click)="showSharePopup();">
+                    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px" y="0px" width="24px" height="24px" viewBox="0 0 408 408"
+                        style="enable-background:new 0 0 408 408;" xml:space="preserve">
+                        <path d="M204,102c28.05,0,51-22.95,51-51S232.05,0,204,0s-51,22.95-51,51S175.95,102,204,102z M204,153c-28.05,0-51,22.95-51,51
+			                s22.95,51,51,51s51-22.95,51-51S232.05,153,204,153z M204,306c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51
+			                S232.05,306,204,306z" fill="#ffffff" />
+                    </svg> -->
+                    <svg class="icon_custom icon-ellipsis-vertical text-white mr-2">
+                        <use xlink:href="#icon-ellipsis-vertical"></use>
+                    </svg>
+                </a>
+                
+            </div>
+        </div>
+        <!-- / Scroll fixed head -->
+
+        <!-- show original list scroll -->
+        <div *ngIf="showStageOriginalList.data.length > 0" class="col-12 px-0 stage_section mt-4">
+            <div class="section_header">
+                <h5 class="section_heading" [innerHtml]="lang.artistLandscape.popularShows"></h5>
+            </div>
+            <cdk-virtual-scroll-viewport style="padding-top: 50%" class="scrollerHide"
+                (scrolledIndexChange)="getNextBatchOnScroll('showStageOriginal', 'getArtistShowList', $event)"
+                #showStageOriginalScroll id="stageOrig_hScroll" orientation="horizontal" itemSize="142">
+                <div role="list" class="scrolling_carousel smallStagecard">
+                  <app-stage-original-card class="scrolling_carousel_item" [stageOriginalObj]="item" [stageOriginalS3Url]="showStageOriginalList.s3Url" id="stage_original_card" *cdkVirtualFor="let item of showStageOriginalList.data"></app-stage-original-card>
+                </div>
+            </cdk-virtual-scroll-viewport>
+        </div>
+        <!-- / show original list scroll -->
+
+        <!-- stage collection list scroll -->
+        <div *ngIf="stageCollectionList.data.length > 0" class="col-12  px-0 stage_section">
+            <div class="section_header">
+                <h5 class="section_heading" [innerHtml]="lang.artistLandscape.popularCollections"></h5>
+            </div>
+
+            <cdk-virtual-scroll-viewport style="padding-top: 82.5%" #stageCollectionScroll itemSize="150"
+                (scrolledIndexChange)="getNextBatchOnScroll('stageCollection', 'getArtistCollectionList', $event)"
+                class="stageCollCard_hScroll scrollerHide" id="collectionOrig_hScroll" orientation="horizontal">
+                <div role="list" class="scrolling_carousel">  
+                  <app-stage-collection-card [stageCollectionObj]="item" [stageCollectionS3Url]="stageCollectionList.s3Url" *cdkVirtualFor="let item of stageCollectionList.data" id="collection_original_card"></app-stage-collection-card>
+                </div>
+            </cdk-virtual-scroll-viewport>
+        </div>
+        <!-- /stage collection list scroll -->
+
+        <!-- episode card list -->
+        <div *ngIf="showDetails.data.length > 0" class="col-12 stage_section artiEpisodeCard">
+            <div class="section_header px-0">
+                <h5 class="section_heading" [innerHtml]="artistDetail.data.firstName+lang.artistLandscape.performances +lang.artistLandscape.s"></h5>
+            </div>
+            <div class="px-0">                
+                <app-episode-card (actionInfo)="actionView($event)" (clickInfo)="quickViewToggle($event)" [episodeDetailObj]="item"
+                [episodeDetailS3Url]="showDetails.s3Url" *ngFor="let item of showDetails.data"></app-episode-card>
+
+                <button class="see_all_btn d-flex justify-content-center text-capitalize align-items-center" (click)="showMoreEpisode()" 
+                *ngIf="showDetails.showMoreButton" style="margin: auto;"> <span [innerHtml]="lang.artistLandscape.showMore"></span> &nbsp; <fa-icon [icon]="faChevronDown" style="height: 12px;"></fa-icon></button>
+            </div>
+        </div>
+        <!-- /episode card list -->
+
+        <!-- artist list scroll -->
+        <div *ngIf="artistList.data.length > 0" class="col-12  px-0 stage_section">
+            <div class="section_header">
+                <h5 class="section_heading" [innerHtml]="lang.artistLandscape.similarArtists"></h5>
+            </div>
+            <cdk-virtual-scroll-viewport style="padding-top: 40.5%" #artistScroll
+                (scrolledIndexChange)="getNextBatchOnScroll('artist', 'getArtistList', $event)" itemSize="150"
+                class="scrollerHide" id="artistOrig_hScroll" orientation="horizontal">
+                <div role="list" class="scrolling_carousel">
+                  <app-artist-card class="artist_item_{{item._id}}" [artistObj]="item" [artistS3Url]="artistList.s3Url" id="artist_card" *cdkVirtualFor="let item of artistList.data"></app-artist-card>
+                </div>
+            </cdk-virtual-scroll-viewport>
+        </div>
+        <!-- /artist list scroll -->
+    </div>
+</div>
+
+
+<!-- action bottom shift menu -->
+<app-action-overflow-menu *ngIf="actionBottomVisible" [screen_type]="'artist_landscape'" [detail]="artistDetail.data"
+    (actionDisable)="actionBottomVisible = false">
+</app-action-overflow-menu>
+<!-- action bottom shift menu -->
+
+<!-- quick-view-card --> 
+<div class="quickView" *ngIf="isQuickviewVisible">
+   <div class="scrolling_carousel position-relative episodelist_quickview invisible" style="z-index: 9999">
+      <app-quick-view-card id="episode_{{item._id}}" [quickViewIndex]=" i+1" [quickViewObj]="item"
+          [quickViewS3Url]="showDetails.s3Url"
+         *ngFor="let item of showDetails.data; let i=index;"></app-quick-view-card>
+   </div>
+   <a href="JavaScript:Void(0);" (click)="quickViewToggle(false)" class="close"></a>
+</div>
+<!-- /quick-view-card -->

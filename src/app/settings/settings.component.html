@@ -1,0 +1,262 @@
+<div class="container-fluid settings_page rounded">
+   <!-- app control and login /logout detail panel -->
+   <div class="row" [hidden]="!showAnyPopup">
+      <!-- login user detail -->
+      <div class="col-12 settings_header" *ngIf='loggedDiv'>
+         <h6 *ngIf="loggedInChk"><span [innerHtml]="userDetail.userName"></span></h6>
+         <p *ngIf="loggedInChk">{{ getEmailPhone() }}</p>
+      </div>
+      <!-- /login user detail -->
+
+      <div class="col-12 py-3 settings_header" *ngIf='!loggedInChk'>
+         <span class="gradient_btn">
+            <button (click)="login()" class="btn rounded-pill text-uppercase play">
+               <fa-icon [icon]='faUser' class="mr-2"></fa-icon>
+               <span [innerHtml]="langSetting['setting']['login']"> </span>
+            </button>
+         </span>
+      </div>
+
+      <!-- app controls panel -->
+      <div class="col-12 stage_section pt-3">
+         <div class="section_header">
+            <h5 class="section_heading" [innerHtml]="langSetting['setting']['appControls']"></h5>
+         </div>
+         <div class="options">
+            <ul class="list-unstyled settings_list">
+               <li><a (click)="openLanguagePopup()"><span [innerHtml]="langSetting['setting']['languageSettings']"></span>
+                   <!-- <fa-icon [icon]="faAngleRight"></fa-icon> -->
+                  <svg class="icon_custom icon-chevron-right sm_svgic">
+                     <use xlink:href="#icon-chevron-right"></use>
+                  </svg>
+                  
+                  </a>
+               </li>
+               <li><a [innerHtml]="langSetting['setting']['shareApp']" (click)="nativeShare()"></a></li>
+               <!-- <li><a [innerHtml]="langSetting['setting']['legalSection']"></a></li> -->
+               <li><a (click)="openPrivacyPopup()"> <span [innerHtml]="langSetting['setting']['privacyPolicy']"></span>
+                     <!-- <fa-icon [icon]="faAngleRight"></fa-icon> -->
+                     <svg class="icon_custom icon-chevron-right sm_svgic">
+                        <use xlink:href="#icon-chevron-right"></use>
+                     </svg>
+                  </a></li>
+               <li><a (click)="openTermsPopup()"><span [innerHtml]="langSetting['setting']['termConditions']"></span>
+                     <!-- <fa-icon [icon]="faAngleRight"></fa-icon> -->
+                     <svg class="icon_custom icon-chevron-right sm_svgic">
+                        <use xlink:href="#icon-chevron-right"></use>
+                     </svg>
+                  </a></li>
+               <!-- <li><a (click)="openAboutPopup()"><span [innerHtml]="langSetting['setting']['aboutUs']"></span> <fa-icon [icon]="faAngleRight"></fa-icon></a></li> -->
+               <li><a (click)="openContactPopup()"><span [innerHtml]="langSetting['setting']['contactUs']"></span>
+                     <!-- <fa-icon [icon]="faAngleRight"></fa-icon> -->
+                     <svg class="icon_custom icon-chevron-right sm_svgic">
+                        <use xlink:href="#icon-chevron-right"></use>
+                     </svg>
+                  </a></li>
+            </ul>
+         </div>
+         <div class="text-center" *ngIf="loggedInChk">
+            <a class="d-block" data-toggle="modal" data-target="#exampleModal"
+               [innerHtml]="langSetting['setting']['logout']"></a>
+            <small class="d-block" [innerHtml]="langSetting['setting']['version']"></small>
+         </div>
+      </div>
+      <!-- / app controls panel -->
+   </div>
+   <!-- / app control and login /logout detail panel -->
+
+   <!-- select language panel -->
+   <div class="row language" [hidden]="!showLanguagePopup">
+      <header class="d-flex align-items-center px-3 py-4 w-100 sticky-top"
+         style="background-image: linear-gradient(to bottom, #252525, #151515);">
+         <a (click)="closePopup('lang')" class="backArrow">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+               x="0px" y="0px" width="20px" height="20px" viewBox="0 0 408 408"
+               style="enable-background:new 0 0 408 408;" xml:space="preserve">
+               <g transform="matrix(0.886385 0 0 0.886385 23.1775 23.1775)">
+                  <g>
+                     <g id="arrow-back">
+                        <path d="M408,178.5H96.9L239.7,35.7L204,0L0,204l204,204l35.7-35.7L96.9,229.5H408V178.5z"
+                           data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                     </g>
+                  </g>
+               </g>
+            </svg> -->
+            <svg class="icon_custom icon-back">
+               <use xlink:href="#icon-back"></use>
+            </svg>
+         </a>
+         <div class="title_listing ml-3">
+            <h5 class="mb-0 text-white" [innerHtml]="langSetting['setting']['selectLanguage']"></h5>
+         </div>
+      </header>
+      <div class="col-12 stage_section pt-3">
+         <form action="#">
+            <div class="d-flex p-3">
+               <input type="radio" id="Season-1" name="radio-group" (click)="onLanguageChanged('hin')"
+                  [checked]="lang == 'hin'">
+               <label class="ml-4" for="Season-1">
+                  <h6 [innerHtml]="langSetting['setting']['hindi']"></h6>
+               </label>
+            </div>
+            <div class="d-flex p-3">
+               <input type="radio" id="Season-2" name="radio-group" (click)="onLanguageChanged('en')"
+                  [checked]="lang == 'en'">
+               <label class="ml-4" for="Season-2">
+                  <h6 [innerHtml]="langSetting['setting']['english']"></h6>
+               </label>
+            </div>
+         </form>
+      </div>
+   </div>
+   <!-- /select language panel -->
+
+   <!-- privacy policy panel -->
+   <div class="row privacy_policy" id="privacy_policy" *ngIf="settingSlug =='privacy'">
+      <header class="d-flex align-items-center px-3 py-4 w-100 sticky-top"
+         style="background-image: linear-gradient(to bottom, #252525, #151515);">
+         <a (click)="closePopup('')" class="backArrow">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+               x="0px" y="0px" width="20px" height="20px" viewBox="0 0 408 408"
+               style="enable-background:new 0 0 408 408;" xml:space="preserve">
+               <g transform="matrix(0.886385 0 0 0.886385 23.1775 23.1775)">
+                  <g>
+                     <g id="arrow-back">
+                        <path d="M408,178.5H96.9L239.7,35.7L204,0L0,204l204,204l35.7-35.7L96.9,229.5H408V178.5z"
+                           data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                     </g>
+                  </g>
+               </g>
+            </svg> -->
+            <svg class="icon_custom icon-back">
+               <use xlink:href="#icon-back"></use>
+            </svg>
+         </a>
+         <div class="title_listing" style="margin-left: 20px;">
+            <h5 class="mb-0 text-white" [innerHtml]="langSetting['setting']['privacyPolicy']"></h5>
+         </div>
+      </header>
+      <div class="col-12 stage_section pt-3">
+         <!-- <h1 [innerHtml]="langSetting['setting']['privacyPolicy']"></h1> -->
+         <p [innerHtml]="privacyContent"></p>
+      </div>
+   </div>
+   <!-- /privacy policy panel -->
+
+   <!-- terms condition panel -->
+   <div class="row terms_conditions" id="terms_conditions" *ngIf="settingSlug =='terms'">
+      <header class="d-flex align-items-center px-3 py-4 w-100 sticky-top"
+         style="background-image: linear-gradient(to bottom, #252525, #151515);">
+         <a (click)="closePopup('')" class="backArrow">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+               x="0px" y="0px" width="20px" height="20px" viewBox="0 0 408 408"
+               style="enable-background:new 0 0 408 408;" xml:space="preserve">
+               <g transform="matrix(0.886385 0 0 0.886385 23.1775 23.1775)">
+                  <g>
+                     <g id="arrow-back">
+                        <path d="M408,178.5H96.9L239.7,35.7L204,0L0,204l204,204l35.7-35.7L96.9,229.5H408V178.5z"
+                           data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                     </g>
+                  </g>
+               </g>
+            </svg> -->
+            <svg class="icon_custom icon-back">
+               <use xlink:href="#icon-back"></use>
+            </svg>
+         </a>
+         <div class="title_listing" *ngIf="settingSlug=='terms'" style="margin-left: 20px;">
+            <h5 class="mb-0 text-white" [innerHtml]="langSetting['setting']['termConditions']"></h5>
+         </div>
+      </header>
+      <div class="col-12 stage_section pt-3">
+         <!-- <h1 [innerHtml]="langSetting['setting']['termConditions']"></h1> -->
+         <p [innerHtml]="termsContent"></p>
+      </div>
+   </div>
+   <!-- /terms condition panel -->
+
+   <!-- about us panel -->
+   <div class="row about_us" *ngIf="settingSlug =='about'">
+      <header class="d-flex align-items-center px-3 py-4 w-100 sticky-top"
+         style="background-image: linear-gradient(to bottom, #252525, #151515);">
+         <a (click)="closePopup('')" class="backArrow">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+               x="0px" y="0px" width="20px" height="20px" viewBox="0 0 408 408"
+               style="enable-background:new 0 0 408 408;" xml:space="preserve">
+               <g transform="matrix(0.886385 0 0 0.886385 23.1775 23.1775)">
+                  <g>
+                     <g id="arrow-back">
+                        <path d="M408,178.5H96.9L239.7,35.7L204,0L0,204l204,204l35.7-35.7L96.9,229.5H408V178.5z"
+                           data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                     </g>
+                  </g>
+               </g>
+            </svg> -->
+            <svg class="icon_custom icon-back">
+               <use xlink:href="#icon-back"></use>
+            </svg>
+         </a>
+      </header>
+      <div class="col-12 stage_section pt-3">
+         <h1 [innerHtml]="langSetting['setting']['privacyPolicy']"></h1>
+         <p [innerHtml]="aboutContent"></p>
+
+      </div>
+   </div>
+   <!--/ about us panel -->
+
+   <!-- contact us panel -->
+   <div class="row contactus_conditions" *ngIf="settingSlug =='contactUs'">
+      <header class="d-flex align-items-center px-3 py-4 w-100 sticky-top"
+         style="background-image: linear-gradient(to bottom, #252525, #151515);">
+         <a (click)="closePopup('')" class="backArrow">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+               x="0px" y="0px" width="20px" height="20px" viewBox="0 0 408 408"
+               style="enable-background:new 0 0 408 408;" xml:space="preserve">
+               <g transform="matrix(0.886385 0 0 0.886385 23.1775 23.1775)">
+                  <g>
+                     <g id="arrow-back">
+                        <path d="M408,178.5H96.9L239.7,35.7L204,0L0,204l204,204l35.7-35.7L96.9,229.5H408V178.5z"
+                           data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                     </g>
+                  </g>
+               </g>
+            </svg> -->
+            <svg class="icon_custom icon-back">
+               <use xlink:href="#icon-back"></use>
+            </svg>
+         </a>
+         <div class="title_listing" *ngIf="settingSlug=='contactUs'" style="margin-left: 20px;">
+            <h5 class="mb-0 text-white" [innerHtml]="langSetting['setting']['contactUs']"></h5>
+         </div>
+      </header>
+      <div class="col-12 stage_section pt-3">
+         <p [innerHtml]="contactUs"></p>
+      </div>
+   </div>
+   <!-- /contact us panel -->
+</div>
+
+<!-- Modal popup of logout confirmation -->
+<div class="modal fade logoutModal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog modal-sm modal-dialog-centered w-75 mx-auto" role="document">
+      <div class="modal-content bg-transparent">
+         <div class="modal-body text-center">
+            <p [innerHtml]="langSetting['setting']['areYouSure']"></p>
+         </div>
+         <div class="modal-footer border-top-0 justify-content-center">
+            <button type="button" class="btn text-white" (click)="signOut()" data-dismiss="modal"
+               [innerHtml]="langSetting['setting']['yes']"></button>
+            <button type="button" class="btn  text-white" data-dismiss="modal"
+               [innerHtml]="langSetting['setting']['no']"></button>
+         </div>
+      </div>
+   </div>
+   <a href="javascript:void(0);" class="close" data-dismiss="modal" aria-label="Close"></a>
+</div>
+<!-- / Modal popup of logout confirmation -->
+
+<!-- footer -->
+   <app-footer></app-footer>
+<!--/ footer -->

@@ -1,0 +1,24 @@
+.icon_custom {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.icon_custom.sm_svgic {
+  width: .88rem;
+  height: .88rem;
+  // top: .5px;
+  position: relative;
+}
+
+.icon_custom.svgColor {
+  fill: #fff;
+}
+
+.icon_custom.svg32 {
+  width: 2rem;
+  height: 2rem;
+}

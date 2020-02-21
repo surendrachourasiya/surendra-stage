@@ -1,0 +1,60 @@
+
+<article class="exclusive__card wrapper">
+  <div (click)="onButtonClick('play_thumbnail')" [routerLink]="['/consumption']" [queryParams]="{type:'showPheripheral', slug: exclusiveDetailObj['slug'], before: 'home'}" class="videos__exclusive position-relative" #videoElement (scroll)="elementInViewport('videoElement')">
+    <video id="exclusive_player_{{exclusiveID}}" class="video-js vjs-16-9" playsinline webkit-playsinline muted
+      data-setup='{ 
+          "controls": true,
+          "poster": "",
+          "autoplay": false,
+          "preload": "auto",
+          "bigPlayButton": false,
+          "errorDisplay" : false,
+          "controlBar": { 
+            "volumeMenuButton": false,
+            "muteToggle": true,
+            "volumeControl": false,
+            "progressControl":false,
+            "children":{
+            }
+            }
+        }'
+        [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'">
+      <source [attr.type]="isHLSPlayed ? 'application/x-mpegURL' : 'video/mp4'">
+      <p class="vjs-no-js">
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>      
+    <!-- <img src="../../../assets/images/failed_to_load_horizontal-04.svg" width="" class="img-fluid" style="height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    box-shadow: rgba(0, 0, 0, 0.72) 0px 2px 0px 0px;
+    -o-object-fit: cover;
+    object-fit: cover;" /> -->
+
+    <a [routerLink]="['/consumption']"
+      [queryParams]="{type:'showPheripheral', slug: exclusiveDetailObj['slug'], before: 'home'}"
+      class="position-absolute top w-100 h-75" style="top:0"></a>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <div class="showThumb__exclusive flex-shrink-1 ml-2">
+      <img class="img-fluid"
+        [attr.src]="exclusiveDetailS3Url.basePath+exclusiveDetailS3Url.showPath+constantImg.squareSmall+exclusiveDetailObj.thumbnail.square.ratio1.sourceLink" loading="lazy" alt="">
+    </div>
+    <div class="showTitle__exclusive w-100 ml-2">
+      <h6 [innerHtml]="exclusiveDetailObj.title"></h6>
+      <p [innerHtml]="exclusiveDetailObj.description"></p>
+    </div>
+  </div>
+  <div class="explore__exclusive d-flex justify-content-center align-items-center">
+    <span>
+      <button [routerLink]="['/show-details', exclusiveDetailObj.slug]" type="button"
+        class="btn rounded-pill text-uppercase" (click)="onButtonClick('play_btn')" [innerHtml]="exploreShowText"></button>
+    </span>
+  </div>
+</article>    

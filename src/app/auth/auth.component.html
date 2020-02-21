@@ -1,0 +1,255 @@
+<div class="login">
+    <!-- stage logo -->
+    <div class="logo__login">
+        <img src="assets/images/stage_logo_login.png" class="img-fluid" />
+    </div>
+    <!-- /stage logo -->
+
+    <!-- language selection popup -->
+    <div class="bottomPopup__language" [hidden]="!islangTrue">
+        <h6 [innerHtml]="langLogin['login']['language'] + ' / भाषा'"></h6>
+        <div class="select__language d-flex justify-content-center align-items-center">
+            <span class="english" (click)="changeClass('en')" [ngClass]="checked1 ? 'gradient_btn' : ''">
+                <div class="english_input">
+                    <input type="radio" id="english" value="1" name="radio-group" checked>
+                    <label for="english" class="d-flex flex-column justify-content-around">
+                        <span [innerHtml]="langLogin['login']['a']"></span>
+                        <span [innerHtml]="langLogin['login']['english']"></span>
+                    </label>
+                </div>
+            </span>
+            <span class="hindi" (click)="changeClass('hin')" [ngClass]="checked2 ? 'gradient_btn' : ''">
+                <div class="hindi_input">
+                    <input type="radio" id="hindi" value="2" name="radio-group">
+                    <label for="hindi" class="d-flex flex-column justify-content-around">
+                        <span>अ</span>
+                        <span>हिंदी</span>
+                    </label>
+                </div>
+            </span>
+        </div>
+        <span [ngClass]="!nextBtnDisabled ? 'gradient_btn' : ''">
+            <button href="javascript:void(0);" class="see_all_btn next__language"
+                [ngClass]="!nextBtnDisabled ? 'ripple' : ''" (click)="goNextToLogin()" [disabled]=nextBtnDisabled>
+                <span [innerHtml]="nextString"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                    id="Capa_1" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 284.935 284.936"
+                    style="enable-background:new 0 0 284.935 284.936; margin-left:8px;" xml:space="preserve">
+                    <g>
+                        <g>
+                            <path
+                                d="M222.701,135.9L89.652,2.857C87.748,0.955,85.557,0,83.084,0c-2.474,0-4.664,0.955-6.567,2.857L62.244,17.133   c-1.906,1.903-2.855,4.089-2.855,6.567c0,2.478,0.949,4.664,2.855,6.567l112.204,112.204L62.244,254.677   c-1.906,1.903-2.855,4.093-2.855,6.564c0,2.477,0.949,4.667,2.855,6.57l14.274,14.271c1.903,1.905,4.093,2.854,6.567,2.854   c2.473,0,4.663-0.951,6.567-2.854l133.042-133.044c1.902-1.902,2.854-4.093,2.854-6.567S224.603,137.807,222.701,135.9z"
+                                data-original="#000000" class="active-path" data-old_color="#000000" fill="#E0E0E0" />
+                        </g>
+                    </g>
+                </svg>
+            </button>
+        </span>
+    </div>
+    <!-- / language selection popup -->
+
+    <!-- login option selection popup -->
+    <div class="loginPopup" [hidden]="!isloginTrue">
+        <div class="head__login d-flex justify-content-between align-items-center">
+            <div class="selectedLang d-flex justify-content-center align-items-center">
+                <span class="gradient_btn">
+                    <a href="javascript:void(0);">{{( ShowLang() == 'English' ? 'A' : 'अ' )}}</a>
+                </span>
+                <h6>{{  ShowLang() }}</h6>
+            </div>
+            <div class="changeBtn__login">
+                <a href="javascript:void(0);" class="see_all_btn Btn__changeBtn ripple text-capitalize"
+                    (click)="changeLang()">
+                    <span [innerHtml]="langLogin['login']['change']"></span>
+                    <!-- <span>Change</span> -->
+                </a>
+            </div>
+        </div>
+        <div class="inner_loginPopup">
+            <h6><span [innerHtml]="langLogin['login']['loginStageWith']"></span></h6>
+            <div class="SocialLogin__login">
+                <a href="javascript:void(0);" (click)="signInWithGoogle()">
+                    <svg _ngcontent-uvy-c4="" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        id="Layer_1" style="enable-background:new 0 0 512 512;height: 45px;width: 45px;" version="1.1"
+                        viewBox="0 0 512 512" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+                        <path _ngcontent-uvy-c4=""
+                            d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256  c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456  C103.821,274.792,107.225,292.797,113.47,309.408z"
+                            style="fill:#FBBB00;"></path>
+                        <path _ngcontent-uvy-c4=""
+                            d="M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451  c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535  c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z"
+                            style="fill:#518EF8;"></path>
+                        <path _ngcontent-uvy-c4=""
+                            d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512  c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771  c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z"
+                            style="fill:#28B446;"></path>
+                        <path _ngcontent-uvy-c4=""
+                            d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012  c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0  C318.115,0,375.068,22.126,419.404,58.936z"
+                            style="fill:#F14336;"></path>
+                    </svg>
+                </a>
+                <a href="javascript:void(0);" (click)="signInWithFB()">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                        id="Capa_1" x="0px" y="0px" viewBox="0 0 112.196 112.196"
+                        style="enable-background:new 0 0 112.196 112.196; width: 45px; height:45px;"
+                        xml:space="preserve">
+                        <g>
+                            <circle style="fill:#3B5998;" cx="56.098" cy="56.098" r="56.098" />
+                            <path style="fill:#FFFFFF;"
+                                d="M70.201,58.294h-10.01v36.672H45.025V58.294h-7.213V45.406h7.213v-8.34   c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z" />
+                        </g>
+                    </svg>
+                </a>
+                <a href="javascript:void(0);" class="d-none">
+                    <img src="assets/images/icons/trueCaller.png" alt="" width="45px" height="45px" />
+                </a>
+            </div>
+            <span class="divider" [innerHtml]="langLogin['login']['or']"></span>
+            <div class="loginBtn__login">
+                <a href="javascript:void(0);" class="see_all_btn Btn__loginBtn ripple" (click)="LoginForm()">
+                    <span [innerHtml]="langLogin['login']['mobileLogin']"></span>
+                </a>
+            </div>
+
+
+            <p class="agreeText mb-0">{{langLogin['login']['byContinuing']}}
+                <a href="javascript:void(0);" [routerLink]="['../settings','terms']"
+                    [innerHtml]="langLogin['login']['termCondition']"></a>
+                &nbsp;<span [innerHtml]="langLogin['login']['and']"> </span>&nbsp;
+                <a href="javascript:void(0);" [routerLink]="['../settings','privacy']"
+                    [innerHtml]="langLogin['login']['privacyPolicy']"></a> <span
+                    [innerHtml]="langLogin['login']['agree']"></span>
+            </p>
+        </div>
+
+    </div>
+    <!-- / login option selection popup -->
+
+    <!-- Login From -->
+    <div class="wrapper__logindetails" [hidden]="!isdetailsTrue">
+        <div class="login__details position-relative">
+            <h6 [innerHtml]="langLogin['login']['enterDetails']"></h6>
+            <div class="form__details">
+                <form class="go-bottom" [formGroup]="signUpForm" (ngSubmit)="onSubmitGetOtpFormSignUp(signUpForm)">
+                    <div class="gradient_input">
+                        <input id="name" formControlName="name" name="name" type="text" value="" required autofocus
+                            [(ngModel)]="name" onkeypress="otpLogin()" onkeydown="otpLogin()" onkeyup="otpLogin()"
+                            onfocus="otpLogin()" class="signup_name" autocomplete="off" oninput="this.value = (this.value || ''); javascript: if
+                            (this.value.length > this.maxLength) this.value = this.value.slice(0,
+                            this.maxLength);" maxlength="30" />
+                        <label for="name" [ngClass]="name != '' ? 'float_label' : ''"
+                            [innerHtml]="langLogin['login']['name']"></label>
+                    </div>
+                    <div class="gradient_input">
+                        <input id="phone" formControlName="phone" name="phone" type="number" value="" required
+                            [(ngModel)]="phone" autocomplete="off" maxlength="10" pattern="\d{10}" required
+                             onkeypress="otpLogin()" onkeyup="otpLogin()" onfocus="otpLogin()"
+                            class='signup_phone' oninput="this.value = (parseInt(this.value)|| ''); javascript: if
+                            (this.value.length > this.maxLength) this.value = this.value.slice(0,
+                            this.maxLength);" onkeydown="return event.keyCode !== 69 && event.keyCode !== 190" />
+                        <label for="phone" [ngClass]="(phone != '' && phone != null) ? 'float_label' : ''"
+                            [innerHtml]="langLogin['login']['mobileNumber']"></label>
+                    </div>
+                    <div
+                        class="explore__exclusive d-flex float-right align-items-center position-relative w-100 justify-content-end">
+                        <span class="gradient_btn getOtpBtn disabled">
+                            <button type="submit" class="btn rounded-pill text-uppercase"
+                                click="cd.restart();showmsg();">
+                                <span [innerHtml]="langLogin['login']['getOTP']"></span> &nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    version="1.1" id="Capa_1" x="0px" y="0px" width="10px" height="10px"
+                                    viewBox="0 0 284.935 284.936"
+                                    style="enable-background:new 0 0 284.935 284.936; margin-left:8px;"
+                                    xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M222.701,135.9L89.652,2.857C87.748,0.955,85.557,0,83.084,0c-2.474,0-4.664,0.955-6.567,2.857L62.244,17.133   c-1.906,1.903-2.855,4.089-2.855,6.567c0,2.478,0.949,4.664,2.855,6.567l112.204,112.204L62.244,254.677   c-1.906,1.903-2.855,4.093-2.855,6.564c0,2.477,0.949,4.667,2.855,6.57l14.274,14.271c1.903,1.905,4.093,2.854,6.567,2.854   c2.473,0,4.663-0.951,6.567-2.854l133.042-133.044c1.902-1.902,2.854-4.093,2.854-6.567S224.603,137.807,222.701,135.9z"
+                                                data-original="#000000" class="active-path" data-old_color="#000000" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </span>
+                        <span class="logErrMsg position-absolute" id="snackbar" [innerHTML]="_showGetOtpFormMessage"
+                            style="left: 5px;color: #e10d37;text-align: center; font-size:12px; opacity: 0.7;"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /Login From -->
+
+    <!-- OTP Form -->
+    <div class="Wrapper_otp" [hidden]="!isloginOtpTrue">
+        <div class=inner__otp>
+            <div class="head__otp">
+                <p [innerHtml]="langLogin['login']['enterOTP']"></p>
+                <p *ngIf="lang != 'hin'"
+                    [innerHtml]=
+                    "langLogin['login']['we'] +' '+ langLogin['login']['sentOTP'] + ' ' +mobileNumber"></p>
+                <p *ngIf="lang == 'hin'"
+                    [innerHtml]="langLogin['login']['we'] +' '+ langLogin['login']['sentOTP'] +' '+ mobileNumber+ ' '+ langLogin['login']['sentOTPextended'] "></p>
+
+            </div>
+            <div class="form__otp">
+                <form id="verifyotp" class=" d-flex justify-content-center flex-column" [formGroup]="verifyotp"
+                    (ngSubmit)="verifyOtp()" autocomplete="off">
+                    <div class="otpResendWrap position-relative">
+                        <!-- OTP input field -->
+                        <div class="form-group d-flex justify-content-center w-100">
+                            <input id="otp1" class="shadow-none" type="text" formControlName="otp1" name="otp1"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="1" inputMode="numeric" pattern="[0-9]*" onkeypress="validateOtp(event,1)"
+                                onkeyup="validateOtp(event,1)"  />
+
+                            <input id="otp2" class="shadow-none" type="text" formControlName="otp2" name="otp2"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="1" inputMode="numeric" pattern="[0-9]*" onkeypress="validateOtp(event,2)"
+                                onkeyup=validateOtp(event,2)  />
+
+                            <input id="otp3" class="shadow-none" type="text" formControlName="otp3" name="otp3"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="1" inputMode="numeric" pattern="[0-9]*" onkeypress="validateOtp(event,3)"
+                                onkeyup="validateOtp(event,3)"  />
+
+                            <input id="otp4" class="shadow-none" type="text" formControlName="otp4" name="otp4"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="1" inputMode="numeric" pattern="[0-9]*" onkeypress="validateOtp(event,4)"
+                                onkeyup=validateOtp(event,4)  />
+                        </div>
+                        <!-- /OTP input field -->
+
+                        <div class="resend_wrap d-flex align-items-start justify-content-end">
+                            <!--TIMER CODE-->
+                            <span [hidden]="timeLeft == 0">
+                                <countdown #cd [config]="{leftTime:180}" (event)="handleEvent2($event)">$!m!:$!s!
+                                </countdown>
+                            </span>
+                            <!--TIMER CODE-->
+
+                            <div class="resend__otp align-items-center" [hidden]="timeLeft > 0">
+                                <p class="mb-0" [innerHtml]="langLogin['login']['didnotReceiveOTP']">
+                                </p>
+                                <div class="resend_btn__otp">
+                                    <a href="javascript:void(0);" class="see_all_btn ripple" (click)="cd.restart();resendOtp()"
+                                        [innerHtml]="langLogin['login']['resend']" id="resend"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- submit button and validation messages -->
+                    <div class="explore__exclusive d-flex justify-content-center align-items-center verifyBtn_otp position-relative">
+                        <span class="logErrMsg position-absolute" [innerHTML]="_showGetOtpFormMessage"
+                            style="left: 0px;right: 0px;top: -42px;color: #e10d37;text-align: center; font-size:12px; opacity: 0.7;"></span>
+                        <span class="gradient_btn verifyBtn disabled">
+                            <button type="submit" class="btn rounded-pill text-uppercase"
+                                [innerHtml]="langLogin['login']['submit']"></button>
+                        </span>
+                    </div>
+                    <!-- / submit button and validation messages -->
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /OTP Form -->
+</div>

@@ -1,0 +1,74 @@
+<div class="inner__episodes" >
+        <div class="content_cd__episodes">
+           <div class="d-flex">
+              <!-- Thumbnail -->
+              <div class="ThumbWrap__show position-relative mr-2" style="width: 235px;">
+                 <div class="thumb_cd__episodes position-relative " (click)="redirectToConsumption()">
+                    <img [attr.src]="episodeDetailS3Url.basePath+episodeDetailS3Url.episodePath+constantImg.squareMedium+episodeDetailObj.thumbnail.square.ratio1.sourceLink" alt="" class="img-fluid"/>
+                    <!-- <img src="../../../assets/images/failed_to_load_medium-03.svg" width="" class="img-fluid" style="height: 100%; left: 0px; position: absolute;top: 0px;width: 100%;box-shadow: rgba(0, 0, 0, 0.72) 0px 2px 0px 0px;-o-object-fit: cover;object-fit: cover;" /> -->
+                    <div class="time_cd__episodes position-absolute">
+                       <span [innerHtml]="episodeDetailObj.duration | timeFormatter"></span>
+                    </div>
+                 </div>
+                 <div class="progress" *ngIf="episodeDetailObj.lapsedPercent"> 
+                    <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{'width': episodeDetailObj.lapsedPercent+'%'}" aria-valuenow="70"
+                       aria-valuemin="0" aria-valuemax="100"></div>
+                 </div>
+              </div>
+              <!-- /Thumbnail -->
+     
+              <div class="ttl_cd__episodes position-relative" style="width: 100%;">
+                 <h6 [innerHtml]="episodeDetailObj.title"></h6>
+                 <p class="text-capitalize" [innerHtml]="episodeDetailObj.viewCount | viewsNumberFormatter"></p>
+                 <div class="actionIc__episode d-flex">
+                    <a href="javascript:void(0);" class="ic_cd__episode text-white" (click)="openInfoWindow(true, episodeDetailObj._id)">
+                        <svg class="icon_custom icon-info">
+                           <use xlink:href="#icon-info"></use>
+                        </svg>
+                     </a>
+                     
+                     <a href="javascript:void(0);" (click)="nativeShare(episodeDetailObj)">
+                        <svg class="icon_custom icon-share mr-2">
+                           <use xlink:href="#icon-share"></use>
+                        </svg>
+                     </a>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="meta_cd__episodes d-flex align-items-center justify-content-between p-2">
+           <div class="artist_cd__episodes d-flex align-items-center">
+              <img *ngIf="episodeDetailObj.artistList.length != 0"
+                 [attr.src]="episodeDetailS3Url.basePath+episodeDetailS3Url.artistPath+constantImg.artistSmall+episodeDetailObj.artistList[0].profilePic"
+                 class="img-fluid rounded-pill" alt="" width="24px"
+                 height="24px" />
+              <h6 *ngIf="episodeDetailObj.artistList.length != 0" class="ml-2 mb-0"
+                 [innerHtml]="episodeDetailObj.artistList[0].name"></h6>
+           </div>
+           <div class="action_cd__episodes d-flex align-items-center">
+               <span class="download_cd__episodes d-none">
+            <!--   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24"
+                    viewBox="0 0 24 24">
+                    <defs>
+                       <path id="a" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                       <path id="c" d="M0 0h50v50H0z" />
+                    </defs>
+                    <g fill="none" fill-rule="evenodd">
+                       <mask id="b" fill="#fff">
+                          <use xlink:href="#a" />
+                       </mask>
+                       <g mask="url(#b)">
+                          <use fill="#FFF" transform="translate(-13 -13)" xlink:href="#c" />
+                       </g>
+                    </g>
+                 </svg> -->
+              </span>
+              
+               <span (click)="nativeShare(episodeDetailObj)">
+               <svg class="icon_custom icon-share mr-2">
+                  <use xlink:href="#icon-share"></use>
+               </svg>
+               </span>
+           </div>
+        </div>
+     </div>

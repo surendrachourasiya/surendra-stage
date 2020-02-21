@@ -1,0 +1,10 @@
+<!-- artist chip -->
+<div class="artist_chip  d-flex align-items-center" (click)="onChipPopup()" *ngIf="artistChipObj.city != undefined">
+    <div class="artThumb__individual">
+        <img [attr.src]="artistChipS3Url.basePath+artistChipS3Url.artistPath+constantImg.artistSmall+artistChipObj.profilePic" class="img-fluid rounded-pill" [attr.alt]="artistChipObj.name" loading="lazy" />
+    </div>
+    <div class="detailArt__individual text-truncate">
+        <h6 class="text-truncate" [innerHtml]="artistChipObj.name"></h6>
+        <p class="artLocation mb-0" [innerHtml]="artistChipObj.city"></p>
+    </div>
+</div>

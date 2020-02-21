@@ -1,0 +1,49 @@
+
+<div *ngIf="deviceType === 'mobile'">
+    <main #contentArea id="contentArea"> 
+        <app-header ></app-header>
+            <router-outlet></router-outlet>
+        <app-footer *ngIf="router.url === '/home' || router.url === '/' || router.url === '/settings' || router.url === '/search'"></app-footer>
+    </main>
+</div>
+<app-svg-icons></app-svg-icons>
+
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-scale-multiple"></ngx-spinner>
+
+<app-toast *ngIf="showSnackbar" (closeSnackbar)="showSnackbar=false" [snackbarData]="snackbarData"></app-toast>
+
+<div *ngIf="deviceType === 'desktop'">
+    <div class="container container__desk">
+        <div class="row">
+            <div class="Desk__header">
+                <a href="javascript:void(0);">
+                    <img src="../assets/images/logodesk.svg" width="280px" alt="" class="img-fluid" />
+                </a>
+            </div>
+            <div class="dt_desk d-flex">
+                <div class="desk_txt flex-column col-xl-5">
+                    <h1>क्योंकि बोली में अपनापन है</h1>
+                    <h3>स्टेज है दुनिया का पहला स्टैंड अप आर्टिस्ट्स का प्लेटफार्म। </h3>
+                    <h4>मनोरंजन के लिए अब अपनी बोली में देखिए उभरते कलाकारों द्वारा प्रस्तुत <strong>कविताएँ, कॉमेडी और कहानियाँ,</strong> नये शो, कलेक्शंस और अलग-अलग श्रेणियों में। </h4>
+                </div>
+                <div class="rightPanel flex-column col-xl-7">
+                    <div class="group_img">
+                        <img src="../assets/images/stage_website_2.png" alt="" class="img-fluid"/>
+                    </div>
+                    <div class="rightFooter d-flex align-items-center">
+                        <div class="downloadImg">
+                            <h6>डाउनलोड करें</h6>
+                            <a href="javascript:void(0);" (click)="redirectToApp();">
+                                <img src="../assets/images/playstoreBtn.png"  width="200px" alt="" class="img-fluid" />
+                            </a>
+                        </div>
+                        <div class="desk_domain">
+                            <p>stage.in</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

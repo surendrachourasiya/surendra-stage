@@ -1,0 +1,119 @@
+<!-- tab artist list -->
+<!-- <ul class="nav nav-pills justify-content-between align-items-centers artist-hm_tab" role="tablist">
+  <li class="nav-item" class="artist_content_{{item._id}}" *ngFor="let item of contentByArtistObj; let i = index">
+    <a class="nav-link d-flex" [ngClass]="{'active': i === activeIndex }" (click)="updateActiveArtistDetail(i);switchTab(item, i+1) ">
+      <span class="" role="img" [attr.aria-label]="item.firstName" style="width:44px;height:44px;display:inline-block;">
+        <img [src]="contentByArtistS3Url.basePath+contentByArtistS3Url.artistPath+constantImg.artistMedium+item.profilePic" alt="" class="img-fluid rounded-pill" />
+      </span>
+      <div class="artDt__artCont d-flex flex-column">
+        <small class="" [innerHtml]="i === activeIndex ? (item.firstName+' '+item.lastName) : (item.firstName)"></small>
+        <p class="Location__artCont mb-0" *ngIf="i === activeIndex" [innerHtml]="item.city"></p>
+      </div>
+    </a>
+  </li>
+</ul> -->
+<ul class="nav nav-pills justify-content-between align-items-centers artist-hm_tab" role="tablist">
+  <li class="nav-item" class="artist_content_{{this.contentByArtistObj._id._id}}">
+    <a class="nav-link d-flex active">
+      <span class="" role="img" [attr.aria-label]="this.contentByArtistObj._id.name"
+        style="width:44px;height:44px;display:inline-block;">
+        <img
+          [src]="contentByArtistS3Url.basePath+contentByArtistS3Url.artistPath+constantImg.artistMedium+this.contentByArtistObj._id.profilePic"
+          alt="" class="img-fluid rounded-pill" />
+      </span>
+      <div class="artDt__artCont d-flex flex-column">
+        <small class=""
+          [innerHtml]="this.contentByArtistObj._id.name"></small>
+        <p class="Location__artCont mb-0"[innerHtml]="this.contentByArtistObj._id.city"></p>
+      </div>
+    </a>
+  </li>
+</ul>
+
+<!-- /tab artist list -->
+<!-- tab container of the content by artist -->
+<div class="tab-content" id="artist-tabContent">
+  <div class="tab-pane fade show active" id="artist-one" role="tabpanel" aria-labelledby="artist-one-tab">
+    <div class="inner__artistContent d-flex">
+      <!-- first section -->
+      <div class="grid vertical__artistContent position-relative" *ngIf="activeContent[0] != undefined">
+        <div class="verticalImg__artistContent position-relative">
+          <a href="javascript:void(0);" (click)="onArtistClick(activeContent[0], 0)" [routerLink]="['/feed-consumption']" [queryParams] = "{'type': 'episode', 'slug': artistSlug, 'episodeSlug': activeContent[0]['slug']}">
+            <img
+              [attr.src]="contentByArtistS3Url.basePath+contentByArtistS3Url.episodePath+constantImg.verticalMedium+activeContent[0]['thumbnails']['vertical']['ratio1']['sourceLink']"
+              class="img-fluid" [attr.alt]="activeContent[0]['title']" />
+            <!-- <img src="../../../assets/images/failed_to_load_vertical-01.svg" class="img-fluid" [attr.alt]="activeContent[1]['title']" /> -->
+          </a>
+          <div class="vIc__contentArtist position-absolute" style="bottom: 10px; left: 10px; width: 24px; height: 24px; box-shadow: none;    background: #191919B5;
+            border-radius: 50%;">
+            <!-- <img src="assets/images/icons/play-button-inside-a-circle.svg" style="width:24px; height:24px; box-shadow:none;"/> -->
+            <svg class="icon_custom icon-play">
+              <use xlink:href="#icon-play"></use>
+            </svg>
+          </div>
+          <div class="time__vertical position-absolute">
+            <span [innerHtml]="activeContent[0]['duration'] | timeFormatter"></span>
+          </div>
+        </div>
+        <div class="detail__artistContent">
+          <h6 class="title__artistContent" [innerHtml]="activeContent[0]['title']"></h6>
+          <p class="mb-0 text-capitalize" *ngIf="activeContent[0]['viewCount'] != undefined"><span [innerHtml]="activeContent[0]['viewCount'] | viewsNumberFormatter"></span></p>
+        </div>
+      </div>
+      
+      <div class="grid squar__artistContent">
+        <!-- second section -->
+        <div class="firstSquar position-relative" *ngIf="activeContent[1] != undefined">
+          <div class="squarImg__artistContent position-relative">
+            <a href="javascript:void(0);" (click)="onArtistClick(activeContent[1], 1)" [routerLink]="['/feed-consumption']" [queryParams] = "{'type': 'episode', 'slug': artistSlug, 'episodeSlug': activeContent[1]['slug']}">
+              <img
+                [attr.src]="contentByArtistS3Url.basePath+contentByArtistS3Url.episodePath+constantImg.horizontalSmall+activeContent[1]['thumbnails']['horizontal']['ratio3']['sourceLink']"
+                class="img-fluid" [attr.alt]="activeContent[1]['title']" />
+                <!-- <img src="../../../assets/images/failed_to_load_sq_small_p-03.svg" class="img-fluid" [attr.alt]="activeContent[1]['title']" /> -->
+              </a>
+              <div class="vIc__contentArtist position-absolute" style="bottom: 10px; left: 10px; width: 24px; height: 24px; box-shadow: none;    background: #191919B5;
+              border-radius: 50%;">
+              <!-- <img src="assets/images/icons/play-button-inside-a-circle.svg" style="width:24px; height:24px; box-shadow:none;"/> -->
+              <svg class="icon_custom icon-play ">
+                <use xlink:href="#icon-play"></use>
+              </svg>
+            </div>
+            <div class="time__squar position-absolute">
+              <span [innerHtml]="activeContent[1]['duration'] | timeFormatter"></span>
+            </div>
+          </div>
+          <div class="detail__artistContent">
+            <h6 class="title__artistContent" [innerHtml]="activeContent[1]['title']"></h6>
+            <p class="mb-0 text-capitalize" *ngIf="activeContent[1]['viewCount'] != undefined"><span [innerHtml]="activeContent[1]['viewCount'] | viewsNumberFormatter"></span></p>
+          </div>
+        </div>
+        <!-- third section -->
+        <div class="secondSquar position-relative" *ngIf="activeContent[2] != undefined">
+          <div class="squarImg__artistContent position-relative">
+            <a href="javascript:void(0);" (click)="onArtistClick(activeContent[2], 2)" [routerLink]="['/feed-consumption']" [queryParams] = "{'type': 'episode', 'slug': artistSlug, 'episodeSlug': activeContent[2]['slug']}">
+              <img
+                [attr.src]="contentByArtistS3Url.basePath+contentByArtistS3Url.episodePath+constantImg.horizontalSmall+activeContent[2]['thumbnails']['horizontal']['ratio3']['sourceLink']"
+              class="img-fluid" [attr.alt]="activeContent[2]['title']" />
+              <!-- <img src="../../../assets/images/failed_to_load_sq_small-02-03.svg" class="img-fluid" [attr.alt]="activeContent[1]['title']" /> -->
+            </a>
+            <div class="vIc__contentArtist position-absolute" style="bottom: 10px; left: 10px; width: 24px; height: 24px; box-shadow: none;    background: #191919B5;
+            border-radius: 50%;">
+              <!-- <img src="assets/images/icons/play-button-inside-a-circle.svg" style="width:24px; height:24px; box-shadow:none;"/> -->
+              <svg class="icon_custom icon-play">
+                <use xlink:href="#icon-play"></use>
+              </svg>
+            </div>
+            <div class="time__squar position-absolute">
+                <span [innerHtml]="activeContent[2]['duration'] | timeFormatter"></span>
+            </div>
+          </div>
+          <div class="detail__artistContent">
+              <h6 class="title__artistContent" [innerHtml]="activeContent[2]['title']"></h6>
+              <p class="mb-0 text-capitalize" *ngIf="activeContent[2]['viewCount'] != undefined"><span [innerHtml]="activeContent[2]['viewCount'] | viewsNumberFormatter"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+<!-- /tab container of the content by artist -->

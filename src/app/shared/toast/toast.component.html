@@ -1,0 +1,24 @@
+<!-- toast component for large/small toast and feedback message for back online and offline for consumptiom -->
+<div id="snackbar" class="animated slideInUp" style="z-index:9999999999">
+    <div class="snackbarMsg" *ngIf="snackbarData.type == 'lgToast'">
+        <div class="w-100" [innerHtml]="constantsMsg[snackbarData.msg]"></div>
+        <div class="action_snackbar ripple see_all_btn flex-shrink-1" (click)="closeSnakbar()" [hidden]="!snackbarData['actionText']" [innerHtml]="constantsMsg[snackbarData.actionText]"></div>
+    </div>
+    
+    <!-- Internet connection msg -->
+    <div class="connection_error position-fixed w-100" *ngIf="snackbarData.type == 'internetConnection'">
+        <div [ngClass]="{'msg_online': constantsMsg[snackbarData.msg]== constantsMsg['backToOnline'], 'msg_offline': constantsMsg[snackbarData.msg]== constantsMsg['backToOffline']}">
+            <span [innerHtml]="constantsMsg[snackbarData.msg]"></span>
+        </div>
+    </div>
+    <!-- Internet connection msg -->
+    
+    <!-- Video Size msg -->
+    <div class="video_msg d-inline-flex" *ngIf="snackbarData.type == 'smToast'">
+        <div class="videoSize">
+            <span [innerHtml]="snackbarData['msg']"></span>
+        </div>
+    </div>
+    <!-- Video Size msg -->
+</div>
+       

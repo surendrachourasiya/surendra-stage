@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  padding-bottom: 66px;
+}
+
+.search_form {
+  input {
+    border-radius: 24px;
+    border: solid 1px rgba(224, 224, 224, 0.3);
+    background-color: #101010;
+    color: #e0e0e0;
+    outline: none;
+    height: 42px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-size: 16px;
+    font-weight: 600;
+    
+    &::-webkit-input-placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+    &::-moz-placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+    &:-ms-input-placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+    &::placeholder {
+        opacity: 0.5;
+        font-size: 12px;
+        font-weight: 600;
+        color: #e0e0e0;
+        // line-height: 1;
+        line-height: 2.3;
+        }
+  }
+  .searchIcon,
+  .cancelIcon,
+  .backIcon {
+    position: absolute;
+  }
+  .searchIcon {
+    left: 12px;
+    top: 10px;
+  }
+  .cancelIcon {
+    right: 12px;
+    top: 10px;
+  }
+  .backIcon {
+    left: 12px;
+    top: 10px;
+  }
+}

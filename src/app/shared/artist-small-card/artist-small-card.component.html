@@ -1,0 +1,12 @@
+<a ng-href="" class="artist__card position-relative" [ngStyle]="{ 'background-color': artistSmallObj.gradientColor }" [routerLink]="['/artist-landscape', artistSmallObj.slug]">
+   <div class="artist__details text-center">
+      <div class="artist__CircleImg" style="text-align:center;width:100%;">
+         <img [attr.src]="artistSmallS3Url.basePath+artistSmallS3Url.artistPath+constantImg.artistMedium+artistSmallObj.profilePic"
+             loading="lazy" class="rounded-circle" [ngStyle]="{ 'border-color': artistSmallObj.gradientColor }" alt="">
+      </div>
+      <div class="artist__name-location">
+            <h6 class="mb-0 mt-2 text-truncate" [innerHtml]="artistSmallObj.firstName + ' '+ artistSmallObj.lastName"></h6>
+            <p class="mb-0" [innerHtml]="artistSmallObj.city"></p>
+      </div>
+   </div>
+</a>
